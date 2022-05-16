@@ -10,7 +10,7 @@ header {
 	width: 100%;
 	top: 0;
 	z-index: 1;
-	box-shadow: 0 1px 4px rgba(0,0,0,.15);
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
 
 	img {
 		width: 50px;
@@ -85,8 +85,6 @@ header {
 	.hamburger {
 		display: none;
 		margin-right: 15px;
-
-
 	}
 
 	@media (max-width: 600px) {
@@ -111,7 +109,7 @@ header {
 
 				a:not(.logo) {
 					align-self: center;
-					display: inherit
+					display: inherit;
 				}
 			}
 
@@ -130,16 +128,12 @@ header {
 				&__profilePicture {
 					margin-right: 0;
 				}
-
 			}
-
 		}
 		nav {
 			a:not(.logo) {
 				display: none;
 			}
-
-
 		}
 
 		.user {

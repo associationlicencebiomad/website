@@ -3,7 +3,7 @@
 	import { MenuIcon } from '@krowten/svelte-heroicons';
 
 	import HeaderDropdown from './HeaderDropdown.svelte';
-	
+
 	let dropdownOpened: Boolean = false;
 	let headerOpened: Boolean = false;
 
@@ -16,14 +16,13 @@
 	}
 
 	$: url = $page.url.pathname;
-
 </script>
-
 
 <header class:headerOpened>
 	<nav>
-		<a href="/" class="logo {url === '/' ? 'active': ''}" on:click={() => toggleHeader(false)}>
-			<img src="/images/logo.jpg" alt="Logo" /><div class='Name'>LBM</div>
+		<a href="/" class="logo {url === '/' ? 'active' : ''}" on:click={() => toggleHeader(false)}>
+			<img src="/images/logo.jpg" alt="Logo" />
+			<div class="Name">LBM</div>
 		</a>
 		<a href="/test" class={url === '/test' ? 'active' : ''} on:click={() => toggleHeader(false)}>
 			Blog
@@ -34,10 +33,10 @@
 	</nav>
 	<div class="user" on:click={() => toggleDropdown()}>
 		<span class="user__username">John DOE</span>
-		<img src='/images/pp.png' alt="John DOE" class='user__profilePicture' />
+		<img src="/images/pp.png" alt="John DOE" class="user__profilePicture" />
 	</div>
-	<HeaderDropdown dropdownOpened={dropdownOpened} headerOpened={headerOpened}/>
-	<div on:click={() => toggleHeader()} class='hamburger'>
+	<HeaderDropdown {dropdownOpened} {headerOpened} />
+	<div on:click={() => toggleHeader()} class="hamburger">
 		<MenuIcon class="icon" />
 	</div>
 </header>
