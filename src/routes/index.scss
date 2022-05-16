@@ -1,0 +1,180 @@
+@import '../scss/colors';
+
+.landing {
+	&__title {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-wrap: wrap;
+		width: 100%;
+		height: calc(100vh - 70px);
+		padding-bottom: 50px;
+	}
+
+	height: 100vh;
+	background-size: cover;
+	background-image: url('/images/WEI_2021-2022.webp');
+	background-color: rgba(0, 0, 0, 0.5);
+	background-blend-mode: multiply;
+
+	color: $white-3;
+	text-align: center;
+
+	h1 {
+		font-size: 60px;
+		font-weight: 600;
+		margin: 0;
+		max-width: 900px;
+		text-transform: uppercase;
+		padding: 10%;
+
+		@media screen and (max-width: 600px) {
+			font-size: 40px;
+		}
+
+		@media screen and (max-width: 400px) {
+			font-size: 30px;
+		}
+	}
+
+	.scrollDown :global(svg) {
+		position: absolute;
+		bottom: 5px;
+	}
+
+	.separator :global(svg) {
+		min-height: 50px;
+	}
+}
+
+.separator :global(svg) {
+	color: $black-0;
+	width: 100%;
+	background-color: transparent;
+	display: block;
+	user-select: none;
+	pointer-events: none;
+	overflow: hidden;
+}
+
+.about {
+	background-color: $black-0;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	color: $white-3;
+	padding: 4rem;
+	padding-bottom: 0;
+
+	.about__title {
+		justify-items: flex-start;
+
+		font-size: 40px;
+		font-weight: 600;
+
+		@media screen and (max-width: 600px) {
+			font-size: 30px;
+		}
+	}
+
+	&__content {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		margin: 50px 0px;
+		// flex-wrap: wrap;
+		width: 100%;
+		// margin: 2rem;
+
+		p {
+			font-size: 26px;
+			font-weight: 300;
+			line-height: 1.5;
+			max-width: 1000px;
+			margin-right: 50px;
+			text-align: justify;
+
+			@media screen and (max-width: 400px) {
+				font-size: 16px;
+			}
+		}
+
+		&__illustration :global(svg) {
+			width: 100%;
+			height: 100%;
+			max-width: 800px;
+			max-height: 800px;
+		}
+
+		@media screen and (max-width: 1300px) {
+			flex-wrap: wrap;
+
+			p {
+				width: 100%;
+				margin-right: 0;
+				margin-bottom: 2rem;
+			}
+		}
+	}
+}
+
+.albm {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-color: $white-0;
+	color: $white-3;
+	padding-bottom: 0;
+
+	&__title {
+		font-size: 40px;
+		font-weight: 600;
+		color: $black-2;
+
+		@media screen and (max-width: 600px) {
+			font-size: 30px;
+		}
+	}
+
+	&__content {
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		margin: 4rem;
+
+		&__text {
+			font-size: 26px;
+			font-weight: 300;
+			color: $black-0;
+			line-height: 1.5;
+			max-width: 1000px;
+			text-align: justify;
+
+			@media screen and (max-width: 400px) {
+				font-size: 16px;
+			}
+		}
+
+		&__container {
+			margin-left: 50px;
+			margin-top: 20px;
+
+			@media screen and (max-width: 1400px) {
+				margin-left: 0;
+			}
+
+			&__item {
+				display: flex;
+				flex-wrap: wrap;
+				flex-direction: row;
+				justify-content: space-around;
+				align-items: center;
+			}
+		}
+	}
+}
