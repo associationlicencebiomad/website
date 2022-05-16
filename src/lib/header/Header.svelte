@@ -15,7 +15,7 @@
 		dropdownOpened = typeof value !== 'undefined' ? value : !dropdownOpened;
 	}
 
-	let url: string = $page.url.pathname;
+	$: url = $page.url.pathname;
 
 </script>
 
