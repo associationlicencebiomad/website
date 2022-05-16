@@ -38,7 +38,7 @@
 	</div>
 	<HeaderDropdown dropdownOpened={dropdownOpened} headerOpened={headerOpened}/>
 	<div on:click={() => toggleHeader()} class='hamburger'>
-		<MenuIcon />
+		<MenuIcon class="icon" />
 	</div>
 </header>
 
