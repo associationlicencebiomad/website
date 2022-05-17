@@ -1,0 +1,17 @@
+@import '../scss/colors';
+@import '../scss/fonts';
+@import '../scss/reset';
+
+html,
+body {
+	font-family: Rubik, sans-serif;
+	font-size: 16px;
+	line-height: 1.5;
+	color: $black-0;
+	background-color: $white-3;
+}
+
+.icon {
+	width: 1em;
+	height: 1em;
+}
