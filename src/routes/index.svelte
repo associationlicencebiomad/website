@@ -36,10 +36,10 @@
 		</div>
 	</div>
 </section>
+<div class="separator">
+	<Separator_2 />
+</div>
 <section class="albm">
-	<div class="separator">
-		<Separator_2 />
-	</div>
 	<h2 class="albm__title">L’association :</h2>
 	<div class="albm__content">
 		<img src="/images/logo_albm.webp" alt="Logo ALBM" />

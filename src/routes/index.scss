@@ -125,14 +125,13 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	background-color: $white-0;
-	color: $white-3;
+	background-color: $white-3;
+	color: $black-2;
 	padding-bottom: 0;
 
 	&__title {
 		font-size: 40px;
 		font-weight: 600;
-		color: $black-2;
 
 		@media screen and (max-width: 600px) {
 			font-size: 30px;
