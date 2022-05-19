@@ -2,6 +2,12 @@
 @import '../scss/fonts';
 @import '../scss/reset';
 
+:global(*),
+:global(*::before),
+:global(*::after) {
+  box-sizing: border-box;
+}
+
 html,
 body {
 	font-family: Rubik, sans-serif;
