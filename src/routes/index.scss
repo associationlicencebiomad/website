@@ -1,5 +1,9 @@
 @import '../scss/colors';
 
+* { // dirty fix for first separator ...
+	box-sizing: content-box;
+}
+
 .landing {
 	&__title {
 		display: flex;
@@ -41,6 +45,8 @@
 		position: absolute;
 		bottom: 5px;
 	}
+
+
 
 	.separator :global(svg) {
 		min-height: 50px;
