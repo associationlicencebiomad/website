@@ -53,7 +53,7 @@
 		box-shadow: 0 1px 0 0 $accent-3;
 	}
 
-	&>input+label {
+	&>input+label  {
 		color: $black-3;
 		position: absolute;
 		top: 0;
@@ -75,7 +75,7 @@
 
 	input:focus+label,
 	input:invalid+label,
-	input+label.active {
+	input+label.active, input[type="date"]+label {
 		transform: translateY(-14px) scale(0.8);
 		transform-origin: 0 0;
 	}
@@ -110,5 +110,9 @@
 		text-align: left;
 		font-size: 12px;
 		color: rgba(0, 0, 0, 0.54);
+	}
+
+	&.hidden {
+		display: none;
 	}
 }

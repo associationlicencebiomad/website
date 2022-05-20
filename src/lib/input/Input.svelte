@@ -9,7 +9,7 @@
 </script>
 
 
-<div class="input-field" >
+<div class="input-field {type}" >
 	<input id={id} bind:value={value} {...$$restProps} use:setType/>
 	<label for={id} class:active={value}><slot /></label>
 	{#if $$slots.helper}
