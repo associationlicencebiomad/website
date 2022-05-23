@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { AcademicCapIcon, BriefcaseIcon, IdentificationIcon } from "@krowten/svelte-heroicons";
 
-	import { Position, Type } from "./Type";
+	import { Position, Type } from "./timeline.type";
 
 	export let name: string;
 	export let date: string;

@@ -1,6 +1,6 @@
 <script>
 import TimelineItem from "./timelineItem/TimelineItem.svelte";
-import { Type, Position } from "./timelineItem/Type";
+import { Type, Position } from "./timelineItem/timeline.type";
 
 </script>
 
