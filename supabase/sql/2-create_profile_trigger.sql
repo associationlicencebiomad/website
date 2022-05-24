@@ -4,7 +4,7 @@ returns trigger as $$
 declare
     promo_id_exists INTEGER;
 begin
-    SELECT id INTO promo_id_exists FROM public.promos WHERE public.promos.key = new.raw_user_meta_data->>'key';
+    SELECT id INTO promo_id_exists FROM public.promo_key WHERE public.promo_key.key = new.raw_user_meta_data->>'key';
 	IF NOT FOUND THEN
     -- we can't found the promo, so key isn't valid so we reject user creation...
 		raise exception'Invalid key';
