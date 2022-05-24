@@ -1,4 +1,4 @@
-export enum Type {
+export enum ItemType {
 	education = 'education',
 	internship = 'internship',
 	work = 'work',
@@ -9,12 +9,12 @@ export enum Position {
 	right = 'right',
 };
 
-type timelineItem = {
-	type: Type,
+export type TimelineItemType = {
+	type: ItemType,
 	name: string,
 	date: string,
 	place: string,
 	description: string,
 };
 
-type timeline = Array<timelineItem>;
+export type TimelineType = Array<TimelineItemType>;

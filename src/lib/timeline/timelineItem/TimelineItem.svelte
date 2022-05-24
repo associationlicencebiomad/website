@@ -1,13 +1,13 @@
 <script lang="ts">
 	import { AcademicCapIcon, BriefcaseIcon, IdentificationIcon } from "@krowten/svelte-heroicons";
 
-	import { Position, Type } from "./timeline.type";
+	import { Position, ItemType } from "../timeline.type";
 
 	export let name: string;
 	export let date: string;
 	export let place: string;
 	export let description: string = '';
-	export let type: Type;
+	export let type: ItemType;
 	export let position: Position = Position.left;
 
 	// export let 
@@ -16,9 +16,9 @@
 
 <li class="item {position} {type}">
 	
-	{#if type === Type.education}
+	{#if type === ItemType.education}
 	<AcademicCapIcon />
-	{:else if type === Type.work}
+	{:else if type === ItemType.work}
 	<BriefcaseIcon />
 	{:else}
 	<IdentificationIcon />
