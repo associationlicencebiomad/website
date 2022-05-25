@@ -8,13 +8,16 @@
 	import { supabase } from '$lib/supabase-client';
 	import { page } from '$app/stores';
 
+	let loading: boolean = false;
 	let toasts: Array<ToastType> = [];
 	let email: string = '';
 
 	const requestReset = async () => {
+		loading = true;
 		const { error } = await supabase.auth.api.resetPasswordForEmail(email, {
 			redirectTo: `${$page.url.origin}/auth/resetpassword`
 		});
+		loading = false;
 		if (error) {
 			toasts = [
 				...toasts,
@@ -47,8 +50,8 @@
 <form on:submit|preventDefault={requestReset}>
 	<Input id="email" type="email" bind:value={email} required>Email</Input>
 	<div class="flex-container">
-		<Button color="accent-3" hover={false}>
-			<CheckIcon slot="icon" />Réinitialiser
+		<Button color="accent-3" hover={false} disabled={loading}>
+			<CheckIcon slot="icon" />{loading ? 'Chargement' : 'Réinitialiser'}
 		</Button>
 		<Button color="accent-3" on:click={() => history.back()}
 			><ArrowNarrowLeftIcon slot="icon" />Retour</Button

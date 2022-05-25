@@ -8,11 +8,13 @@
 import { supabase } from '$lib/supabase-client';
 import { goto } from '$app/navigation';
 
+	let loading: boolean = false;
 	let toasts: Array<ToastType> = [];
 	let password: string = '';
 	let passwordConfirm: string = '';
 
 	const resetPassword = async () => {
+		loading = true;
 		if (password !== passwordConfirm) {
 			toasts = [
 				...toasts,
@@ -28,6 +30,7 @@ import { goto } from '$app/navigation';
 			password,
 		});
 
+		loading = false;
 		
 		if (error) {
 			toasts = [
@@ -61,8 +64,8 @@ import { goto } from '$app/navigation';
 		Mot de passe (×2)
 	</Input>
 	<div class="flex-container">
-		<Button color="accent-3" hover={false}><CheckIcon slot="icon" />
-			Réinitialiser
+		<Button color="accent-3" hover={false}><CheckIcon slot="icon" disabled={loading} />
+			{loading ? "Chargement" : "Réinitialiser"}
 		</Button>
 		<Button color="accent-3" on:click={() => history.back()}><ArrowNarrowLeftIcon slot="icon"/>Retour</Button>
 	</div>

@@ -85,7 +85,7 @@
 	</Input>
 	<Input name="signupKey" type="text" bind:value={key} required>Clée d'inscription</Input>
 	<div class="flex-container">
-		<Button color="accent-3" hover={false}><CheckIcon slot="icon" />{loading ? 'Chargement' : 'Register'}</Button>
+		<Button color="accent-3" hover={false} disabled={loading}><CheckIcon slot="icon" />{loading ? 'Chargement' : 'Register'}</Button>
 		<Button color="accent-3" on:click={() => history.back()}>
 			<ArrowNarrowLeftIcon slot="icon" />Retour
 		</Button>
