@@ -39,7 +39,7 @@ import Timeline from '$lib/timeline/Timeline.svelte';
 				</div>
 			</div>
 			<div class="user__info__history">
-				<div class="referrer"><UsersIcon /><span>Jane DOE</span></div>
+				<div class="godparent"><UsersIcon /><span>Jane DOE</span></div>
 				<div class="birthday"><CakeIcon /><span>27 février 2003</span></div>
 				<div class="promoType"><BookOpenIcon /><span>Bio-Maths</span></div>
 				<div class="promo"><CalendarIcon /><span>LBM 2021 — Pidiaoul</span></div>

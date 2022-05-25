@@ -1,0 +1,335 @@
+@import '../../scss/colors';
+
+button {
+	background: none;
+	border: none;
+	border-radius: 4px;
+	padding: 7px 14px;
+	font-weight: 400;
+	position: relative;
+	transition: all 300ms ease;
+	display: flex;
+	align-items: center;
+	grid-gap: 5px;
+
+	display: flex;
+	align-items: center;
+	grid-gap: 5px;
+
+	.icon {
+		height: 24px;
+		width: 24px;
+
+		:global(svg) {
+			width: 24px;
+			height: 24px;
+		}
+	}
+
+	&::after {
+		content: "";
+		position: absolute;
+		bottom: 4px;
+		height: 2px;
+		border-radius: 2px;
+		width: 20px;
+		background: $black-0;
+		left: calc(50% - 10px);
+		transition: all 300ms ease;
+		transform-origin: center center;
+		transform: scaleX(0);
+	}
+
+	&:hover::after {
+		transform: scaleX(1);
+	}
+
+	&.btn-accent-3 {
+		color: $accent-3;
+		background: rgba($accent-3, .2);
+
+		&::after {
+			background: $accent-3;
+		}
+
+		&.btn-hover {
+			background: transparent;
+			&:hover {
+				background: rgba($accent-3, .2);
+			}
+		}
+	}
+
+	&.btn-accent-2 {
+		color: $accent-2;
+		background: rgba($accent-2, .2);
+
+		&::after {
+			background: $accent-2;
+		}
+
+		&.btn-hover {
+			background: transparent;
+			&:hover {
+				background: rgba($accent-2, .2);
+			}
+		}
+	}
+
+	&.btn-accent-1 {
+		color: $accent-1;
+		background: rgba($accent-1, .2);
+
+		&::after {
+			background: $accent-1;
+		}
+
+		&.btn-hover {
+			background: transparent;
+			&:hover {
+				background: rgba($accent-1, .2);
+			}
+		}
+	}
+
+	&.btn-accent-0 {
+		color: $accent-0;
+		background: rgba($accent-0, .2);
+
+		&::after {
+			background: $accent-0;
+		}
+
+		&.btn-hover {
+			background: transparent;
+			&:hover {
+				background: rgba($accent-0, .2);
+			}
+		}
+	}
+
+	&.btn-red {
+		color: $red;
+		background: rgba($red, .2);
+
+		&::after {
+			background: $red;
+		}
+
+		&.btn-hover {
+			background: transparent;
+			&:hover {
+				background: rgba($red, .2);
+			}
+		}
+	}
+
+	&.btn-orange {
+		color: $orange;
+		background: rgba($orange, .2);
+
+		&::after {
+			background: $orange;
+		}
+
+		&.btn-hover {
+			background: transparent;
+			&:hover {
+				background: rgba($orange, .2);
+			}
+		}
+	}
+
+	&.btn-yellow {
+		color: $yellow;
+		background: rgba($yellow, .2);
+
+		&::after {
+			background: $yellow;
+		}
+
+		&.btn-hover {
+			background: transparent;
+			&:hover {
+				background: rgba($yellow, .2);
+			}
+		}
+	}
+
+	&.btn-green {
+		color: $green;
+		background: rgba($green, .2);
+
+		&::after {
+			background: $green;
+		}
+
+		&.btn-hover {
+			background: transparent;
+			&:hover {
+				background: rgba($green, .2);
+			}
+		}
+	}
+
+	&.btn-purple {
+		color: $purple;
+		background: rgba($purple, .2);
+
+		&::after {
+			background: $purple;
+		}
+
+		&.btn-hover {
+			background: transparent;
+			&:hover {
+				background: rgba($purple, .2);
+			}
+		}
+	}
+
+	&.btn-white-0 {
+		color: $white-0;
+		background: rgba($white-0, .2);
+
+		&::after {
+			background: $white-0;
+		}
+
+		&.btn-hover {
+			background: transparent;
+			&:hover {
+				background: rgba($white-0, .2);
+			}
+		}
+	}
+
+	&.btn-white-1 {
+		color: $white-1;
+		background: rgba($white-1, .2);
+
+		&::after {
+			background: $white-1;
+		}
+
+		&.btn-hover {
+			background: transparent;
+			&:hover {
+				background: rgba($white-1, .2);
+			}
+		}
+	}
+
+	&.btn-white-2 {
+		color: $white-2;
+		background: rgba($white-2, .2);
+
+		&::after {
+			background: $white-2;
+		}
+
+		&.btn-hover {
+			background: transparent;
+			&:hover {
+				background: rgba($white-2, .2);
+			}
+		}
+	}
+
+	&.btn-white-3 {
+		color: $white-3;
+		background: rgba($white-3, .2);
+
+		&::after {
+			background: $white-3;
+		}
+
+		&.btn-hover {
+			background: transparent;
+			&:hover {
+				background: rgba($white-3, .2);
+			}
+		}
+	}
+
+	&.btn-white-4 {
+		color: $white-4;
+		background: rgba($white-4, .2);
+
+		&::after {
+			background: $white-4;
+		}
+
+		&.btn-hover {
+			background: transparent;
+			&:hover {
+				background: rgba($white-4, .2);
+			}
+		}
+	}
+
+
+	&.btn-black-0 {
+		color: $black-0;
+		background: rgba($black-0, .2);
+
+		&::after {
+			background: $black-0;
+		}
+
+		&.btn-hover {
+			background: transparent;
+			&:hover {
+				background: rgba($black-0, .2);
+			}
+		}
+	}
+
+	&.btn-black-1 {
+		color: $black-1;
+		background: rgba($black-1, .2);
+
+		&::after {
+			background: $black-1;
+		}
+
+		&.btn-hover {
+			background: transparent;
+			&:hover {
+				background: rgba($black-1, .2);
+			}
+		}
+	}
+
+	&.btn-black-2 {
+		color: $black-2;
+		background: rgba($black-2, .2);
+
+		&::after {
+			background: $black-2;
+		}
+
+		&.btn-hover {
+			background: transparent;
+			&:hover {
+				background: rgba($black-2, .2);
+			}
+		}
+	}
+
+	&.btn-black-3 {
+		color: $black-3;
+		background: rgba($black-3, .2);
+
+		&::after {
+			background: $black-3;
+		}
+
+		&.btn-hover {
+			background: transparent;
+			&:hover {
+				background: rgba($black-3, .2);
+			}
+		}
+	}
+}

@@ -1,8 +1,11 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { MenuIcon } from '@krowten/svelte-heroicons';
+	import { profile } from '$lib/store';
 
 	import HeaderDropdown from './HeaderDropdown.svelte';
+	import { supabase } from '$lib/supabase-client';
+	import Avatar from '$lib/Avatar/Avatar.svelte';
 
 	let dropdownOpened: Boolean = false;
 	let headerOpened: Boolean = false;
@@ -15,6 +18,25 @@
 		dropdownOpened = typeof value !== 'undefined' ? value : !dropdownOpened;
 	}
 
+	export let src = '';
+
+	async function downloadImage() {
+		const { data, error } = await supabase.storage
+			.from('avatars')
+			.download($profile?.avatar ? $profile?.avatar : '');
+
+		if (error) {
+			src = '/images/avatar.png';
+			console.error(error);
+		}
+
+		if (data) {
+			src = URL.createObjectURL(data);
+		} else {
+			src = '/images/avatar.png';
+		}
+	}
+
 	$: url = $page.url.pathname;
 </script>
 
@@ -24,18 +46,30 @@
 			<img src="/images/logo.jpg" alt="Logo" />
 			<div class="Name">LBM</div>
 		</a>
-		<a href="/test" class={url === '/test' ? 'active' : ''} on:click={() => toggleHeader(false)}>
+		<a href="/blog" class={url === '/blog' ? 'active' : ''} on:click={() => toggleHeader(false)}>
 			Blog
 		</a>
-		<a href="/test" class={url === '/test' ? 'active' : ''} on:click={() => toggleHeader(false)}>
+		<a
+			href="/career"
+			class={url === '/career' ? 'active' : ''}
+			on:click={() => toggleHeader(false)}
+		>
 			Parcours
 		</a>
 	</nav>
-	<div class="user" on:click={() => toggleDropdown()}>
-		<span class="user__username">John DOE</span>
-		<img src="/images/pp.png" alt="John DOE" class="user__profilePicture" />
-	</div>
-	<HeaderDropdown {dropdownOpened} {headerOpened} />
+	{#if $profile}
+		<div class="user" on:click={() => toggleDropdown()}>
+			<span class="user__username">{$profile.first_name} {$profile.last_name}</span>
+			<Avatar profile={$profile} class="user__profilePicture" />
+		</div>
+		<HeaderDropdown {dropdownOpened} {headerOpened} />
+	{:else}
+		<div class="auth">
+			<a href="/auth/login">Connexion</a> 
+			—
+			<a href="/auth/register">Inscription</a>
+		</div>
+	{/if}
 	<div on:click={() => toggleHeader()} class="hamburger">
 		<MenuIcon class="icon" />
 	</div>

@@ -22,7 +22,7 @@
 			</a>
 		</li>
 		<li class="dropdown__content__item">
-			<a class="dropdown__link" href="/logout" on:click={() => dropdownUsed()}>
+			<a class="dropdown__link" href="/auth/logout" on:click={() => dropdownUsed()}>
 				<LogoutIcon class="icon" /> Logout
 			</a>
 		</li>
