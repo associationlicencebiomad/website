@@ -21,7 +21,6 @@
 	let key: string = '';
 
 	const register = async () => {
-		loading = true;
 		if (password !== passwordConfirm) {
 			toasts = [
 				...toasts,
@@ -32,7 +31,8 @@
 			];
 			return;
 		}
-
+		
+		loading = true;
 		let { error } = await supabase.auth.signUp(
 			{
 				email,
