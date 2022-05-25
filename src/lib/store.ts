@@ -4,4 +4,4 @@ import { writable } from 'svelte/store';
 
 export const user = writable<null|User>(null);
 
-export const userProfile = writable<null|Profile>(null);
+export const profile = writable<null|Profile>(null);

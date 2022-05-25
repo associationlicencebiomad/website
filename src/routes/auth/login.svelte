@@ -112,7 +112,7 @@
 		align-items: center;
 		grid-gap: 10px;
 		@media screen and (max-width: 400px) {
-			flex-direction: column-reverse;
+			flex-direction: column;
 			align-items: center;
 			justify-content: center;
 		}

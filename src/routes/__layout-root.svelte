@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { user, userProfile } from '$lib/store';
+	import { user, profile } from '$lib/store';
 	import { supabase } from '$lib/supabase-client';
 	import type { User } from '@supabase/supabase-js';
 	import type { Profile } from 'src/types/database/Profile.type';
@@ -13,9 +13,9 @@
 				.match({ id: user.id })
 				.single();
 
-			$userProfile = data;
+			$profile = data;
 		} else {
-			$userProfile = null;
+			$profile = null;
 		}
 	};
 
