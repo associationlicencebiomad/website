@@ -11,7 +11,7 @@
 	export let promoYear: number;
 </script>
 
-<a href="/profile/{promoYear}/{first_name.replace(' ', '_').toLowerCase()}.{last_name.replace(' ', '_').toLowerCase()}" class="UserCareerCard">
+<a href="/profile/{promoYear}/{first_name.replaceAll(' ', '_').toLowerCase()}.{last_name.replaceAll(' ', '_').toLowerCase()}" class="UserCareerCard">
 	<Avatar {first_name} {last_name} {avatar} />
 	<h1>{first_name} {last_name}</h1>
 	<div class="current">

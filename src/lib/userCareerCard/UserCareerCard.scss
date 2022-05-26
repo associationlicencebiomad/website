@@ -14,9 +14,10 @@
 	padding: 10px;
 	cursor: pointer;
 	min-width: 200px;
-	max-width: 300px;
+	max-width: 250px;
 	min-height: 250px;
 	text-decoration: none;
+	outline: none;
 	
 
 	:global(img) {
@@ -28,7 +29,7 @@
 	}
 
 	h1 {
-		font-size: 20px;
+		font-size: 18px;
 		font-weight: 500;
 		margin-bottom: 5px;
 		text-align: center;
@@ -38,7 +39,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		margin: 15px;
+		margin: 15px 10px;
 		margin-top: 0;
 
 
