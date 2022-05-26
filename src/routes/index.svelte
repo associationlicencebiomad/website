@@ -1,10 +1,12 @@
 <script lang="ts">
+import Illustration from '$lib/assets/Illustration.svelte';
+
+import Scroll from '$lib/assets/Scroll.svelte';
+import Separator_1 from '$lib/assets/Separator-1.svelte';
+import Separator_2 from '$lib/assets/Separator-2.svelte';
+
 	import OrgMemberCard from '$lib/OrgMemberCard/OrgMemberCard.svelte';
 
-	import Scroll from '../assets/scroll.svg';
-	import Illustration from '../assets/illustration.svg';
-	import Separator_1 from '../assets/separator-1.svg';
-	import Separator_2 from '../assets/separator-2.svg';
 </script>
 
 <section class="landing">

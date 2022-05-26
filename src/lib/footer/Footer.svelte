@@ -1,17 +1,17 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+import Separator_3 from '$lib/assets/Separator-3.svelte';
+import FacebookIcon from '$lib/icons/FacebookIcon.svelte';
+import InstagramIcon from '$lib/icons/InstagramIcon.svelte';
 
-	import Separator from '../../assets/separator-3.svg';
 
-	import FacebookIcon from '../../assets/icons/facebook.svg';
-	import InstagramIcon from '../../assets/icons/instagram.svg';
 
 	$: url = $page.url.pathname;
 </script>
 
 <footer>
 	<div class="separator">
-		<Separator />
+		<Separator_3 />
 	</div>
 	<div class="content">
 		<div class="container">
