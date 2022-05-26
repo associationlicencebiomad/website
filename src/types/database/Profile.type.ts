@@ -11,6 +11,7 @@ export type Profile = {
 	timeline: TimelineType;
 	created_at: string;
 	updated_at: string;
+	promos: Promos;
 }
 
 export type Links = {
@@ -20,4 +21,10 @@ export type Links = {
 	facebook: string;
 	instagram: string;
 	linkedin: string;
+}
+
+export type Promos = {
+	id: number;
+	name: string;
+	year: number;
 }

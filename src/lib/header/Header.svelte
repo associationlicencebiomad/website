@@ -60,7 +60,7 @@
 	{#if $profile}
 		<div class="user" on:click={() => toggleDropdown()}>
 			<span class="user__username">{$profile.first_name} {$profile.last_name}</span>
-			<Avatar profile={$profile} class="user__profilePicture" />
+			<Avatar first_name={$profile.first_name} last_name={$profile.last_name} avatar={$profile.avatar} class="user__profilePicture" />
 		</div>
 		<HeaderDropdown {dropdownOpened} {headerOpened} />
 	{:else}
