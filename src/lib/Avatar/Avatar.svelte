@@ -1,15 +1,17 @@
 <script lang="ts">
 	import { supabase } from "$lib/supabase-client";
 	import type { Profile } from "src/types/database/Profile.type";
-import { onMount } from "svelte";
+	import { onMount } from "svelte";
 
-	export let profile: Profile;
-	export let src = `https://ui-avatars.com/api/?name=${profile.first_name}+${profile.last_name}&size=250&background=random`;
+	export let avatar: string;
+	export let first_name: string;
+	export let last_name: string;
+	export let src = `https://ui-avatars.com/api/?name=${first_name}+${last_name}&size=250&background=random`;
 
 	const getSrc = async () => {
 		try {
-			if (profile && profile.avatar) {
-				const { data, error } = await supabase.storage.from('avatars').download(profile.avatar)
+			if (avatar) {
+				const { data, error } = await supabase.storage.from('avatars').download(avatar)
 				
 				if (error) throw error
 				
@@ -28,4 +30,4 @@ import { onMount } from "svelte";
 	});
 </script>
 
-<img src={src} alt="{profile.first_name} {profile.last_name}" {...$$restProps}/>
+<img src={src} alt="{first_name} {last_name}" {...$$restProps}/>

@@ -11,12 +11,15 @@
 	font-weight: 300;
 	color: $black-0;
 	border-radius: 10px;
-	// margin: 10px;
+	padding: 10px;
 	cursor: pointer;
-	max-width: 200px;
+	min-width: 200px;
+	max-width: 300px;
 	min-height: 250px;
+	text-decoration: none;
+	
 
-	img {
+	:global(img) {
 		margin-top: 15px;
 		width: 100px;
 		height: 100px;
@@ -25,9 +28,10 @@
 	}
 
 	h1 {
-		font-size: 24px;
+		font-size: 20px;
 		font-weight: 500;
 		margin-bottom: 5px;
+		text-align: center;
 	}
 
 	.current {
