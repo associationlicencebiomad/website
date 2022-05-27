@@ -11,7 +11,7 @@ create table public.profiles (
   better_promo text,
   
   avatar text,
-  links json,
+  links json default '{"website": "", "twitter": "", "github": "", "facebook": "", "instagram": "", "linkedin": ""}',
   -- godparent uuid[],
   promo_id int references public.promos(id) on delete cascade not null,
   timeline json default '[{"type": "education", "name": "LBM", "date": "", "place": "Station biologique de Roscoff", "description": ""}]',

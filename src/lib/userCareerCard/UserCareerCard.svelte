@@ -17,7 +17,7 @@
 	<div class="current">
 		{#if timeline}
 			<LocationMarkerIcon />
-			<p>{timeline.at(-1)?.name} — {timeline.at(-1)?.place}</p>
+			<p>{timeline[0]?.name} — {timeline[0]?.place}</p>
 		{/if}
 	</div>
 	<p class="lbmName">LBM {promoYear} — {promoName}</p>

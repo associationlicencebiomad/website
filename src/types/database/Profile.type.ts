@@ -1,7 +1,7 @@
 import type { TimelineType } from "$lib/timeline/timeline.type";
 
 export type Profile = {
-	id: number;
+	id: string;
 	first_name: string;
 	last_name: string;
 	birthday: string;

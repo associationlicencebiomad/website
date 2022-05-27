@@ -26,6 +26,7 @@
 		"prettier-plugin-svelte": "^2.7.0",
 		"sass": "^1.52.1",
 		"svelte": "^3.48.0",
+		"svelte-autosize": "^1.0.1",
 		"svelte-check": "^2.7.1",
 		"svelte-inview": "^3.0.0",
 		"svelte-preprocess": "^4.10.6",

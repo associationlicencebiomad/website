@@ -72,7 +72,7 @@
 					{currentProfile.first_name}
 					{currentProfile.last_name}
 				</div>
-				{#if currentProfile.links}
+				{#if Object.values(currentProfile.links).some(el => el)}
 					<UserLinks links={currentProfile.links} />
 				{/if}
 			</div>

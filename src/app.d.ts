@@ -9,3 +9,8 @@ declare namespace App {
 	// interface Stuff {}
 }
 
+declare module 'svelte-autosize' {
+	const autosize :any;
+	export default autosize;
+}
+
