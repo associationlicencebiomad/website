@@ -12,16 +12,14 @@
 	import { supabase } from '$lib/supabase-client';
 	import Textarea from '$lib/textarea/Textarea.svelte';
 	import { ItemType } from '$lib/timeline/timeline.type';
-	import { ArrowDownIcon, ArrowUpIcon, GlobeAltIcon, PlusIcon } from '@krowten/svelte-heroicons';
-	import type { Load } from '@sveltejs/kit';
-	import type { profil } from '../../types/database/profil.type';
+	import { ArrowDownIcon,ArrowUpIcon,GlobeAltIcon,PlusIcon,TrashIcon } from '@krowten/svelte-heroicons';
+	import type { Profil } from '../../types/database/Profil.type';
 
-	export let error: string;
 	let uploading = false;
 	let files: FileList;
 	let fileInput: HTMLInputElement;
 	let edited = false;
-	let newprofil: profil = JSON.parse(JSON.stringify($profil));
+	let newprofil: Profil = JSON.parse(JSON.stringify($profil));
 	$: newprofil, (edited = JSON.stringify(newprofil) !== JSON.stringify($profil));
 
 	async function uploadAvatar() {
@@ -57,7 +55,7 @@
 		saving = true;
 		try {
 			const { data, error } = await supabase
-				.from<profil>('profils')
+				.from<Profil>('profils')
 				.update({
 					first_name: newprofil.first_name,
 					last_name: newprofil.last_name,
@@ -75,8 +73,8 @@
 
 			if (error) throw error;
 
-			profil = data;
-			newprofil = JSON.parse(JSON.stringify(profil));
+			$profil = data;
+			newprofil = JSON.parse(JSON.stringify($profil));
 		} catch (err) {
 			console.log(err);
 		} finally {
@@ -91,7 +89,7 @@
 			<div class="content">
 				Il y a des modifications non enregistrées.
 				<div class="container">
-					<Button on:click={() => (newprofil = JSON.parse(JSON.stringify(profil)))}>
+					<Button on:click={() => (newprofil = JSON.parse(JSON.stringify($profil)))}>
 						Réinitialiser
 					</Button>
 					<Button color="accent-3" on:click={updateUser} disabled={saving}
@@ -221,6 +219,14 @@
 			{#each newprofil.timeline as timelineItem, index (index)}
 				<div class="timelineItem">
 					<div class="control">
+						<Button
+							color="red"
+							on:click={() =>
+								(newprofil.timeline = [
+									...newprofil.timeline.slice(0, index),
+									...newprofil.timeline.slice(index + 1)
+								])}
+							><TrashIcon slot="icon" /></Button>
 						{#if index > 0}
 							<Button
 								color="accent-3"

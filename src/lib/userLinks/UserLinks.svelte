@@ -1,13 +1,11 @@
 <script lang="ts">
-	import { GlobeAltIcon } from '@krowten/svelte-heroicons';
-
 	import FacebookIcon from '$lib/icons/FacebookIcon.svelte';
 	import GithubIcon from '$lib/icons/GithubIcon.svelte';
 	import InstagramIcon from '$lib/icons/InstagramIcon.svelte';
 	import LinkedinIcon from '$lib/icons/LinkedinIcon.svelte';
 	import TwitterIcon from '$lib/icons/TwitterIcon.svelte';
-
-	import type { Links } from '../../types/database/profil.type';
+	import { GlobeAltIcon } from '@krowten/svelte-heroicons';
+	import type { Links } from '../../types/database/Profil.type';
 
 	export let links: Links;
 </script>

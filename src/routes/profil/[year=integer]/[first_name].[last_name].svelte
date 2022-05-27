@@ -1,7 +1,17 @@
 <script lang="ts" context="module">
+	import AnecdoteCard from '$lib/anecdoteCard/AnecdoteCard.svelte';
+	import Avatar from '$lib/Avatar/Avatar.svelte';
+	import Button from '$lib/button/Button.svelte';
+	import { user } from '$lib/store';
 	import { supabase } from '$lib/supabase-client';
-
+	import Timeline from '$lib/timeline/Timeline.svelte';
+	import UserLinks from '$lib/userLinks/UserLinks.svelte';
+	import {
+	BookOpenIcon,CakeIcon,CalendarIcon,ChatAltIcon,LocationMarkerIcon
+	} from '@krowten/svelte-heroicons';
 	import type { Load } from '@sveltejs/kit';
+	import type { Profil } from '../../../types/database/Profil.type';
+
 
 	export const load: Load = async ({ params }) => {
 		const { data, error: supabaseErr } = await supabase
@@ -24,31 +34,15 @@
 
 		return {
 			props: {
-				currentprofil: data[0] as profil
+				currentprofil: data[0] as Profil
 			}
 		};
 	};
 </script>
 
 <script lang="ts">
-	import {
-		UsersIcon,
-		CakeIcon,
-		BookOpenIcon,
-		CalendarIcon,
-		LocationMarkerIcon,
-		ChatAltIcon
-	} from '@krowten/svelte-heroicons';
-	import type { profil } from '../../../types/database/profil.type';
-
-	import AnecdoteCard from '$lib/anecdoteCard/AnecdoteCard.svelte';
-	import Timeline from '$lib/timeline/Timeline.svelte';
-	import Avatar from '$lib/Avatar/Avatar.svelte';
-	import UserLinks from '$lib/userLinks/UserLinks.svelte';
-	import Button from '$lib/button/Button.svelte';
-	import { user } from '$lib/store';
-
-	export let currentprofil: profil;
+	
+	export let currentprofil: Profil;
 	export let error: boolean;
 
 	if (error) console.error(error);
