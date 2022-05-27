@@ -7,17 +7,15 @@
 		LocationMarkerIcon,
 		ChatAltIcon,
 		GlobeAltIcon,
-		LoginIcon
 	} from '@krowten/svelte-heroicons';
 
 	import AnecdoteCard from '$lib/anecdoteCard/AnecdoteCard.svelte';
-
-	import FacebookIcon from '../assets/icons/facebook.svg';
-	import InstagramIcon from '../assets/icons/instagram.svg';
-import Timeline from '$lib/timeline/Timeline.svelte';
+	import Timeline from '$lib/timeline/Timeline.svelte';
+	import FacebookIcon from '$lib/icons/FacebookIcon.svelte';
+	import InstagramIcon from '$lib/icons/InstagramIcon.svelte';
 </script>
 
-<div class="back"><a href="/">← Retour</a></div>
+<div class="back"><div on:click={() => window.history.back()}>← Retour</div></div>
 <div class="user">
 	<div class="user__info">
 		<div class="user__info__avatar">

@@ -1,6 +1,6 @@
-@import '../scss/colors';
-@import '../scss/mixins';
-@import '../scss/animations';
+@import 'src/scss/colors';
+@import 'src/scss/mixins';
+@import 'src/scss/animations';
 
 .back {
 	display: block;
@@ -82,36 +82,6 @@
 				text-align: center;
 			}
 
-			&__links {
-				font-size: 24px;
-				background-color: $accent-2;
-				padding: 9px 15px;
-				border-radius: 35px;
-				display: flex;
-				align-items: center;
-				justify-content: space-around;
-
-				.link {
-					display: flex;
-					align-items: center;
-					justify-content: center;
-					width: 24px;
-					height: 24px;
-					outline: none;
-					color: $white-1;
-					transition: all ease-in-out .2s;
-
-					&:not(:last-child) {
-						margin-right: 10px;
-					}
-
-					&:hover {
-						color: $orange;
-					}
-				}
-
-			}
-
 			@media screen and (max-width: 492px) {
 				flex-direction: column;
 				justify-content: center;
@@ -149,7 +119,7 @@
 
 				:global(svg) {
 					width: 24px;
-					height: 24px;
+					height: 100%;
 					color: $accent-2;
 					margin-right: 20px;
 				}
@@ -170,34 +140,6 @@
 				color: $black-0;
 				margin-right: 30px;
 
-			}
-
-			button {
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				padding: 10px 20px;
-				border: none;
-				border-radius: 10px;
-				cursor: pointer;
-				transition: all 0.2s ease-in-out;
-
-				background-color: $green;
-				color: $white-2;
-
-				:global(svg) {
-					margin-left: 10px;
-					width: 32px;
-					height: 32px;
-				}
-
-				&:hover {
-					background-color: darken($green, 10%);
-				}
-
-				&:active {
-					animation: hover-feedback 0.2s ease-in-out;
-				}
 			}
 
 			@media screen and (max-width: 650px) {
@@ -231,6 +173,13 @@
 			font-weight: 300;
 			text-align: justify;
 			color: $black-0;
+
+			&.null {
+				text-align: center;
+				color: $black-3;
+				font-style: italic;
+				margin: 50px 0px ;
+			}
 		}
 	}
 

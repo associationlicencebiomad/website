@@ -4,11 +4,17 @@ create table public.profiles (
   first_name text not null,
   last_name text not null,
   birthday date not null,
+  about text,
+
+  best_memory text,
+  strong_points text,
+  better_promo text,
+  
   avatar text,
   links json,
   -- godparent uuid[],
   promo_id int references public.promos(id) on delete cascade not null,
-  timeline json,
+  timeline json default '[{"type": "education", "name": "LBM", "date": "", "place": "Station biologique de Roscoff", "description": ""}]',
 
   created_at timestamp with time zone default timezone('utc'::text, now()) not null,
   updated_at timestamp with time zone default timezone('utc'::text, now()) not null

@@ -1,6 +1,10 @@
 <script lang="ts">
 	export let name: string;
 	export let content: string;
+
+	if (!content) {
+		content = "Cette personne n'a pas bien rempli son profil...";
+	}
 </script>
 
 <div class="anecdote">
