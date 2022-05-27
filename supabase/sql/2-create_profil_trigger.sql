@@ -9,7 +9,7 @@ begin
     -- we can't found the promo, so key isn't valid so we reject user creation...
 		raise exception'Invalid key';
 	ELSE
-        insert into public.profiles (id, first_name, last_name, birthday, promo_id)
+        insert into public.profils (id, first_name, last_name, birthday, promo_id)
         values (new.id, new.raw_user_meta_data->>'first_name', new.raw_user_meta_data->>'last_name', (new.raw_user_meta_data->>'birthday')::date, promo_id_exists);
 		RETURN NEW;
 	END IF;

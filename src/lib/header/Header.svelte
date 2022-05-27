@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { MenuIcon } from '@krowten/svelte-heroicons';
-	import { profile } from '$lib/store';
+	import { profil } from '$lib/store';
 
 	import HeaderDropdown from './HeaderDropdown.svelte';
 	import { supabase } from '$lib/supabase-client';
@@ -23,7 +23,7 @@
 	async function downloadImage() {
 		const { data, error } = await supabase.storage
 			.from('avatars')
-			.download($profile?.avatar ? $profile?.avatar : '');
+			.download($profil?.avatar ? $profil?.avatar : '');
 
 		if (error) {
 			src = '/images/avatar.png';
@@ -57,10 +57,10 @@
 			Parcours
 		</a>
 	</nav>
-	{#if $profile}
+	{#if $profil}
 		<div class="user" on:click={() => toggleDropdown()}>
-			<span class="user__username">{$profile.first_name} {$profile.last_name}</span>
-			<Avatar first_name={$profile.first_name} last_name={$profile.last_name} avatar={$profile.avatar} class="user__profilePicture" />
+			<span class="user__username">{$profil.first_name} {$profil.last_name}</span>
+			<Avatar first_name={$profil.first_name} last_name={$profil.last_name} avatar={$profil.avatar} class="user__profilPicture" />
 		</div>
 		<HeaderDropdown {dropdownOpened} {headerOpened} />
 	{:else}

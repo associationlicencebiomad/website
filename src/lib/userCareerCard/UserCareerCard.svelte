@@ -11,13 +11,13 @@
 	export let promoYear: number;
 </script>
 
-<a href="/{promoYear}/{first_name.replace(' ', '_').toLowerCase()}-{last_name.replace(' ', '_').toLowerCase()}" class="UserCareerCard">
+<a href="/profil/{promoYear}/{first_name.replaceAll(' ', '_').toLowerCase()}.{last_name.replaceAll(' ', '_').toLowerCase()}" class="UserCareerCard">
 	<Avatar {first_name} {last_name} {avatar} />
 	<h1>{first_name} {last_name}</h1>
 	<div class="current">
 		{#if timeline}
 			<LocationMarkerIcon />
-			<p>{timeline.at(-1)?.name} — {timeline.at(-1)?.place}</p>
+			<p>{timeline[0]?.name} — {timeline[0]?.place}</p>
 		{/if}
 	</div>
 	<p class="lbmName">LBM {promoYear} — {promoName}</p>

@@ -8,7 +8,6 @@
 	import Input from '$lib/input/Input.svelte';
 	import Toast from '$lib/toast/Toast.svelte';
 	import { supabase } from '$lib/supabase-client';
-	import { page } from '$app/stores';
 
 	let loading: boolean = false;
 	let toasts: Array<ToastType> = [];
@@ -40,8 +39,8 @@
 			},
 			{
 				data: {
-					first_name,
-					last_name,
+					first_name: first_name.charAt(1).toUpperCase() + first_name.slice(1).toLowerCase(),
+					last_name: last_name.toUpperCase(),
 					birthday,
 					key
 				}
