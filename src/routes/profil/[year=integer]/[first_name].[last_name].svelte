@@ -129,5 +129,5 @@
 </div>
 
 <style lang="scss">
-	@import '../profil';
+	@import './profil';
 </style>
