@@ -1,5 +1,3 @@
-
-
 <script lang="ts">
 	import Avatar from '$lib/Avatar/Avatar.svelte';
 	import Button from '$lib/button/Button.svelte';
@@ -10,7 +8,7 @@
 	import TwitterIcon from '$lib/icons/TwitterIcon.svelte';
 	import Input from '$lib/input/Input.svelte';
 	import Select from '$lib/select/Select.svelte';
-import { profil } from '$lib/store';
+	import { profil } from '$lib/store';
 	import { supabase } from '$lib/supabase-client';
 	import Textarea from '$lib/textarea/Textarea.svelte';
 	import { ItemType } from '$lib/timeline/timeline.type';
@@ -96,7 +94,9 @@ import { profil } from '$lib/store';
 					<Button on:click={() => (newprofil = JSON.parse(JSON.stringify(profil)))}>
 						Réinitialiser
 					</Button>
-					<Button color="accent-3" on:click={updateUser} disabled={saving}>{saving ? 'Enregistrement ...' : 'Enregistrer'}</Button>
+					<Button color="accent-3" on:click={updateUser} disabled={saving}
+						>{saving ? 'Enregistrement ...' : 'Enregistrer'}</Button
+					>
 				</div>
 			</div>
 		</div>
@@ -192,16 +192,16 @@ import { profil } from '$lib/store';
 				Points forts de la LBM
 				<p slot="helper">
 					Qu'est ce que la licence t'as apporté de mieux sur le point personnel ou académique ? Les
-					réponses évidentes tel que "petites promos" ou "licence à l'étranger" sont a éviter puisque
-					c'est pas assez personnel.
+					réponses évidentes tel que "petites promos" ou "licence à l'étranger" sont a éviter
+					puisque c'est pas assez personnel.
 				</p>
 			</Textarea>
 			<Textarea bind:value={newprofil.better_promo}>
 				C'était mieux du temps de ta promo ? Prouve le !
 				<p slot="helper">
 					On connait tous les discours des ancien.ne.s quand ils parlent de leur promos, et comment
-					tout se dégrade (les {new Date().getFullYear() - 1}, vous verrez l'année prochaine) ! Si tu
-					as ce sentiment explique pourquoi :).
+					tout se dégrade (les {new Date().getFullYear() - 1}, vous verrez l'année prochaine) ! Si
+					tu as ce sentiment explique pourquoi :).
 				</p>
 			</Textarea>
 		</section>
@@ -261,12 +261,18 @@ import { profil } from '$lib/store';
 		</section>
 	</div>
 {:else}
-<div class="not-login">
-	<h1></h1>
-	<h2>Tu n'es pas connecté !</h2>
-	<p>Afin de pouvoir éditer ton profil il faut tout d'aboord vous <a href="/auth/login">connecter</a></p>
-</div>
+	<div class="not-login">
+		<section>
+			<h2>Tu n'es pas connecté !</h2>
+			<p>
+				Afin de pouvoir éditer ton profil, il faut tout d'abord te <a href="/auth/login"
+					>connecter</a
+				>
+			</p>
+		</section>
+	</div>
 {/if}
+
 <style lang="scss">
 	@import './profil';
 </style>
