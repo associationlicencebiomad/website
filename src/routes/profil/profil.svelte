@@ -86,5 +86,5 @@
 </div>
 
 <style lang="scss">
-	@import './profile';
+	@import './profil';
 </style>

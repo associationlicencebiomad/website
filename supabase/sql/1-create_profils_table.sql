@@ -1,5 +1,5 @@
 -- 1. Create table
-create table public.profiles (
+create table public.profils (
   id uuid references auth.users(id) on delete cascade unique not null primary key,
   first_name text not null,
   last_name text not null,
@@ -21,16 +21,16 @@ create table public.profiles (
 );
 
 -- 2. Enable RLS
-alter table public.profiles
+alter table public.profils
   enable row level security;
 
 -- 3. Create Policy
-create policy "Public profiles are viewable by everyone."
-  on profiles for select using (
+create policy "Public profils are viewable by everyone."
+  on profils for select using (
     true
   );
 
-create policy "Users can update their own profiles."
-  on profiles for update using (
+create policy "Users can update their own profils."
+  on profils for update using (
     auth.uid() = id
   );

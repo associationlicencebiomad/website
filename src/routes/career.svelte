@@ -1,11 +1,11 @@
 <script lang="ts" context="module">
 	import type { Load } from '@sveltejs/kit';
-	import type { Profile } from '../types/database/Profile.type';
+	import type { profil } from '../types/database/profil.type';
 
 	export const load: Load = async () => {
 
 		const { data, error: supabaseErr } = await supabase
-			.from<Profile>('profiles')
+			.from<profil>('profils')
 			.select(
 				`
 				id,
@@ -20,7 +20,7 @@
 
 		return {
 			props: {
-				profiles: data,
+				profils: data,
 				error: supabaseErr
 			}
 		};
@@ -34,7 +34,7 @@
 	import type { PostgrestError } from '@supabase/supabase-js';
 	import { inview } from 'svelte-inview';
 
-	export let profiles: Profile[] = [];
+	export let profils: profil[] = [];
 	export let error: PostgrestError | null;
 
 	let page: number = 0;
@@ -46,7 +46,7 @@
 
 	const fetchData = async () => {
 		const { data, error: supabaseErr } = await supabase
-			.from<Profile>('profiles')
+			.from<profil>('profils')
 			.select(
 				`
 				id,
@@ -62,7 +62,7 @@
 		if (supabaseErr) {
 			console.error(supabaseErr);
 		} else {
-			if (data) profiles = [...profiles, ...data];
+			if (data) profils = [...profils, ...data];
 
 			if (!data || data.length < 30) {
 				hasMore = false;
@@ -95,14 +95,14 @@
 	</div>
 </div>
 <div class="UsersCareer">
-	{#each profiles as profile (profile.id)}
+	{#each profils as profil (profil.id)}
 		<UserCareerCard
-			first_name={profile.first_name}
-			last_name={profile.last_name}
-			avatar={profile.avatar}
-			promoName={profile.promos.name}
-			promoYear={profile.promos.year}
-			timeline={profile.timeline}
+			first_name={profil.first_name}
+			last_name={profil.last_name}
+			avatar={profil.avatar}
+			promoName={profil.promos.name}
+			promoYear={profil.promos.year}
+			timeline={profil.timeline}
 		/>
 	{/each}
 </div>

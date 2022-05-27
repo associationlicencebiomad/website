@@ -1,42 +1,42 @@
 <script lang="ts" context="module">
-	import { user, profile } from '$lib/store';
+	import { user, profil } from '$lib/store';
 	import { supabase } from '$lib/supabase-client';
 	import type { User } from '@supabase/supabase-js';
 	import type { Load } from '@sveltejs/kit';
-	import type { Profile } from 'src/types/database/Profile.type';
+	import type { profil } from 'src/types/database/profil.type';
 	import { get } from 'svelte/store';
 
 	export const load: Load = async () => {
-		const updateUserProfile = async (user: User | null) => {
+		const updateUserprofil = async (user: User | null) => {
 			if (user) {
 				let { data } = await supabase
-					.from<Profile>('profiles')
+					.from<profil>('profils')
 					.select('*, promos(*)')
 					.match({ id: user.id })
 					.single();
 
-				profile.set(data);
+				profil.set(data);
 			} else {
-				profile.set(null);
+				profil.set(null);
 			}
 		};
 
 		user.set(supabase.auth.user());
-		await updateUserProfile(get(user));
+		await updateUserprofil(get(user));
 
 		supabase.auth.onAuthStateChange(async (event) => {
 			if (event === 'PASSWORD_RECOVERY') {
 				user.set(null);
 			} else {
 				user.set(supabase.auth.user());
-				await updateUserProfile(get(user));
+				await updateUserprofil(get(user));
 			}
 		});
 		return {};
 	};
 </script>
 
-<!-- {@debug $userProfile} -->
+<!-- {@debug $userprofil} -->
 
 <slot />
 

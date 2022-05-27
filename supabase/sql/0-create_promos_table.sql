@@ -11,7 +11,7 @@ alter table public.promos
 
 -- 3. Create Policy
 create policy "Promos are viewable by everyone."
-  on profiles for select using (
+  on profils for select using (
     true
   );
 

@@ -1,6 +1,6 @@
 import type { TimelineType } from "$lib/timeline/timeline.type";
 
-export type Profile = {
+export type profil = {
 	id: string;
 	first_name: string;
 	last_name: string;

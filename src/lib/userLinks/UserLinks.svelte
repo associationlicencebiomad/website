@@ -7,7 +7,7 @@
 	import LinkedinIcon from '$lib/icons/LinkedinIcon.svelte';
 	import TwitterIcon from '$lib/icons/TwitterIcon.svelte';
 
-	import type { Links } from '../../types/database/Profile.type';
+	import type { Links } from '../../types/database/profil.type';
 
 	export let links: Links;
 </script>

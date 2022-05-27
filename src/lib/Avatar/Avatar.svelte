@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { supabase } from "$lib/supabase-client";
-	import type { Profile } from "src/types/database/Profile.type";
+	import type { profil } from "src/types/database/profil.type";
 	import { afterUpdate, onMount } from "svelte";
 
 	export let avatar: string;

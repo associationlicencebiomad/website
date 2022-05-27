@@ -5,7 +5,7 @@
 
 	export const load: Load = async ({ params }) => {
 		const { data, error: supabaseErr } = await supabase
-			.from('profiles')
+			.from('profils')
 			.select(
 				`
 				*,
@@ -24,7 +24,7 @@
 
 		return {
 			props: {
-				currentProfile: data[0] as Profile
+				currentprofil: data[0] as profil
 			}
 		};
 	};
@@ -39,7 +39,7 @@
 		LocationMarkerIcon,
 		ChatAltIcon
 	} from '@krowten/svelte-heroicons';
-	import type { Profile } from '../../../types/database/Profile.type';
+	import type { profil } from '../../../types/database/profil.type';
 
 	import AnecdoteCard from '$lib/anecdoteCard/AnecdoteCard.svelte';
 	import Timeline from '$lib/timeline/Timeline.svelte';
@@ -48,7 +48,7 @@
 	import Button from '$lib/button/Button.svelte';
 	import { user } from '$lib/store';
 
-	export let currentProfile: Profile;
+	export let currentprofil: profil;
 	export let error: boolean;
 
 	if (error) console.error(error);
@@ -61,31 +61,31 @@
 	<div class="user__info">
 		<div class="user__info__avatar">
 			<Avatar
-				avatar={currentProfile.avatar}
-				first_name={currentProfile.first_name}
-				last_name={currentProfile.last_name}
+				avatar={currentprofil.avatar}
+				first_name={currentprofil.first_name}
+				last_name={currentprofil.last_name}
 			/>
 		</div>
 		<div class="user__info__container">
 			<div class="user__info__primary">
 				<div class="user__info__primary__name">
-					{currentProfile.first_name}
-					{currentProfile.last_name}
+					{currentprofil.first_name}
+					{currentprofil.last_name}
 				</div>
-				{#if Object.values(currentProfile.links).some(el => el)}
-					<UserLinks links={currentProfile.links} />
+				{#if Object.values(currentprofil.links).some(el => el)}
+					<UserLinks links={currentprofil.links} />
 				{/if}
 			</div>
 			<div class="user__info__history">
 				<!-- <div class="godparent"><UsersIcon /><span>Jane DOE</span></div> Parrain marraine not yet implemented -->
 				<div class="birthday">
-					<CakeIcon /><span>{new Date(currentProfile.birthday).toLocaleDateString()}</span>
+					<CakeIcon /><span>{new Date(currentprofil.birthday).toLocaleDateString()}</span>
 				</div>
 				<div class="promoType">
 					<BookOpenIcon /><span>
-						{#if currentProfile.promos.year >= 2019}
+						{#if currentprofil.promos.year >= 2019}
 							Bio-MAD
-						{:else if currentProfile.promos.year >= 2014}
+						{:else if currentprofil.promos.year >= 2014}
 							Bio-Maths, doubles diplômes
 						{:else}
 							Bio-Maths
@@ -94,12 +94,12 @@
 				</div>
 				<div class="promo">
 					<CalendarIcon /><span
-						>LBM {currentProfile.promos.year} — {currentProfile.promos.name}</span
+						>LBM {currentprofil.promos.year} — {currentprofil.promos.name}</span
 					>
 				</div>
 				<div class="current">
 					<LocationMarkerIcon /><span
-						>{currentProfile.timeline.at(-1)?.name} — {currentProfile.timeline.at(-1)?.place}</span
+						>{currentprofil.timeline.at(-1)?.name} — {currentprofil.timeline.at(-1)?.place}</span
 					>
 				</div>
 			</div>
@@ -115,25 +115,25 @@
 	</div>
 	<div class="user__about">
 		<h3>A propos :</h3>
-		{#if currentProfile.about}
-			<p>{currentProfile.about}</p>
+		{#if currentprofil.about}
+			<p>{currentprofil.about}</p>
 		{:else}
 			<p class="null">Cette personne n'a pas bien rempli son profil...</p>
 		{/if}
 	</div>
 	<div class="user__anecdote">
-		<AnecdoteCard name="Meilleur souvenir de la LBM" content={currentProfile.best_memory} />
-		<AnecdoteCard name="Points forts de la LBM" content={currentProfile.strong_points} />
+		<AnecdoteCard name="Meilleur souvenir de la LBM" content={currentprofil.best_memory} />
+		<AnecdoteCard name="Points forts de la LBM" content={currentprofil.strong_points} />
 		<AnecdoteCard
 			name="C'était mieux du temps de ta promo ? Prouve le !"
-			content={currentProfile.better_promo}
+			content={currentprofil.better_promo}
 		/>
 	</div>
 	<div class="user__timeline">
-		<Timeline timeline={currentProfile.timeline} />
+		<Timeline timeline={currentprofil.timeline} />
 	</div>
 </div>
 
 <style lang="scss">
-	@import '../profile';
+	@import '../profil';
 </style>
