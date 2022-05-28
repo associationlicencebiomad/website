@@ -25,9 +25,9 @@
 			<img src="/images/logo.jpg" alt="Logo" />
 			<div class="Name">LBM</div>
 		</a>
-		<a href="/blog" class={url === '/blog' ? 'active' : ''} on:click={() => toggleHeader(false)}>
+		<!-- <a href="/blog" class={url === '/blog' ? 'active' : ''} on:click={() => toggleHeader(false)}>
 			Blog
-		</a>
+		</a> -->
 		<a
 			href="/career"
 			class={url === '/career' ? 'active' : ''}
