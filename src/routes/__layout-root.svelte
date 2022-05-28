@@ -3,14 +3,14 @@
 	import { supabase } from '$lib/supabase-client';
 	import type { User } from '@supabase/supabase-js';
 	import type { Load } from '@sveltejs/kit';
-	import type { profil } from 'src/types/database/profil.type';
+	import type { Profil } from 'src/types/database/Profil.type';
 	import { get } from 'svelte/store';
 
 	export const load: Load = async () => {
 		const updateUserprofil = async (user: User | null) => {
 			if (user) {
 				let { data } = await supabase
-					.from<profil>('profils')
+					.from<Profil>('profils')
 					.select('*, promos(*)')
 					.match({ id: user.id })
 					.single();
@@ -36,8 +36,9 @@
 	};
 </script>
 
-<!-- {@debug $userprofil} -->
-
+<head>
+	<title>ALBM</title>
+</head>
 <slot />
 
 <style global lang="scss">
