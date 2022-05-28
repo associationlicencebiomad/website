@@ -11,11 +11,11 @@
 
 <div class="dropdown" class:headerOpened class:hidden={!dropdownOpened}>
 	<ul class="dropdown__content">
-		<li class="dropdown__content__item">
+		<!-- <li class="dropdown__content__item">
 			<a class="dropdown__link" href="/user/settings" on:click={() => dropdownUsed()}>
 				<CogIcon class="icon" /> Settings
 			</a>
-		</li>
+		</li> -->
 		<li class="dropdown__content__item">
 			<a class="dropdown__link" href="/user/profil" on:click={() => dropdownUsed()}>
 				<UserIcon class="icon" /> Mon profil
