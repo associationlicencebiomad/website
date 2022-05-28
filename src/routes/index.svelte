@@ -9,17 +9,14 @@
 	import type { Load } from '@sveltejs/kit';
 	import type { Buro } from 'src/types/database/Profil.type';
 
-
 	export const load: Load = async ({ params }) => {
-		const { data, error: supabaseErr } = await supabase
-			.from<Buro>('buro')
-			.select(`
+		const { data, error: supabaseErr } = await supabase.from<Buro>('buro').select(`
 				*,
 				profils (first_name, last_name, avatar)
 			`);
 
 		if (supabaseErr || !data) {
-			return { 
+			return {
 				props: { error: supabaseErr }
 			};
 		}
@@ -76,21 +73,26 @@
 <section class="albm">
 	<h2 class="albm__title">L'association :</h2>
 	<div class="albm__content">
-		<img src="/images/logo_albm.webp" alt="Logo ALBM" />
+		<img src="/images/logo_albm.png" alt="Logo ALBM" />
 		<div class="albm__content__container">
 			<div class="albm__content__container__item">
 				<p class="albm__content__text">
 					L'ALBM est l'association des licences Bio-MAD. Elle permet l'organisation de la JEEP. Il
 					s'agit de la journée d'échange entre promotions. Lors de cette journée les étudiants
-					peuvent échanger sur leurs expériences. Il y a des présentations de parcours de
-					chercheurs et d'étudiants. L'association permet aussi d'aider à financer des projets tel
-					que les week-end d'intégration des nouvelles générations.
+					peuvent échanger sur leurs expériences. Il y a des présentations de parcours de chercheurs
+					et d'étudiants. L'association permet aussi d'aider à financer des projets tel que les
+					week-end d'intégration des nouvelles générations.
 				</p>
 			</div>
 			<div class="albm__content__container__item">
 				{#if buro}
 					{#each buro as member (member.id)}
-						<OrgMemberCard first_name={member.profils.first_name} last_name={member.profils.last_name} role={member.role} avatar={member.profils.avatar}  />
+						<OrgMemberCard
+							first_name={member.profils.first_name}
+							last_name={member.profils.last_name}
+							role={member.role}
+							avatar={member.profils.avatar}
+						/>
 					{/each}
 				{/if}
 			</div>

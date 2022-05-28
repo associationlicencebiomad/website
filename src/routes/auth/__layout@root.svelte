@@ -1,6 +1,6 @@
 <div class="container">
 	<div class="form">
-		<img src="/images/logo_albm.webp" class="logo" alt="Logo" />
+		<img src="/images/logo_albm.png" class="logo" alt="Logo" />
 		<slot />
 	</div>
 </div>

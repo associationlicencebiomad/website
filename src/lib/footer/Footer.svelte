@@ -15,7 +15,7 @@ import InstagramIcon from '$lib/icons/InstagramIcon.svelte';
 	</div>
 	<div class="content">
 		<div class="container">
-			<img src="/images/logo_albm.webp" alt="Logo ALBM" />
+			<img src="/images/logo_albm.png" alt="Logo ALBM" />
 			<div class="title">
 				<h1>ALBM</h1>
 				<div class="socials">

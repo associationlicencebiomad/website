@@ -153,6 +153,10 @@
 		align-items: center;
 		margin: 4rem;
 
+		:global(img) {
+			max-height: 300px;
+		}
+
 		&__text {
 			font-size: 26px;
 			font-weight: 300;
