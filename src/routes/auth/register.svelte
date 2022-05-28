@@ -39,7 +39,7 @@
 			},
 			{
 				data: {
-					first_name: first_name.charAt(1).toUpperCase() + first_name.slice(1).toLowerCase(),
+					first_name: first_name.charAt(0).toUpperCase() + first_name.slice(1).toLowerCase(),
 					last_name: last_name.toUpperCase(),
 					birthday,
 					key
@@ -82,7 +82,7 @@
 	<Input name="confirm" type="password" bind:value={passwordConfirm} required>
 		Mot de passe (×2)
 	</Input>
-	<Input name="signupKey" type="text" bind:value={key} required>Clée d'inscription</Input>
+	<Input name="signupKey" type="text" bind:value={key} required>Clef d'inscription</Input>
 	<div class="flex-container">
 		<Button color="accent-3" hover={false} disabled={loading}><CheckIcon slot="icon" />{loading ? 'Chargement' : 'Register'}</Button>
 		<Button color="accent-3" on:click={() => history.back()}>
