@@ -11,13 +11,13 @@ alter table public.promos
 
 -- 3. Create Policy
 create policy "Promos are viewable by everyone."
-  on profils for select using (
+  on promos for select using (
     true
   );
 
 -- 4. create a promo_key table, to keep these keys privates ...
 create table public.promo_key (
-  id bigint primary key not null references public.promo.id on delete cascade,
+  id bigint primary key not null references public.promos(id) on delete cascade,
   key text unique not null
 );
 
