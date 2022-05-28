@@ -56,8 +56,8 @@
 				timeline,
 				promos (name, year)
 			`
-			)
-			.range(page * 30, (page + 1) * 30 - 1);
+			);
+			// .range(page * 30, (page + 1) * 30 - 1);
 
 		if (supabaseErr) {
 			console.error(supabaseErr);
