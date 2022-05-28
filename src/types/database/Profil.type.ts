@@ -32,3 +32,9 @@ export type Promos = {
 	name: string;
 	year: number;
 }
+
+export type Buro = {
+	id: string;
+	role: string;
+	profils: Profil;
+};
