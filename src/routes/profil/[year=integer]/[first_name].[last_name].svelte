@@ -93,7 +93,7 @@
 				</div>
 				<div class="current">
 					<LocationMarkerIcon /><span
-						>{currentprofil.timeline.at(-1)?.name} — {currentprofil.timeline.at(-1)?.place}</span
+						>{currentprofil.timeline[0]?.name} — {currentprofil.timeline[0]?.place}</span
 					>
 				</div>
 			</div>
