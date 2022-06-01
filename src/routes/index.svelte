@@ -51,15 +51,15 @@
 	<h2 class="about__title">Une licence en 2 parties</h2>
 	<div class="about__content">
 		<p class="about__content__text">
-			La licence de biologie modelisation et analyse de données (BIO-MAD) se déroule à la station
-			biologique de Roscoff les 2 premières années. L'occasion pour nos frais bacheliers de
-			découvrir les oignons de Roscoff, le doux crachin breton et les sorties vélo les cheveux aux
-			vents. Après ces 2 années de dur labeur entouré de gens vraiment pas ouf, les étudiants ont
+			La licence de biologie modélisation et analyse de données (BIO-MAD) se déroule à la station
+			biologique de Roscoff les 2 premières années ; l'occasion pour nos frais bacheliers de
+			découvrir les oignons de Roscoff, le doux crachin breton et les sorties vélo les cheveux au
+			vent. Après ces 2 années de dur labeur entourés de gens vraiment pas ouf, les étudiants ont
 			l'opportunité de s'envoler vers de nouveaux horizons. Il y a de quoi satisfaire nos jeunes
 			roscovites, la carte des accords avec Sorbonne Université couvre tous les continents. Même si
-			la plupart de étudiants privilégient les destinations canadiennes et européennes, certains
-			visent des destinations plus exotiques tel que l'Amerique du sud, l'Asie de l'est et
-			l'Oceanie. C'est l'occasion de quitter notre douce Bretagne et de découvrir de nouvelles
+			la plupart des étudiants privilégient les destinations canadiennes et européennes, certains
+			visent des destinations plus exotiques tel que l'Amérique du sud, l'Asie de l'est et
+			l'Océanie. C'est l'occasion de quitter notre douce Bretagne et de découvrir de nouvelles
 			contrées plus lointaines.
 		</p>
 		<div class="about__content__illustration">
@@ -81,7 +81,7 @@
 					s'agit de la journée d'échange entre promotions. Lors de cette journée les étudiants
 					peuvent échanger sur leurs expériences. Il y a des présentations de parcours de chercheurs
 					et d'étudiants. L'association permet aussi d'aider à financer des projets tel que les
-					week-end d'intégration des nouvelles générations.
+					week-ends d'intégration des nouvelles générations.
 				</p>
 			</div>
 			<div class="albm__content__container__item">
