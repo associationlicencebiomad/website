@@ -17,27 +17,27 @@
 		</a>
 	{/if}
 	{#if links.twitter}
-		<a href={links.twitter} target="_blank" rel="noopener noreferrer" class="link">
+		<a href={`https://twitter.com/${links.twitter}`} target="_blank" rel="noopener noreferrer" class="link">
 			<TwitterIcon />
 		</a>
 	{/if}
 	{#if links.github}
-		<a href={links.github} target="_blank" rel="noopener noreferrer" class="link">
+		<a href={`https://github.com/${links.github}`} target="_blank" rel="noopener noreferrer" class="link">
 			<GithubIcon />
 		</a>
 	{/if}
 	{#if links.facebook}
-		<a href={links.facebook} target="_blank" rel="noopener noreferrer" class="link">
+		<a href={`https://www.facebook.com/${links.facebook}`} target="_blank" rel="noopener noreferrer" class="link">
 			<FacebookIcon />
 		</a>
 	{/if}
 	{#if links.instagram}
-		<a href={links.instagram} target="_blank" rel="noopener noreferrer" class="link">
+		<a href={`https://www.instagram.com/${links.instagram}`} target="_blank" rel="noopener noreferrer" class="link">
 			<InstagramIcon />
 		</a>
 	{/if}
 	{#if links.linkedin}
-		<a href={links.linkedin} target="_blank" rel="noopener noreferrer" class="link">
+		<a href={`https://www.linkedin.com/in/${links.linkedin}`} target="_blank" rel="noopener noreferrer" class="link">
 			<LinkedinIcon />
 		</a>
 	{/if}

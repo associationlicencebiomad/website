@@ -12,7 +12,13 @@
 	import { supabase } from '$lib/supabase-client';
 	import Textarea from '$lib/textarea/Textarea.svelte';
 	import { ItemType } from '$lib/timeline/timeline.type';
-	import { ArrowDownIcon,ArrowUpIcon,GlobeAltIcon,PlusIcon,TrashIcon } from '@krowten/svelte-heroicons';
+	import {
+		ArrowDownIcon,
+		ArrowUpIcon,
+		GlobeAltIcon,
+		PlusIcon,
+		TrashIcon
+	} from '@krowten/svelte-heroicons';
 	import type { Profil } from '../../types/database/Profil.type';
 
 	let uploading = false;
@@ -144,24 +150,38 @@
 					</div>
 					<div class="twitter">
 						<TwitterIcon />
-						<Input type="text" bind:value={newprofil.links.twitter}>Twitter</Input>
+						<Input type="text" bind:value={newprofil.links.twitter}>
+							Twitter
+							<p slot="helper">Seulement le nom d'utilisateur sans le @</p>
+						</Input>
 					</div>
 					<div class="github">
 						<GithubIcon />
-						<Input type="text" bind:value={newprofil.links.github}>Github</Input>
+						<Input type="text" bind:value={newprofil.links.github}>
+							Github
+							<p slot="helper">Seulement le nom d'utilisateur sans le @</p>
+						</Input>
 					</div>
 					<div class="facebook">
 						<FacebookIcon />
-						<Input type="text" bind:value={newprofil.links.facebook}>Facebook</Input>
+						<Input type="text" bind:value={newprofil.links.facebook}>
+							Facebook
+							<p slot="helper">Seulement le nom d'utilisateur sans le @</p>
+						</Input>
 					</div>
 					<div class="instagram">
-						<InstagramIcon /><Input type="text" bind:value={newprofil.links.instagram}
-							>Instagram</Input
-						>
+						<InstagramIcon />
+						<Input type="text" bind:value={newprofil.links.instagram}>
+							Instagram
+							<p slot="helper">Seulement le nom d'utilisateur sans le @</p>
+						</Input>
 					</div>
 					<div class="linkedin">
 						<LinkedinIcon />
-						<Input type="text" bind:value={newprofil.links.linkedin}>Linkedin</Input>
+						<Input type="text" bind:value={newprofil.links.linkedin}>
+							Linkedin
+							<p slot="helper">Seulement le nom d'utilisateur sans le @</p>
+						</Input>
 					</div>
 				</div>
 			</div>
@@ -225,8 +245,8 @@
 								(newprofil.timeline = [
 									...newprofil.timeline.slice(0, index),
 									...newprofil.timeline.slice(index + 1)
-								])}
-							><TrashIcon slot="icon" /></Button>
+								])}><TrashIcon slot="icon" /></Button
+						>
 						{#if index > 0}
 							<Button
 								color="accent-3"
