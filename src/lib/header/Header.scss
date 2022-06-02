@@ -80,6 +80,7 @@ header {
 		// profil picture
 		& :global(img) {
 			margin-right: 15px;
+			object-fit: cover;
 		}
 	}
 

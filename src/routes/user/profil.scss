@@ -157,6 +157,8 @@
 		}
 	}
 
+
+
 	.timeline {
 		.add {
 			margin: auto;
@@ -171,6 +173,7 @@
 		.control {
 			position: absolute;
 			display: flex;
+			grid-gap: 5px;
 			gap: 5px;
 
 			right: 14%;
@@ -186,6 +189,7 @@
 			justify-content: flex-start;
 			align-items: center;
 			gap: 10px;
+			grid-gap: 10px;
 			flex-grow: 1;
 		}
 
@@ -199,8 +203,8 @@
 	width: 100vw;
 	height: 100vh;
 	display: flex;
-		align-items: center;
-		justify-content: center;
+	align-items: center;
+	justify-content: center;
 
 	section {
 		padding: 2.5em 4%;
@@ -223,7 +227,7 @@
 			font-style: italic;
 			color: $black-3;
 			text-align: center;
-			
+
 			a {
 				color: $accent-3;
 				text-decoration: none;
@@ -231,12 +235,20 @@
 				font-size: 14px;
 				font-style: italic;
 				text-align: center;
-				
+
 				&:hover {
 					color: darken($accent-3, 20%);
 				}
 			}
-		}	
+		}
 	}
 
+}
+
+
+:global(.user > .anecdote > .input-field:last-child > label) {
+	@media screen and (max-width: 477px) {
+		transform: translateY(-10px) !important;
+
+	}
 }
