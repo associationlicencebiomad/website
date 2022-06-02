@@ -15,7 +15,8 @@
 				promos (name, year)
 			`
 			)
-			.range(0, 29);
+			.order('promo_id', { ascending: true })
+			.range(0, 29)
 
 		return {
 			props: {
@@ -60,6 +61,7 @@
 				promos (name, year)
 			`
 			)
+			.order('promo_id', { ascending: true })
 			.range(page * 30, (page + 1) * 30 - 1);
 
 		if (supabaseErr) {
