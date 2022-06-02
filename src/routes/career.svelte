@@ -3,7 +3,6 @@
 	import type { profil } from '../types/database/profil.type';
 
 	export const load: Load = async () => {
-
 		const { data, error: supabaseErr } = await supabase
 			.from<profil>('profils')
 			.select(
@@ -45,6 +44,10 @@
 	}
 
 	const fetchData = async () => {
+		// To get more results, we'll increment the page by 1
+		page++;
+
+		console.log(page * 30, (page + 1) * 30 - 1);
 		const { data, error: supabaseErr } = await supabase
 			.from<profil>('profils')
 			.select(
@@ -56,8 +59,8 @@
 				timeline,
 				promos (name, year)
 			`
-			);
-			// .range(page * 30, (page + 1) * 30 - 1);
+			)
+			.range(page * 30, (page + 1) * 30 - 1);
 
 		if (supabaseErr) {
 			console.error(supabaseErr);
@@ -70,12 +73,14 @@
 		}
 	};
 
-	const handleChange = (e: CustomEvent) => {
-		// To get more results, we'll increment the page by 1
-		page++;
+	$: profils, console.log(profils);
+	$: page, console.log(page);
+
+	const handleChange = async (e: CustomEvent) => {
+		console.log('trigger');
 
 		// And fetch more data
-		if (e.detail.inView && hasMore) fetchData();
+		if (e.detail.inView && hasMore) await fetchData();
 	};
 </script>
 
