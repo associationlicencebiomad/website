@@ -40,13 +40,13 @@
 		flex-wrap: wrap;
 
 		&__avatar :global(img) {
-			max-width: 250px;
-			max-height: 250px;
+			width: 250px;
+			height: 250px;
 			border-radius: 100%;
 			// margin-bottom: 60px;
-			width: 100%;
 			margin-bottom: 50px;
 			margin-right: 50px;
+			object-fit: cover;
 
 			@media screen and (max-width: 1400px) {
 				margin-right: 0;
