@@ -114,10 +114,12 @@
 
 				span {
 					overflow: wrap;
+					flex: 7;
 
 				}
 
 				:global(svg) {
+					flex: 1;
 					width: 24px;
 					height: 100%;
 					color: $accent-2;
