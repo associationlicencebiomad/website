@@ -1,10 +1,10 @@
 <script lang="ts" context="module">
 	import type { Load } from '@sveltejs/kit';
-	import type { profil } from '../types/database/profil.type';
+	import type { Profil as ProfilType } from '../types/database/Profil.type';
 
 	export const load: Load = async () => {
 		const { data, error: supabaseErr } = await supabase
-			.from<profil>('profils')
+			.from<ProfilType>('profils')
 			.select(
 				`
 				id,
@@ -33,7 +33,7 @@
 	import type { PostgrestError } from '@supabase/supabase-js';
 	import { inview } from 'svelte-inview';
 
-	export let profils: profil[] = [];
+	export let profils: ProfilType[] = [];
 	export let error: PostgrestError | null;
 
 	let page: number = 0;
@@ -49,7 +49,7 @@
 
 		console.log(page * 30, (page + 1) * 30 - 1);
 		const { data, error: supabaseErr } = await supabase
-			.from<profil>('profils')
+			.from<ProfilType>('profils')
 			.select(
 				`
 				id,
