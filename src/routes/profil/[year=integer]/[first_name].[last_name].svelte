@@ -2,16 +2,21 @@
 	import AnecdoteCard from '$lib/anecdoteCard/AnecdoteCard.svelte';
 	import Avatar from '$lib/Avatar/Avatar.svelte';
 	import Button from '$lib/button/Button.svelte';
-	import { user } from '$lib/store';
+	import { profil, user } from '$lib/store';
 	import { supabase } from '$lib/supabase-client';
 	import Timeline from '$lib/timeline/Timeline.svelte';
 	import UserLinks from '$lib/userLinks/UserLinks.svelte';
 	import {
-	BookOpenIcon,CakeIcon,CalendarIcon,ChatAltIcon,LocationMarkerIcon
+		ArrowNarrowLeftIcon,
+		BookOpenIcon,
+		CakeIcon,
+		CalendarIcon,
+		ChatAltIcon,
+		LocationMarkerIcon,
+		LoginIcon
 	} from '@krowten/svelte-heroicons';
 	import type { Load } from '@sveltejs/kit';
 	import type { Profil } from '../../../types/database/Profil.type';
-
 
 	export const load: Load = async ({ params }) => {
 		const { data, error: supabaseErr } = await supabase
@@ -27,7 +32,7 @@
 			.ilike('last_name', params.last_name);
 
 		if (supabaseErr || !data) {
-			return { 
+			return {
 				props: { error: supabaseErr }
 			};
 		}
@@ -41,12 +46,42 @@
 </script>
 
 <script lang="ts">
-	
+	import Popup from '$lib/popup/Popup.svelte';
+	import Input from '$lib/input/Input.svelte';
+	import Textarea from '$lib/textarea/Textarea.svelte';
+
 	export let currentprofil: Profil;
 	export let error: boolean;
 
+	let subject: string = '';
+	let message: string = '';
+
 	if (error) console.error(error);
 </script>
+
+<Popup>
+	<h1 class="title">
+		Envoyer un message à {currentprofil.first_name}
+	</h1>
+	<form method="post">
+		<input type="hidden" name="id" value={currentprofil.id} />
+		<input type="hidden" name="to" value={`${currentprofil.first_name} ${currentprofil.last_name}`} />
+		<input type="hidden" name="from" value={`${$profil?.first_name} ${$profil?.last_name}`} />
+		<input type="hidden" name="from_email" value={$user?.email} />
+		<Input name="subject" type="text" bind:value={subject} required>Sujet</Input>
+		<Textarea name="message" bind:value={message} required>Message</Textarea>
+		<div class="flex-container">
+			<Button color="accent-3" hover={false} type="submit">
+				<LoginIcon slot="icon" />
+				Toaster
+			</Button>
+			<Button color="accent-3" on:click={() => history.back()}>
+				<ArrowNarrowLeftIcon slot="icon" />
+				Retour
+			</Button>
+		</div>
+	</form>
+</Popup>
 
 <div class="back">
 	<a href="/" on:click|preventDefault={() => window.history.back()}>← Retour</a>
@@ -66,7 +101,7 @@
 					{currentprofil.first_name}
 					{currentprofil.last_name}
 				</div>
-				{#if Object.values(currentprofil.links).some(el => el)}
+				{#if Object.values(currentprofil.links).some((el) => el)}
 					<UserLinks links={currentprofil.links} />
 				{/if}
 			</div>
@@ -87,9 +122,7 @@
 					</span>
 				</div>
 				<div class="promo">
-					<CalendarIcon /><span
-						>LBM {currentprofil.promos.year} — {currentprofil.promos.name}</span
-					>
+					<CalendarIcon /><span>LBM {currentprofil.promos.year} — {currentprofil.promos.name}</span>
 				</div>
 				<div class="current">
 					<LocationMarkerIcon /><span
