@@ -2,8 +2,11 @@
 	import AnecdoteCard from '$lib/anecdoteCard/AnecdoteCard.svelte';
 	import Avatar from '$lib/Avatar/Avatar.svelte';
 	import Button from '$lib/button/Button.svelte';
+	import Input from '$lib/input/Input.svelte';
+	import Popup from '$lib/popup/Popup.svelte';
 	import { profil, user } from '$lib/store';
 	import { supabase } from '$lib/supabase-client';
+	import Textarea from '$lib/textarea/Textarea.svelte';
 	import Timeline from '$lib/timeline/Timeline.svelte';
 	import UserLinks from '$lib/userLinks/UserLinks.svelte';
 	import {
@@ -13,7 +16,7 @@
 		CalendarIcon,
 		ChatAltIcon,
 		LocationMarkerIcon,
-		LoginIcon
+		PaperAirplaneIcon
 	} from '@krowten/svelte-heroicons';
 	import type { Load } from '@sveltejs/kit';
 	import type { Profil } from '../../../types/database/Profil.type';
@@ -31,6 +34,11 @@
 			.ilike('first_name', params.first_name)
 			.ilike('last_name', params.last_name);
 
+		if (supabaseErr) {
+			console.error(supabaseErr);
+			return { props: { errors: [supabaseErr.message] } };
+		}
+
 		if (supabaseErr || !data) {
 			return {
 				props: { error: supabaseErr }
@@ -46,42 +54,37 @@
 </script>
 
 <script lang="ts">
-	import Popup from '$lib/popup/Popup.svelte';
-	import Input from '$lib/input/Input.svelte';
-	import Textarea from '$lib/textarea/Textarea.svelte';
-
 	export let currentprofil: Profil;
-	export let error: boolean;
 
+	let popup: boolean = false;
 	let subject: string = '';
 	let message: string = '';
-
-	if (error) console.error(error);
 </script>
 
-<Popup>
-	<h1 class="title">
-		Envoyer un message à {currentprofil.first_name}
-	</h1>
-	<form method="post">
-		<input type="hidden" name="id" value={currentprofil.id} />
-		<input type="hidden" name="to" value={`${currentprofil.first_name} ${currentprofil.last_name}`} />
-		<input type="hidden" name="from" value={`${$profil?.first_name} ${$profil?.last_name}`} />
-		<input type="hidden" name="from_email" value={$user?.email} />
-		<Input name="subject" type="text" bind:value={subject} required>Sujet</Input>
-		<Textarea name="message" bind:value={message} required>Message</Textarea>
-		<div class="flex-container">
-			<Button color="accent-3" hover={false} type="submit">
-				<LoginIcon slot="icon" />
-				Toaster
-			</Button>
-			<Button color="accent-3" on:click={() => history.back()}>
-				<ArrowNarrowLeftIcon slot="icon" />
-				Retour
-			</Button>
-		</div>
-	</form>
-</Popup>
+{#if popup}
+	<Popup>
+		<h1 class="title">
+			Envoyer un message à {currentprofil.first_name}
+		</h1>
+		<form method="post">
+			<input type="hidden" name="to" value={currentprofil.id} />
+			<input type="hidden" name="from" value={`${$profil?.first_name} ${$profil?.last_name}`} />
+			<input type="hidden" name="from_email" value={$user?.email} />
+			<Input name="subject" type="text" bind:value={subject} required>Sujet</Input>
+			<Textarea name="message" bind:value={message} required>Message</Textarea>
+			<div class="flex-container">
+				<Button color="accent-3" hover={false} type="submit">
+					<PaperAirplaneIcon slot="icon" />
+					Envoyer
+				</Button>
+				<Button color="accent-3" on:click={() => (popup = false)}>
+					<ArrowNarrowLeftIcon slot="icon" />
+					Retour
+				</Button>
+			</div>
+		</form>
+	</Popup>
+{/if}
 
 <div class="back">
 	<a href="/" on:click|preventDefault={() => window.history.back()}>← Retour</a>
@@ -122,20 +125,24 @@
 					</span>
 				</div>
 				<div class="promo">
-					<CalendarIcon /><span>LBM {currentprofil.promos.year} — {currentprofil.promos.name}</span>
+					<CalendarIcon />
+					<span>LBM {currentprofil.promos.year} — {currentprofil.promos.name}</span>
 				</div>
 				<div class="current">
-					<LocationMarkerIcon /><span
-						>{currentprofil.timeline[0]?.name} — {currentprofil.timeline[0]?.place}</span
-					>
+					<LocationMarkerIcon />
+					<span>{currentprofil.timeline[0]?.name} — {currentprofil.timeline[0]?.place}</span>
 				</div>
 			</div>
-			{#if $user}
+			{#if $user && currentprofil.id != $user?.id}
 				<div class="user__info__contact">
 					<p>Une question sur mon parcours, mes études actuelle ou le pays de ma L3 ?</p>
-					<Button color="black-3" title="Cette fonctionnalité n'est pas encore disponible" disabled
-						>Message <ChatAltIcon slot="icon" /></Button
+					<Button
+						color="green"
+						title="Cette fonctionnalité n'est pas encore disponible"
+						on:click={() => (popup = true)}
 					>
+						Message <ChatAltIcon slot="icon" />
+					</Button>
 				</div>
 			{/if}
 		</div>

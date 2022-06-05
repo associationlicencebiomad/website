@@ -48,7 +48,6 @@
 		// To get more results, we'll increment the page by 1
 		page++;
 
-		console.log(page * 30, (page + 1) * 30 - 1);
 		const { data, error: supabaseErr } = await supabase
 			.from<ProfilType>('profils')
 			.select(
@@ -75,12 +74,7 @@
 		}
 	};
 
-	$: profils, console.log(profils);
-	$: page, console.log(page);
-
 	const handleChange = async (e: CustomEvent) => {
-		console.log('trigger');
-
 		// And fetch more data
 		if (e.detail.inView && hasMore) await fetchData();
 	};

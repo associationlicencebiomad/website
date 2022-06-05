@@ -11,11 +11,6 @@
 	justify-content: center;
 	background-color: rgba($black-0, 0.5);
 
-	& .logo {
-		width: 64px;
-		margin-bottom: 8px;
-	}
-
 	& :global(.title) {
 		margin-bottom: 8px;
 		font-size: 24px;

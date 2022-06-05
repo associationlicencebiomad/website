@@ -1,35 +1,27 @@
 import { transporter } from "$lib/mail";
-import { supabase } from "$lib/supabase-client";
 import type { RequestHandler } from "@sveltejs/kit";
 import { createClient } from '@supabase/supabase-js'
 
 
 export const post: RequestHandler = async ({ request }) => {
 	const data = await request.formData(); // or .json(), or .text(), etc
-	let to = data.get("id");
+	let to = data.get("to");
 
-	if (to) {
-	
 
-		let supabase = createClient(import.meta.env.VITE_SUPABASE_URL, import.meta.env.VITE_SUPABASE_SERVICE_KEY)
+	let supabase = createClient(import.meta.env.VITE_SUPABASE_URL, import.meta.env.VITE_SUPABASE_SERVICE_KEY)
 
-		let {data: user, error} = await supabase.auth.api.getUserById(to as string);
+	let { data: user, error } = await supabase.auth.api.getUserById(to as string);
 
-		console.log(user)
-		
-		let info = await transporter.sendMail({
-			from: `${data.get('from')} <website@albm.fr>`, // sender address
-			to: user?.email, // list of receivers
-			cc: data.get('from_email') as string,
-			subject: data.get('subject') as string, // Subject line
-			text: `${data.get('message')} \n\nMessage envoyer depuis le site de l'ALBM, veuillez répondre à ${data.get('from')} : ${data.get('from_email')} `, // plain text body
-			// html: "<b>Hello world?</b>", // html body
-		});
-	}
-	
-	return {
-		status: 201,		
-	};
+	await transporter.sendMail({
+		from: `${data.get('from')} <website@albm.fr>`, // sender address
+		to: user?.email, // list of receivers
+		cc: data.get('from_email') as string,
+		subject: data.get('subject') as string, // Subject line
+		text: `${data.get('message')} \n\nMessage envoyé depuis le site de l'ALBM, veuillez répondre à ${data.get('from')} : ${data.get('from_email')} `, // plain text body
+		// html: "<b>Hello world?</b>", // html body
+	});
+
+	return {};
 }
 
 
