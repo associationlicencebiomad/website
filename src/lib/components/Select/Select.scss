@@ -1,0 +1,35 @@
+@import 'src/scss/colors';
+
+select {
+	/* Reset */
+	appearance: none;
+	border: 0;
+	outline: 0;
+	font: inherit;
+	/* Personalize */
+	// width: 20em;
+	height: 3em;
+	padding: 0 3em 0 1em;
+	background: url(https://upload.wikimedia.org/wikipedia/commons/9/9d/Caret_down_font_awesome_whitevariation.svg)
+			no-repeat right 0.8em center / 1.4em,
+		rgba($accent-3, 0.2);
+	color: $black-0;
+	border-radius: 0.25em;
+	// box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
+	cursor: pointer;
+	/* <option> colors */
+	option {
+		color: inherit;
+		background-color: $white-0;
+	}
+	/* Remove focus outline */
+	&:focus {
+		outline: none;
+		background-color: rgba($accent-3, 0.5);
+		transition: all;
+	}
+	/* Remove IE arrow */
+	&::-ms-expand {
+		display: none;
+	}
+}

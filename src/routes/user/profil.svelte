@@ -1,17 +1,17 @@
 <script lang="ts">
-	import Avatar from '$lib/Avatar/Avatar.svelte';
-	import Button from '$lib/button/Button.svelte';
+	import Avatar from '$lib/components/Avatar/Avatar.svelte';
+	import Button from '$lib/components/Button/Button.svelte';
 	import FacebookIcon from '$lib/icons/FacebookIcon.svelte';
 	import GithubIcon from '$lib/icons/GithubIcon.svelte';
 	import InstagramIcon from '$lib/icons/InstagramIcon.svelte';
 	import LinkedinIcon from '$lib/icons/LinkedinIcon.svelte';
 	import TwitterIcon from '$lib/icons/TwitterIcon.svelte';
-	import Input from '$lib/input/Input.svelte';
-	import Select from '$lib/select/Select.svelte';
-	import { profil } from '$lib/store';
-	import { supabase } from '$lib/supabase-client';
-	import Textarea from '$lib/textarea/Textarea.svelte';
-	import { ItemType } from '$lib/timeline/timeline.type';
+	import Input from '$lib/components/Input/Input.svelte';
+	import Select from '$lib/components/Select/Select.svelte';
+	import { session } from '$app/stores';
+	import { supabaseClient } from '$lib/supabase-client';
+	import Textarea from '$lib/components/Textarea/Textarea.svelte';
+	import { ItemType } from '$lib/components/Timeline/timeline.type';
 	import {
 		ArrowDownIcon,
 		ArrowUpIcon,
@@ -25,22 +25,22 @@
 	let files: FileList;
 	let fileInput: HTMLInputElement;
 	let edited = false;
-	let newprofil: Profil = JSON.parse(JSON.stringify($profil));
-	$: newprofil, (edited = JSON.stringify(newprofil) !== JSON.stringify($profil));
+	let newprofil: Profil = JSON.parse(JSON.stringify($session.user.profil));
+	$: newprofil, (edited = JSON.stringify(newprofil) !== JSON.stringify($session.user.profil));
 
 	async function uploadAvatar() {
 		try {
 			uploading = true;
 
 			if (!files || files.length === 0) {
-				throw new Error('You must select an image to upload.');
+				throw new Error('You must Select an image to upload.');
 			}
 
 			const file = files[0];
 			const fileExt = file.name.split('.').pop();
 			const filePath = `${Math.random()}.${newprofil.id}.${fileExt}`;
 
-			let { error: uploadError } = await supabase.storage
+			let { error: uploadError } = await supabaseClient.storage
 				.from('avatars')
 				.upload(filePath, file, { upsert: true });
 			if (uploadError) throw uploadError;
@@ -60,7 +60,7 @@
 	const updateUser = async () => {
 		saving = true;
 		try {
-			const { data, error } = await supabase
+			const { data, error } = await supabaseClient
 				.from<Profil>('profils')
 				.update({
 					first_name: newprofil.first_name,
@@ -79,8 +79,8 @@
 
 			if (error) throw error;
 
-			$profil = data;
-			newprofil = JSON.parse(JSON.stringify($profil));
+			$session.user.profil = data;
+			newprofil = JSON.parse(JSON.stringify($session.user.profil));
 		} catch (err) {
 			console.log(err);
 		} finally {
@@ -95,7 +95,7 @@
 			<div class="content">
 				Il y a des modifications non enregistrées.
 				<div class="container">
-					<Button on:click={() => (newprofil = JSON.parse(JSON.stringify($profil)))}>
+					<Button on:click={() => (newprofil = JSON.parse(JSON.stringify($session.user.profil)))}>
 						Réinitialiser
 					</Button>
 					<Button color="accent-3" on:click={updateUser} disabled={saving}

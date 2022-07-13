@@ -1,17 +1,17 @@
 <script lang="ts">
 	import { CheckIcon, ArrowNarrowLeftIcon } from '@krowten/svelte-heroicons';
-	import type { ToastType } from '$lib/toast/toast.type';
+	import type { ToastType } from '$lib/components/Toast/toast.type';
 
-	import Button from '$lib/button/Button.svelte';
-	import Input from '$lib/input/Input.svelte';
-	import Toast from '$lib/toast/Toast.svelte';
-import { supabase } from '$lib/supabase-client';
-import { goto } from '$app/navigation';
+	import Button from '$lib/components/Button/Button.svelte';
+	import Input from '$lib/components/Input/Input.svelte';
+	import Toast from '$lib/components/Toast/Toast.svelte';
+	import { supabaseClient } from '$lib/supabase-client';
+	import { goto } from '$app/navigation';
 
-	let loading: boolean = false;
+	let loading = false;
 	let toasts: Array<ToastType> = [];
-	let password: string = '';
-	let passwordConfirm: string = '';
+	let password = '';
+	let passwordConfirm = '';
 
 	const resetPassword = async () => {
 		loading = true;
@@ -26,12 +26,12 @@ import { goto } from '$app/navigation';
 			return;
 		}
 
-		let { error } = await supabase.auth.update({
-			password,
+		let { error } = await supabaseClient.auth.update({
+			password
 		});
 
 		loading = false;
-		
+
 		if (error) {
 			toasts = [
 				...toasts,
@@ -41,12 +41,11 @@ import { goto } from '$app/navigation';
 				}
 			];
 		} else {
-			await supabase.auth.signOut();
+			await supabaseClient.auth.signOut();
 			goto('/auth/login?reset');
 		}
 	};
 </script>
-
 
 <h1 class="title">Réinitialiser votre mot de passe</h1>
 
@@ -57,17 +56,18 @@ import { goto } from '$app/navigation';
 {/each}
 
 <form on:submit|preventDefault={resetPassword}>
-	<Input id="password" type="password" bind:value={password} required>
-		Mot de passe
-	</Input>
+	<Input id="password" type="password" bind:value={password} required>Mot de passe</Input>
 	<Input id="confirm" type="password" bind:value={passwordConfirm} required>
 		Mot de passe (×2)
 	</Input>
 	<div class="flex-container">
-		<Button color="accent-3" hover={false}><CheckIcon slot="icon" disabled={loading} />
-			{loading ? "Chargement" : "Réinitialiser"}
+		<Button color="accent-3" hover={false}
+			><CheckIcon slot="icon" disabled={loading} />
+			{loading ? 'Chargement' : 'Réinitialiser'}
 		</Button>
-		<Button color="accent-3" on:click={() => history.back()}><ArrowNarrowLeftIcon slot="icon"/>Retour</Button>
+		<Button color="accent-3" on:click={() => history.back()}
+			><ArrowNarrowLeftIcon slot="icon" />Retour</Button
+		>
 	</div>
 </form>
 
@@ -82,7 +82,6 @@ import { goto } from '$app/navigation';
 			flex-direction: column;
 			align-items: center;
 			justify-content: center;
-			
 		}
 	}
 </style>

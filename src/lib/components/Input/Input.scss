@@ -1,0 +1,115 @@
+@import 'src/scss/colors';
+
+.input-field {
+	position: relative;
+	margin: 1em 0;
+
+	input:not([type]),
+	input[type='text']:not(.browser-default),
+	input[type='password']:not(.browser-default),
+	input[type='email']:not(.browser-default),
+	input[type='url']:not(.browser-default),
+	input[type='time']:not(.browser-default),
+	input[type='date']:not(.browser-default),
+	input[type='datetime']:not(.browser-default),
+	input[type='datetime-local']:not(.browser-default),
+	input[type='tel']:not(.browser-default),
+	input[type='number']:not(.browser-default),
+	input[type='search']:not(.browser-default) {
+		background-color: transparent;
+		border: none;
+		border-bottom: 1px solid $black-3;
+		border-radius: 0;
+		outline: none;
+		height: 3rem;
+		width: 100%;
+		font-size: 16px;
+		margin: 0 0 8px 0;
+		padding: 0;
+		box-shadow: none;
+		box-sizing: content-box;
+		transition: border 0.3s;
+		transition: box-shadow 0.3s, border 0.3s;
+
+		// &.c-primary {
+		//     border-bottom: 1px solid $primary;
+		// }
+	}
+
+	input:not([type]):focus:not([readonly]),
+	input[type='text']:not(.browser-default):focus:not([readonly]),
+	input[type='password']:not(.browser-default):focus:not([readonly]),
+	input[type='email']:not(.browser-default):focus:not([readonly]),
+	input[type='url']:not(.browser-default):focus:not([readonly]),
+	input[type='time']:not(.browser-default):focus:not([readonly]),
+	input[type='date']:not(.browser-default):focus:not([readonly]),
+	input[type='datetime']:not(.browser-default):focus:not([readonly]),
+	input[type='datetime-local']:not(.browser-default):focus:not([readonly]),
+	input[type='tel']:not(.browser-default):focus:not([readonly]),
+	input[type='number']:not(.browser-default):focus:not([readonly]),
+	input[type='search']:not(.browser-default):focus:not([readonly]) {
+		border-bottom: 1px solid $accent-3;
+		box-shadow: 0 1px 0 0 $accent-3;
+	}
+
+	& > input + label {
+		color: $black-3;
+		position: absolute;
+		top: 0;
+		left: 0;
+		font-size: 1rem;
+		cursor: text;
+		/* transition: color .2s ease-out; */
+		/* transition: transform .2s ease-out, color .2s ease-out; */
+		transition: transform 0.2s ease-out, color 0.2s ease-out;
+		transform-origin: 0% 100%;
+		text-align: initial;
+		transform: translateY(12px);
+	}
+
+	input:focus + label {
+		color: $accent-3;
+	}
+
+	input:focus+label,
+	// Input:invalid+label,
+	input+label.active, input[type="date"]+label {
+		transform: translateY(-14px) scale(0.8);
+		transform-origin: 0 0;
+	}
+
+	.helper-text {
+		:global(a) {
+			&:visited,
+			&:link {
+				color: $black-3;
+				text-decoration: none;
+				outline: none;
+				font-style: italic;
+			}
+
+			&:hover {
+				color: $black-0;
+				transition: all ease-in-out 0.3s;
+			}
+		}
+
+		&::after {
+			opacity: 1;
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+
+		position: relative;
+		min-height: 18px;
+		display: block;
+		text-align: left;
+		font-size: 12px;
+		color: rgba(0, 0, 0, 0.54);
+	}
+
+	&.hidden {
+		display: none;
+	}
+}
