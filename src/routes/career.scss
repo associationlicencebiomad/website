@@ -1,4 +1,4 @@
-@import '../scss/colors';
+@import 'src/scss/colors';
 @import '../scss/animations';
 
 .title {
@@ -71,12 +71,12 @@
 
 			&:hover {
 				color: $accent-3;
-				transition: all ease-in-out .3s;
+				transition: all ease-in-out 0.3s;
 			}
 
 			&:focus {
 				outline: none;
-				animation: click-feedback .3s ease-in-out;
+				animation: click-feedback 0.3s ease-in-out;
 			}
 		}
 	}

@@ -1,20 +1,18 @@
 <script lang="ts">
-	import { LoginIcon, ArrowNarrowLeftIcon } from '@krowten/svelte-heroicons';
+	import type { ToastType } from '$lib/components/Toast/toast.type';
+	import { ArrowNarrowLeftIcon, LoginIcon } from '@krowten/svelte-heroicons';
 	import { page } from '$app/stores';
-	import { supabase } from '$lib/supabase-client';
-	import { user } from '$lib/store';
-
-	import Button from '$lib/button/Button.svelte';
-	import Input from '$lib/input/Input.svelte';
-	import Toast from '$lib/toast/Toast.svelte';
-	import type { ToastType } from '$lib/toast/toast.type';
-	import { goto } from '$app/navigation';
+	import { route } from '../../lib/route';
+	import { supabaseClient } from '$lib/supabase-client';
+	import Button from '$lib/components/Button/Button.svelte';
+	import Input from '$lib/components/Input/Input.svelte';
+	import Toast from '$lib/components/Toast/Toast.svelte';
 
 	let toasts: Array<ToastType> = [];
-	let email: string = '';
-	let password: string = '';
+	let email = '';
+	let password = '';
 
-	let loading: boolean = false;
+	let loading = false;
 
 	if ($page.url.searchParams.has('success')) {
 		toasts = [
@@ -52,7 +50,7 @@
 
 	const login = async () => {
 		loading = true;
-		let { user: userDetails, error } = await supabase.auth.signIn({
+		let { error } = await supabaseClient.auth.signIn({
 			email,
 			password
 		});
@@ -66,15 +64,10 @@
 				}
 			];
 		} else {
-			user.set(userDetails);
-			goto('/');
+			await route('/');
 		}
 		loading = false;
 	};
-
-	if ($user) {
-		goto('/');
-	}
 </script>
 
 <h1 class="title">Connectez-vous à votre compte</h1>

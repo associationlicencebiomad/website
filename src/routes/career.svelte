@@ -1,9 +1,10 @@
 <script lang="ts" context="module">
 	import type { Load } from '@sveltejs/kit';
 	import type { Profil as ProfilType } from '../types/database/Profil.type';
+	import { supabaseClient } from '$lib/supabase-client';
 
 	export const load: Load = async () => {
-		const { data, error: supabaseErr } = await supabase
+		const { data, error: supabaseErr } = await supabaseClient
 			.from<ProfilType>('profils')
 			.select(
 				`
@@ -16,7 +17,7 @@
 			`
 			)
 			.order('promo_id', { ascending: true })
-			.range(0, 29)
+			.range(0, 29);
 
 		return {
 			props: {
@@ -28,17 +29,16 @@
 </script>
 
 <script lang="ts">
-	import UserCareerCard from '$lib/userCareerCard/UserCareerCard.svelte';
+	import UserCareerCard from '$lib/components/UserCareerCard/UserCareerCard.svelte';
 	import { SearchIcon } from '@krowten/svelte-heroicons';
-	import { supabase } from '$lib/supabase-client';
 	import type { PostgrestError } from '@supabase/supabase-js';
 	import { inview } from 'svelte-inview';
 
 	export let profils: ProfilType[] = [];
 	export let error: PostgrestError | null;
 
-	let page: number = 0;
-	let hasMore: boolean = true;
+	let page = 0;
+	let hasMore = true;
 
 	if (error) {
 		console.error(error);
@@ -48,7 +48,7 @@
 		// To get more results, we'll increment the page by 1
 		page++;
 
-		const { data, error: supabaseErr } = await supabase
+		const { data, error: supabaseErr } = await supabaseClient
 			.from<ProfilType>('profils')
 			.select(
 				`
@@ -109,7 +109,7 @@
 </div>
 
 <!-- Trigger infinite scroll https://levelup.gitconnected.com/loading-more-results-on-scroll-with-svelte-js-restful-apis-svelte-infinite-scrolling-ad80a09b5e33 -->
-<div use:inview={{}} on:change={handleChange} />
+<div use:inview on:change={handleChange} />
 
 <style lang="scss">
 	@import './career';

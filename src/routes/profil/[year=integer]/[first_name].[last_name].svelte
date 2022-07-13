@@ -1,14 +1,14 @@
 <script lang="ts" context="module">
-	import AnecdoteCard from '$lib/anecdoteCard/AnecdoteCard.svelte';
-	import Avatar from '$lib/Avatar/Avatar.svelte';
-	import Button from '$lib/button/Button.svelte';
-	import Input from '$lib/input/Input.svelte';
-	import Popup from '$lib/popup/Popup.svelte';
+	import AnecdoteCard from '$lib/components/AnecdoteCard/AnecdoteCard.svelte';
+	import Avatar from '$lib/components/Avatar/Avatar.svelte';
+	import Button from '$lib/components/Button/Button.svelte';
+	import Input from '$lib/components/Input/Input.svelte';
+	import Popup from '$lib/components/Popup/Popup.svelte';
 	import { profil, user } from '$lib/store';
-	import { supabase } from '$lib/supabase-client';
-	import Textarea from '$lib/textarea/Textarea.svelte';
-	import Timeline from '$lib/timeline/Timeline.svelte';
-	import UserLinks from '$lib/userLinks/UserLinks.svelte';
+	import { supabaseClient } from '$lib/supabase-client';
+	import Textarea from '$lib/components/Textarea/Textarea.svelte';
+	import Timeline from '$lib/components/Timeline/Timeline.svelte';
+	import UserLinks from '$lib/components/UserLinks/UserLinks.svelte';
 	import {
 		ArrowNarrowLeftIcon,
 		BookOpenIcon,
@@ -22,7 +22,7 @@
 	import type { Profil } from '../../../types/database/Profil.type';
 
 	export const load: Load = async ({ params }) => {
-		const { data, error: supabaseErr } = await supabase
+		const { data, error: supabaseErr } = await supabaseClient
 			.from('profils')
 			.select(
 				`
@@ -56,9 +56,9 @@
 <script lang="ts">
 	export let currentprofil: Profil;
 
-	let popup: boolean = false;
-	let subject: string = '';
-	let message: string = '';
+	let popup = false;
+	let subject = '';
+	let message = '';
 </script>
 
 {#if popup}

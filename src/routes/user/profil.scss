@@ -2,7 +2,6 @@
 @import 'src/scss/mixins';
 @import 'src/scss/animations';
 
-
 .popup {
 	z-index: 100;
 
@@ -24,8 +23,6 @@
 		align-items: center;
 		justify-content: center;
 		column-gap: 20px;
-
-
 
 		.container {
 			display: flex;
@@ -117,9 +114,6 @@
 				align-items: center;
 				width: 100%;
 
-
-
-
 				:global(svg) {
 					color: $accent-3;
 					width: 24px;
@@ -128,9 +122,7 @@
 
 				:global(.input-field) {
 					width: 100%;
-
 				}
-
 			}
 		}
 
@@ -156,8 +148,6 @@
 			}
 		}
 	}
-
-
 
 	.timeline {
 		.add {
@@ -242,13 +232,10 @@
 			}
 		}
 	}
-
 }
-
 
 :global(.user > .anecdote > .input-field:last-child > label) {
 	@media screen and (max-width: 477px) {
 		transform: translateY(-10px) !important;
-
 	}
 }

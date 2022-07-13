@@ -1,11 +1,11 @@
-@import '../scss/colors';
-@import '../scss/fonts';
-@import '../scss/reset';
+@import 'src/scss/colors';
+@import 'src/scss/fonts';
+@import 'src/scss/reset';
 
 :global(*),
 :global(*::before),
 :global(*::after) {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 html,

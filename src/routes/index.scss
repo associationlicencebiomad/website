@@ -1,6 +1,7 @@
-@import '../scss/colors';
+@import 'src/scss/colors';
 
-* { // dirty fix for first separator ...
+* {
+	// dirty fix for first separator ...
 	box-sizing: content-box;
 }
 
@@ -46,8 +47,6 @@
 		position: absolute;
 		bottom: 5px;
 	}
-
-
 
 	.separator :global(svg) {
 		min-height: 50px;

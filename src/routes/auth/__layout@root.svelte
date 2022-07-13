@@ -6,7 +6,7 @@
 </div>
 
 <style lang="scss">
-	@import '../../scss/colors';
+	@import 'src/scss/colors';
 
 	.container {
 		width: 100vw;
@@ -15,7 +15,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		
+
 		& .logo {
 			width: 64px;
 			margin-bottom: 8px;

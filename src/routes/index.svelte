@@ -3,14 +3,14 @@
 	import Scroll from '$lib/assets/Scroll.svelte';
 	import Separator_1 from '$lib/assets/Separator-1.svelte';
 	import Separator_2 from '$lib/assets/Separator-2.svelte';
-	import OrgMemberCard from '$lib/OrgMemberCard/OrgMemberCard.svelte';
-	import { supabase } from '$lib/supabase-client';
+	import OrgMemberCard from '$lib/components/OrgMemberCard/OrgMemberCard.svelte';
+	import { supabaseClient } from '$lib/supabase-client';
 	import type { PostgrestError } from '@supabase/supabase-js';
 	import type { Load } from '@sveltejs/kit';
 	import type { Buro } from 'src/types/database/Profil.type';
 
-	export const load: Load = async ({ params }) => {
-		const { data, error: supabaseErr } = await supabase.from<Buro>('buro').select(`
+	export const load: Load = async () => {
+		const { data, error: supabaseErr } = await supabaseClient.from<Buro>('buro').select(`
 				*,
 				profils (first_name, last_name, avatar)
 			`);

@@ -1,23 +1,23 @@
 <script lang="ts">
 	import { CheckIcon, ArrowNarrowLeftIcon } from '@krowten/svelte-heroicons';
-	import type { ToastType } from '$lib/toast/toast.type';
+	import type { ToastType } from '$lib/components/Toast/toast.type';
 	import { goto } from '$app/navigation';
 	import { user } from '$lib/store';
 
-	import Button from '$lib/button/Button.svelte';
-	import Input from '$lib/input/Input.svelte';
-	import Toast from '$lib/toast/Toast.svelte';
-	import { supabase } from '$lib/supabase-client';
+	import Button from '$lib/components/Button/Button.svelte';
+	import Input from '$lib/components/Input/Input.svelte';
+	import Toast from '$lib/components/Toast/Toast.svelte';
+	import { supabaseClient } from '$lib/supabase-client';
 
-	let loading: boolean = false;
+	let loading = false;
 	let toasts: Array<ToastType> = [];
-	let first_name: string = '';
-	let last_name: string = '';
-	let email: string = '';
-	let password: string = '';
-	let passwordConfirm: string = '';
-	let birthday: string = '';
-	let key: string = '';
+	let first_name = '';
+	let last_name = '';
+	let email = '';
+	let password = '';
+	let passwordConfirm = '';
+	let birthday = '';
+	let key = '';
 
 	const register = async () => {
 		if (password !== passwordConfirm) {
@@ -30,9 +30,9 @@
 			];
 			return;
 		}
-		
+
 		loading = true;
-		let { error } = await supabase.auth.signUp(
+		let { error } = await supabaseClient.auth.signUp(
 			{
 				email,
 				password
@@ -78,13 +78,17 @@
 	<Input name="lastName" type="text" bind:value={last_name} required>Nom</Input>
 	<Input name="birthDate" type="date" bind:value={birthday} required>Date de naissance</Input>
 	<Input name="email" type="email" bind:value={email} required>Email</Input>
-	<Input name="password" type="password" bind:value={password} required minlength="8" >Mot de passe</Input>
+	<Input name="password" type="password" bind:value={password} required minlength="8"
+		>Mot de passe</Input
+	>
 	<Input name="confirm" type="password" bind:value={passwordConfirm} required>
 		Mot de passe (×2)
 	</Input>
 	<Input name="signupKey" type="text" bind:value={key} required>Clef d'inscription</Input>
 	<div class="flex-container">
-		<Button color="accent-3" hover={false} disabled={loading}><CheckIcon slot="icon" />{loading ? 'Chargement' : 'Register'}</Button>
+		<Button color="accent-3" hover={false} disabled={loading}
+			><CheckIcon slot="icon" />{loading ? 'Chargement' : 'Register'}</Button
+		>
 		<Button color="accent-3" on:click={() => history.back()}>
 			<ArrowNarrowLeftIcon slot="icon" />Retour
 		</Button>

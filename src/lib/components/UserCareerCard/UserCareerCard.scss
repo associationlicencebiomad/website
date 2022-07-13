@@ -1,0 +1,64 @@
+@import 'src/scss/colors';
+@import '../../../scss/animations';
+
+.UserCareerCard {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background-color: $white-4;
+	font-size: 14px;
+	font-weight: 300;
+	color: $black-0;
+	border-radius: 10px;
+	padding: 10px;
+	cursor: pointer;
+	min-width: 200px;
+	max-width: 250px;
+	min-height: 250px;
+	text-decoration: none;
+	outline: none;
+
+	:global(img) {
+		margin-top: 15px;
+		width: 100px;
+		height: 100px;
+		border-radius: 100%;
+		margin-bottom: 10px;
+		object-fit: cover;
+	}
+
+	h1 {
+		font-size: 18px;
+		font-weight: 500;
+		margin-bottom: 5px;
+		text-align: center;
+	}
+
+	.current {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: 15px 10px;
+		margin-top: 0;
+
+		:global(svg) {
+			color: $accent-3;
+			width: 25px;
+			height: 25px;
+			margin-right: 10px;
+			flex: 1;
+		}
+		p {
+			flex: 7;
+		}
+	}
+
+	.lbmName {
+		margin-bottom: 10px;
+	}
+
+	&:hover {
+		animation: hover-feedback 0.3s ease-in-out;
+	}
+}
