@@ -5,7 +5,7 @@
 </script>
 
 <div class="input-field">
-	<textarea {id} bind:value use:autosize {...$$restProps}></textarea>
+	<textarea {id} bind:value use:autosize {...$$restProps} />
 	<label for={id} class:active={value}><slot /></label>
 	{#if $$slots.helper}
 		<span class="helper-text" data-error="wrong" data-success="right">
