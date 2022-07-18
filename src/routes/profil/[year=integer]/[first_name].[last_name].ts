@@ -2,7 +2,7 @@ import { transporter } from '$lib/mail';
 import type { RequestHandler } from '@sveltejs/kit';
 import { createClient } from '@supabase/supabase-js';
 
-export const post: RequestHandler = async ({ request }) => {
+export const POST: RequestHandler = async ({ request }) => {
 	const data = await request.formData(); // or .json(), or .text(), etc
 	const to = data.get('to');
 
