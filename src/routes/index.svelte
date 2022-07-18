@@ -10,12 +10,14 @@
 	import type { Buro } from 'src/types/database/Profil.type';
 
 	export const load: Load = async () => {
-		const { data, error: supabaseErr } = await supabaseClient.from<Buro>('buro').select(`
+		const { data, error: supabaseErr } = await supabaseClient.from<Buro>('buro')
+			.select(`
 				*,
 				profils (first_name, last_name, avatar)
-			`);
+			`)
+			.eq('display', true);
 
-		if (supabaseErr || !data) {
+        if (supabaseErr || !data) {
 			return {
 				props: { error: supabaseErr }
 			};

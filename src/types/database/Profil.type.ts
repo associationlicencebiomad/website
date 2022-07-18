@@ -36,5 +36,6 @@ export type Promos = {
 export type Buro = {
 	id: string;
 	role: string;
+	display: boolean;
 	profils: Profil;
 };
