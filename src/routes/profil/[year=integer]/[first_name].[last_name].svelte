@@ -54,7 +54,8 @@
 </script>
 
 <script lang="ts">
-	export let currentprofil: Profil;
+	import {session} from "$app/stores";
+    export let currentprofil: Profil;
 
 	let popup = false;
 	let subject = '';
@@ -133,7 +134,7 @@
 					<span>{currentprofil.timeline[0]?.name} — {currentprofil.timeline[0]?.place}</span>
 				</div>
 			</div>
-			{#if $user && currentprofil.id != $user?.id}
+			{#if $session.user && currentprofil.id !== $session.user?.id}
 				<div class="user__info__contact">
 					<p>Une question sur mon parcours, mes études actuelle ou le pays de ma L3 ?</p>
 					<Button
