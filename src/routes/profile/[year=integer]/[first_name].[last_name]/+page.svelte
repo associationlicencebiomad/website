@@ -101,19 +101,19 @@
 					<span>{currentProfile.timeline[0]?.name} — {currentProfile.timeline[0]?.place}</span>
 				</div>
 			</div>
-			<!--{#if $page.data.session.user && currentProfile.id !== $page.data.session.user?.id}-->
-			<div class="user__info__contact">
-				<p>Une question sur mon parcours, mes études actuelle ou le pays de ma L3 ?</p>
-				<Button
-						color="green"
-						on:click={() => (popup = true)}
-						title="Cette fonctionnalité n'est pas encore disponible"
-				>
-					Message
-					<ChatAltIcon slot="icon"/>
-				</Button>
-			</div>
-			<!--{/if}-->
+			{#if $page.data.session.user && currentProfile.id !== $page.data.session.user?.id}
+				<div class="user__info__contact">
+					<p>Une question sur mon parcours, mes études actuelle ou le pays de ma L3 ?</p>
+					<Button
+							color="green"
+							on:click={() => (popup = true)}
+							title="Cette fonctionnalité n'est pas encore disponible"
+					>
+						Message
+						<ChatAltIcon slot="icon"/>
+					</Button>
+				</div>
+			{/if}
 		</div>
 	</div>
 	<div class="user__about">

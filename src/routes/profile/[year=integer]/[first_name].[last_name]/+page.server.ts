@@ -1,8 +1,14 @@
 import {transporter} from '$lib/mail';
 import {createClient} from '@supabase/supabase-js';
-import type {RequestHandler} from "./$types";
+// import type {RequestHandler} from "./$types";
+import {error, type RequestHandler} from '@sveltejs/kit';
 
-export const POST: RequestHandler = async ({request}) => {
+export const POST: RequestHandler = async ({request, locals}) => {
+
+	if (!locals.user) {
+		throw new error(403, 'not logged in');
+	}
+
 	const data = await request.formData(); // or .json(), or .text(), etc
 	const to = data.get('to');
 
