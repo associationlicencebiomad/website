@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	import {page} from '$app/stores';
 	import Separator_3 from '../../assets/Separator-3.svelte';
 	import FacebookIcon from '../../icons/FacebookIcon.svelte';
 	import InstagramIcon from '../../icons/InstagramIcon.svelte';
@@ -30,7 +30,7 @@
 		<div class="links">
 			<a href="/static" class={url === '/' ? 'active' : ''}>Home</a>
 			<a href="/blog" class={url === '/blog' ? 'active' : ''}>Blog</a>
-			<a href="/career" class={url === '/career' ? 'active' : ''}>Parcours</a>
+			<a class={url === '/careers' ? 'active' : ''} href="/careers">Parcours</a>
 			<a href="/about" class={url === '/about' ? 'active' : ''}>A propos</a>
 			<a href="/contact" class={url === '/contact' ? 'active' : ''}>Contact</a>
 			<a href="/credits" class={url === '/cretis' ? 'active' : ''}>Crédits</a>

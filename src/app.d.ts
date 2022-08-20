@@ -5,7 +5,7 @@
 declare namespace App {
 	interface UserSession {
 		user: import('@supabase/supabase-js').User & {
-			profil: import('types/database/Profil.type').Profil;
+			profil: import('src/types/database/Profile.type').Profile;
 		};
 		accessToken?: string;
 	}
@@ -13,8 +13,6 @@ declare namespace App {
 	interface Locals extends UserSession {
 		error: import('@supabase/supabase-js').ApiError;
 	}
-
-	type Session = UserSession;
 
 	// interface Platform {}
 	// interface Stuff {}

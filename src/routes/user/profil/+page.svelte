@@ -8,25 +8,20 @@
 	import TwitterIcon from '$lib/icons/TwitterIcon.svelte';
 	import Input from '$lib/components/Input/Input.svelte';
 	import Select from '$lib/components/Select/Select.svelte';
-	import { session } from '$app/stores';
-	import { supabaseClient } from '$lib/supabase-client';
+	import {supabaseClient} from '$lib/supabase-client';
 	import Textarea from '$lib/components/Textarea/Textarea.svelte';
-	import { ItemType } from '$lib/components/Timeline/timeline.type';
-	import {
-		ArrowDownIcon,
-		ArrowUpIcon,
-		GlobeAltIcon,
-		PlusIcon,
-		TrashIcon
-	} from '@krowten/svelte-heroicons';
-	import type { Profil } from '../../types/database/Profil.type';
+	import {ItemType} from '$lib/components/Timeline/timeline.type';
+	import {ArrowDownIcon, ArrowUpIcon, GlobeAltIcon, PlusIcon, TrashIcon} from '@krowten/svelte-heroicons';
+	import type {Profile} from '/src/types/database/Profile.type';
+	import {page} from "$app/stores";
+	import {invalidate} from "$app/navigation";
 
 	let uploading = false;
 	let files: FileList;
 	let fileInput: HTMLInputElement;
-	let edited = false;
-	let newprofil: Profil = JSON.parse(JSON.stringify($session.user.profil));
-	$: newprofil, (edited = JSON.stringify(newprofil) !== JSON.stringify($session.user.profil));
+	let edited;
+	let newprofile: Profile = JSON.parse(JSON.stringify($page.data.session.user.profile));
+	$: newprofile, (edited = JSON.stringify(newprofile) !== JSON.stringify($page.data.session.user.profile));
 
 	async function uploadAvatar() {
 		try {
@@ -38,21 +33,21 @@
 
 			const file = files[0];
 			const fileExt = file.name.split('.').pop();
-			const filePath = `${Math.random()}.${newprofil.id}.${fileExt}`;
+			const filePath = `${Math.random()}.${newprofile.id}.${fileExt}`;
 
 			let { error: uploadError } = await supabaseClient.storage
 				.from('avatars')
 				.upload(filePath, file, { upsert: true });
 			if (uploadError) throw uploadError;
 
-			newprofil.avatar = filePath;
+			newprofile.avatar = filePath;
 		} finally {
 			uploading = false;
 		}
 	}
 
 	const resetAvatar = () => {
-		newprofil.avatar = '';
+		newprofile.avatar = '';
 	};
 
 	let saving = false;
@@ -60,27 +55,27 @@
 	const updateUser = async () => {
 		saving = true;
 		try {
-			const { data, error } = await supabaseClient
-				.from<Profil>('profils')
+			const {error} = await supabaseClient
+				.from<Profile>('profiles')
 				.update({
-					first_name: newprofil.first_name,
-					last_name: newprofil.last_name,
-					avatar: newprofil.avatar,
-					birthday: newprofil.birthday,
-					links: newprofil.links,
-					about: newprofil.about,
-					best_memory: newprofil.best_memory,
-					strong_points: newprofil.strong_points,
-					better_promo: newprofil.better_promo,
-					timeline: newprofil.timeline
+					first_name: newprofile.first_name,
+					last_name: newprofile.last_name,
+					avatar: newprofile.avatar,
+					birthday: newprofile.birthday,
+					links: newprofile.links,
+					about: newprofile.about,
+					best_memory: newprofile.best_memory,
+					strong_points: newprofile.strong_points,
+					better_promo: newprofile.better_promo,
+					timeline: newprofile.timeline
 				})
-				.match({ id: newprofil.id })
+				.match({id: newprofile.id})
 				.single();
 
 			if (error) throw error;
-
-			$session.user.profil = data;
-			newprofil = JSON.parse(JSON.stringify($session.user.profil));
+			await invalidate();
+			// $page.data.session.user = data;
+			newprofile = JSON.parse(JSON.stringify($page.data.session.user.profile));
 		} catch (err) {
 			console.log(err);
 		} finally {
@@ -89,13 +84,13 @@
 	};
 </script>
 
-{#if newprofil}
+{#if newprofile}
 	{#if edited}
 		<div class="popup">
 			<div class="content">
 				Il y a des modifications non enregistrées.
 				<div class="container">
-					<Button on:click={() => (newprofil = JSON.parse(JSON.stringify($session.user.profil)))}>
+					<Button on:click={() => (newprofile = JSON.parse(JSON.stringify($page.data.session.user.profile)))}>
 						Réinitialiser
 					</Button>
 					<Button color="accent-3" on:click={updateUser} disabled={saving}
@@ -112,9 +107,9 @@
 		<section class="info">
 			<div class="info__avatar">
 				<Avatar
-					avatar={newprofil.avatar}
-					first_name={newprofil.first_name}
-					last_name={newprofil.last_name}
+						avatar={newprofile.avatar}
+						first_name={newprofile.first_name}
+						last_name={newprofile.last_name}
 				/>
 				<div class="container">
 					<Button on:click={resetAvatar}>Réinitialiser</Button>
@@ -139,46 +134,51 @@
 			</div>
 			<div class="container">
 				<div class="info__names">
-					<Input type="text" bind:value={newprofil.first_name}>Prénom</Input>
-					<Input type="text" bind:value={newprofil.last_name}>Nom</Input>
-					<Input type="date" bind:value={newprofil.birthday}>Date de naissance</Input>
+					<Input type="text" bind:value={newprofile.first_name}>Prénom</Input>
+					<Input type="text" bind:value={newprofile.last_name}>Nom</Input>
+					<Input type="date" bind:value={newprofile.birthday}>Date de naissance</Input>
+					<!--					<Select bind:value={newprofile.god} name="Parrain ou marraine">-->
+					<!--						<option value={ItemType.education}>Étude</option>-->
+					<!--						<option value={ItemType.internship}>Stage</option>-->
+					<!--						<option value={ItemType.work}>Travail</option>-->
+					<!--					</Select>-->
 				</div>
 				<div class="info__links">
 					<div class="website">
 						<GlobeAltIcon />
-						<Input type="text" bind:value={newprofil.links.website}>Site web</Input>
+						<Input type="text" bind:value={newprofile.links.website}>Site web</Input>
 					</div>
 					<div class="twitter">
 						<TwitterIcon />
-						<Input type="text" bind:value={newprofil.links.twitter}>
+						<Input type="text" bind:value={newprofile.links.twitter}>
 							Twitter
 							<p slot="helper">Seulement le nom d'utilisateur sans le @</p>
 						</Input>
 					</div>
 					<div class="github">
 						<GithubIcon />
-						<Input type="text" bind:value={newprofil.links.github}>
+						<Input type="text" bind:value={newprofile.links.github}>
 							Github
 							<p slot="helper">Seulement le nom d'utilisateur sans le @</p>
 						</Input>
 					</div>
 					<div class="facebook">
 						<FacebookIcon />
-						<Input type="text" bind:value={newprofil.links.facebook}>
+						<Input type="text" bind:value={newprofile.links.facebook}>
 							Facebook
 							<p slot="helper">Seulement le nom d'utilisateur sans le @</p>
 						</Input>
 					</div>
 					<div class="instagram">
 						<InstagramIcon />
-						<Input type="text" bind:value={newprofil.links.instagram}>
+						<Input type="text" bind:value={newprofile.links.instagram}>
 							Instagram
 							<p slot="helper">Seulement le nom d'utilisateur sans le @</p>
 						</Input>
 					</div>
 					<div class="linkedin">
 						<LinkedinIcon />
-						<Input type="text" bind:value={newprofil.links.linkedin}>
+						<Input type="text" bind:value={newprofile.links.linkedin}>
 							Linkedin
 							<p slot="helper">Seulement le nom d'utilisateur sans le @</p>
 						</Input>
@@ -189,7 +189,7 @@
 
 		<section class="about">
 			<h2>A propos</h2>
-			<Textarea bind:value={newprofil.about}>
+			<Textarea bind:value={newprofile.about}>
 				<p slot="helper">
 					Dit nous ce que tu fait actuellement et ce que tu veux faire par la suite. En passant tu
 					pourras nous glisser quelques mots sur ton activité quotidienne, et comment tu te sens
@@ -199,14 +199,14 @@
 		</section>
 		<section class="anecdote">
 			<h2>Informations de PREMIÈRE importance</h2>
-			<Textarea bind:value={newprofil.best_memory}>
+			<Textarea bind:value={newprofile.best_memory}>
 				Meilleur souvenir de la LBM
 				<p slot="helper">
 					Nostalgique de la belle époque des tempêtes et des odeurs de goémon, fais nous part de ton
 					meilleur souvenir :).
 				</p>
 			</Textarea>
-			<Textarea bind:value={newprofil.strong_points}>
+			<Textarea bind:value={newprofile.strong_points}>
 				Points forts de la LBM
 				<p slot="helper">
 					Qu'est ce que la licence t'as apporté de mieux sur le point personnel ou académique ? Les
@@ -214,7 +214,7 @@
 					puisque c'est pas assez personnel.
 				</p>
 			</Textarea>
-			<Textarea bind:value={newprofil.better_promo}>
+			<Textarea bind:value={newprofile.better_promo}>
 				C'était mieux du temps de ta promo ? Prouve le !
 				<p slot="helper">
 					On connait tous les discours des ancien.ne.s quand ils parlent de leur promos, et comment
@@ -230,40 +230,40 @@
 				<Button
 					color="accent-3"
 					on:click={() =>
-						(newprofil.timeline = [
+						(newprofile.timeline = [
 							{ type: '', name: '', date: '', place: '', description: '' },
-							...newprofil.timeline
+							...newprofile.timeline
 						])}><PlusIcon slot="icon" /> Ajouter un item</Button
 				>
 			</div>
-			{#each newprofil.timeline as timelineItem, index (index)}
+			{#each newprofile.timeline as timelineItem, index (index)}
 				<div class="timelineItem">
 					<div class="control">
 						<Button
 							color="red"
 							on:click={() =>
-								(newprofil.timeline = [
-									...newprofil.timeline.slice(0, index),
-									...newprofil.timeline.slice(index + 1)
+								(newprofile.timeline = [
+									...newprofile.timeline.slice(0, index),
+									...newprofile.timeline.slice(index + 1)
 								])}><TrashIcon slot="icon" /></Button
 						>
 						{#if index > 0}
 							<Button
 								color="accent-3"
 								on:click={() => {
-									let item = newprofil.timeline.splice(index, 1)[0];
-									newprofil.timeline.splice(index - 1, 0, item);
-									newprofil.timeline = [...newprofil.timeline];
+									let item = newprofile.timeline.splice(index, 1)[0];
+									newprofile.timeline.splice(index - 1, 0, item);
+									newprofile.timeline = [...newprofile.timeline];
 								}}><ArrowUpIcon slot="icon" /></Button
 							>
 						{/if}
-						{#if index < newprofil.timeline.length - 1}
+						{#if index < newprofile.timeline.length - 1}
 							<Button
 								color="accent-3"
 								on:click={() => {
-									let item = newprofil.timeline.splice(index, 1)[0];
-									newprofil.timeline.splice(index + 1, 0, item);
-									newprofil.timeline = [...newprofil.timeline];
+									let item = newprofile.timeline.splice(index, 1)[0];
+									newprofile.timeline.splice(index + 1, 0, item);
+									newprofile.timeline = [...newprofile.timeline];
 								}}><ArrowDownIcon slot="icon" /></Button
 							>
 						{/if}
@@ -300,5 +300,5 @@
 {/if}
 
 <style lang="scss">
-	@import './profil';
+  @import './profile';
 </style>

@@ -1,6 +1,6 @@
-import type { TimelineType } from '$lib/components/Timeline/timeline.type';
+import type {TimelineType} from '$lib/components/Timeline/timeline.type';
 
-export type Profil = {
+export type Profile = {
 	id: string;
 	first_name: string;
 	last_name: string;
@@ -16,6 +16,7 @@ export type Profil = {
 	created_at: string;
 	updated_at: string;
 	promos: Promos;
+	godparent: Godparent;
 };
 
 export type Links = {
@@ -37,5 +38,7 @@ export type Buro = {
 	id: string;
 	role: string;
 	display: boolean;
-	profils: Profil;
+	profils: Profile;
 };
+
+export type Godparent = {}

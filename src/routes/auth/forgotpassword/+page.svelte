@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { CheckIcon, ArrowNarrowLeftIcon } from '@krowten/svelte-heroicons';
-	import type { ToastType } from '$lib/components/Toast/toast.type';
+	import {ArrowNarrowLeftIcon, CheckIcon} from '@krowten/svelte-heroicons';
+	import type {ToastType} from '$lib/components/Toast/toast.type';
 
 	import Button from '$lib/components/Button/Button.svelte';
 	import Input from '$lib/components/Input/Input.svelte';
 	import Toast from '$lib/components/Toast/Toast.svelte';
-	import { supabaseClient } from '$lib/supabase-client';
-	import { page } from '$app/stores';
+	import {supabaseClient} from '$lib/supabase-client';
+	import {page} from '$app/stores';
 
 	let loading = false;
 	let toasts: Array<ToastType> = [];
@@ -14,7 +14,7 @@
 
 	const requestReset = async () => {
 		loading = true;
-		const { error } = await supabaseClient.auth.api.resetPasswordForEmail(email, {
+		const {error} = await supabaseClient.auth.api.resetPasswordForEmail(email, {
 			redirectTo: `${$page.url.origin}/auth/resetpassword`
 		});
 		loading = false;
