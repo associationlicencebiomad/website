@@ -18,10 +18,10 @@ export const load: PageLoad = async () => {
 			`
 		)
 		.order('promo_id', {ascending: true})
-		.range(0, 29);
+		.range(0, 13);
 
 	return {
 		profiles,
-		hasMore: profiles?.length === 30
+		hasMore: profiles?.length === 14
 	};
 };

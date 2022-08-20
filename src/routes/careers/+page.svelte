@@ -23,7 +23,7 @@
 		profilesPage++;
 
 		const {data: freshProfiles} = await supabaseClient
-			.from<ProfileType>('profils')
+			.from<ProfileType>('profiles')
 			.select(
 				`
 				id,
@@ -35,11 +35,11 @@
 			`
 			)
 			.order('promo_id', {ascending: true})
-			.range(profilesPage * 30, (profilesPage + 1) * 30 - 1);
+			.range(profilesPage * 14, (profilesPage + 1) * 14 - 1);
 
 		profiles = [...profiles, ...freshProfiles];
 
-		if (!freshProfiles || freshProfiles.length < 30) {
+		if (!freshProfiles || freshProfiles.length < 14) {
 			hasMore = false;
 		}
 	};
