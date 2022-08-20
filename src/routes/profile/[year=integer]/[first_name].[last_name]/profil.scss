@@ -1,6 +1,6 @@
-@import 'src/scss/colors';
-@import 'src/scss/mixins';
-@import 'src/scss/animations';
+@import '../../../../scss/colors';
+@import '../../../../scss/mixins';
+@import '../../../../scss/animations';
 
 .back {
 	display: block;
@@ -166,7 +166,7 @@
 				text-align: center;
 				color: $black-3;
 				font-style: italic;
-				margin: 50px 0px;
+				margin: 50px 0;
 			}
 		}
 	}

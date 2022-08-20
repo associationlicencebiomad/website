@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Avatar from '../Avatar/Avatar.svelte';
-	import type { TimelineType } from '../Timeline/timeline.type';
-	import { LocationMarkerIcon } from '@krowten/svelte-heroicons';
+	import type {TimelineType} from '../Timeline/timeline.type';
+	import {LocationMarkerIcon} from '@krowten/svelte-heroicons';
 
 	export let timeline: TimelineType;
 	export let first_name: string;
@@ -12,16 +12,16 @@
 </script>
 
 <a
-	href="/profil/{promoYear}/{first_name.replaceAll(' ', '_').toLowerCase()}.{last_name
+		class="UserCareerCard"
+		href="/profile/{promoYear}/{first_name.replaceAll(' ', '_').toLowerCase()}.{last_name
 		.replaceAll(' ', '_')
 		.toLowerCase()}"
-	class="UserCareerCard"
 >
-	<Avatar {first_name} {last_name} {avatar} />
+	<Avatar {first_name} {last_name} {avatar}/>
 	<h1>{first_name} {last_name}</h1>
 	<div class="current">
 		{#if timeline}
-			<LocationMarkerIcon />
+			<LocationMarkerIcon/>
 			<p>{timeline[0]?.name} — {timeline[0]?.place}</p>
 		{/if}
 	</div>

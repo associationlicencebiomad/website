@@ -4,8 +4,8 @@
 	import InstagramIcon from '../../icons/InstagramIcon.svelte';
 	import LinkedinIcon from '../../icons/LinkedinIcon.svelte';
 	import TwitterIcon from '../../icons/TwitterIcon.svelte';
-	import { GlobeAltIcon } from '@krowten/svelte-heroicons';
-	import type { Links } from '../../../types/database/Profil.type';
+	import {GlobeAltIcon} from '@krowten/svelte-heroicons';
+	import type {Links} from '../../../types/database/Profile.type';
 
 	export let links: Links;
 </script>

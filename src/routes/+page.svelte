@@ -1,41 +1,12 @@
-<script lang="ts" context="module">
-	import Illustration from '$lib/assets/Illustration.svelte';
-	import Scroll from '$lib/assets/Scroll.svelte';
+<script lang="ts">
+	import Scroll from "../lib/assets/Scroll.svelte";
 	import Separator_1 from '$lib/assets/Separator-1.svelte';
+	import Illustration from '$lib/assets/Illustration.svelte';
 	import Separator_2 from '$lib/assets/Separator-2.svelte';
 	import OrgMemberCard from '$lib/components/OrgMemberCard/OrgMemberCard.svelte';
-	import { supabaseClient } from '$lib/supabase-client';
-	import type { PostgrestError } from '@supabase/supabase-js';
-	import type { Load } from '@sveltejs/kit';
-	import type { Buro } from 'src/types/database/Profil.type';
+	import {page} from "$app/stores";
 
-	export const load: Load = async () => {
-		const { data, error: supabaseErr } = await supabaseClient.from<Buro>('buro')
-			.select(`
-				*,
-				profils (first_name, last_name, avatar)
-			`)
-			.eq('display', true);
-
-        if (supabaseErr || !data) {
-			return {
-				props: { error: supabaseErr }
-			};
-		}
-
-		return {
-			props: {
-				buro: data
-			}
-		};
-	};
-</script>
-
-<script lang="ts">
-	export let buro: Buro[];
-	export let error: PostgrestError;
-
-	if (error) console.error(error);
+	if ($page.data.error) console.error($page.data.error);
 </script>
 
 <section class="landing">
@@ -87,13 +58,13 @@
 				</p>
 			</div>
 			<div class="albm__content__container__item">
-				{#if buro}
-					{#each buro as member (member.id)}
+				{#if $page.data.buro}
+					{#each $page.data.buro as member (member.id)}
 						<OrgMemberCard
-							first_name={member.profils.first_name}
-							last_name={member.profils.last_name}
-							role={member.role}
-							avatar={member.profils.avatar}
+								first_name={member.profiles.first_name}
+								last_name={member.profiles.last_name}
+								role={member.role}
+								avatar={member.profiles.avatar}
 						/>
 					{/each}
 				{/if}

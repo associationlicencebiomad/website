@@ -1,13 +1,12 @@
 <script lang="ts">
-	import { CheckIcon, ArrowNarrowLeftIcon } from '@krowten/svelte-heroicons';
-	import type { ToastType } from '$lib/components/Toast/toast.type';
-	import { goto } from '$app/navigation';
-	import { user } from '$lib/store';
+	import {ArrowNarrowLeftIcon, CheckIcon} from '@krowten/svelte-heroicons';
+	import type {ToastType} from '$lib/components/Toast/toast.type';
+	import {goto} from '$app/navigation';
 
 	import Button from '$lib/components/Button/Button.svelte';
 	import Input from '$lib/components/Input/Input.svelte';
 	import Toast from '$lib/components/Toast/Toast.svelte';
-	import { supabaseClient } from '$lib/supabase-client';
+	import {supabaseClient} from '$lib/supabase-client';
 
 	let loading = false;
 	let toasts: Array<ToastType> = [];
@@ -59,10 +58,6 @@
 			goto('/auth/login?success');
 		}
 	};
-
-	if ($user) {
-		goto('/');
-	}
 </script>
 
 <h1 class="title">Créez votre compte</h1>

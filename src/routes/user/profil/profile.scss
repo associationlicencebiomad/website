@@ -1,6 +1,6 @@
-@import 'src/scss/colors';
-@import 'src/scss/mixins';
-@import 'src/scss/animations';
+@import '../../../scss/colors';
+@import '../../../scss/mixins';
+@import '../../../scss/animations';
 
 .popup {
 	z-index: 100;
@@ -96,7 +96,7 @@
 			justify-content: center;
 			flex-grow: 1;
 
-			@media screen and (max-width: 650px) {
+			@media screen and (max-width: 900px) {
 				flex-direction: column;
 			}
 
@@ -169,7 +169,7 @@
 			right: 14%;
 
 			:global(button) {
-				gap: 0px;
+				gap: 0;
 				padding: 2px;
 			}
 		}
