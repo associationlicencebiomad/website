@@ -47,7 +47,7 @@
 	}
 
 	const resetAvatar = () => {
-		newprofile.avatar = '';
+		newprofile.avatar = null;
 	};
 
 	let saving = false;
@@ -71,6 +71,10 @@
 				})
 				.match({id: newprofile.id})
 				.single();
+
+			if (newprofile.avatar !== $page.data.session.user.profile.avatar) {
+				await supabaseClient.storage.from('avatars').remove($page.data.session.user.profile.avatar);
+			}
 
 			if (error) throw error;
 			await invalidate();

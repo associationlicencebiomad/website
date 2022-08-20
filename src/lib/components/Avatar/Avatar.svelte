@@ -1,17 +1,44 @@
 <script lang="ts">
-	import { supabaseClient } from '../../supabase-client';
-	import { onMount } from 'svelte';
+	import {supabaseClient} from '../../supabase-client';
+	import {onMount} from 'svelte';
 
 	export let avatar: string;
 	export let first_name: string;
 	export let last_name: string;
-	export let src = `https://ui-avatars.com/api/?name=${first_name}+${last_name}&size=250&background=random`;
+	export let src;
+
+	function hashCode(str) { // java String#hashCode
+		let hash = 0;
+		for (var i = 0; i < str.length; i++) {
+			hash = str.charCodeAt(i) + ((hash << 5) - hash);
+		}
+		return hash;
+	}
+
+	function intToRGB(i) {
+		let c = (i & 0x00FFFFFF)
+			.toString(16)
+			.toUpperCase();
+
+		return "00000".substring(0, 6 - c.length) + c;
+	}
+
+	/**
+	 * Get color (black/white) depending on bgColor so it would be clearly seen.
+	 * @param bgColor
+	 * @returns {string}
+	 */
+	function getColorByBgColor(bgColor) {
+		if (!bgColor) {
+			return '';
+		}
+		return (parseInt(bgColor.replace('#', ''), 16) > 0xffffff / 2) ? '#000' : '#fff';
+	}
 
 	const getSrc = async () => {
-		src = `https://ui-avatars.com/api/?name=${first_name}+${last_name}&size=250&background=random`;
 		try {
 			if (avatar) {
-				const { data, error } = await supabaseClient.storage.from('avatars').download(avatar);
+				const {data, error} = await supabaseClient.storage.from('avatars').download(avatar);
 
 				if (error) throw error;
 
@@ -28,7 +55,31 @@
 	onMount(async () => {
 		await getSrc();
 	});
+
 	$: avatar, getSrc();
 </script>
 
-<img {src} alt="{first_name} {last_name}" {...$$restProps} />
+{#if avatar && src}
+	<img class="avatar" {src} alt="{first_name} {last_name}" {...$$restProps}/>
+{:else}
+
+	<div style="background-color: #{intToRGB(hashCode(first_name + last_name))}" class="avatar" {...$$restProps}>
+		<span style="color: {getColorByBgColor(intToRGB(hashCode(first_name + last_name)))}">{first_name.charAt(0)}{last_name.charAt(0)}</span>
+	</div>
+{/if}
+
+<style lang="scss">
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+
+    span {
+      padding: 5px;
+      font-size: 42px;
+      font-weight: 600;
+      //font-style: italic;
+    }
+  }
+</style>

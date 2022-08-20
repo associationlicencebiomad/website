@@ -10,12 +10,12 @@
 	background-color: $white-4;
 	color: $black-0;
 
-	:global(img) {
-		width: 90px;
-		height: 90px;
-		border-radius: 100%;
-		object-fit: cover;
-	}
+	:global(.avatar) {
+      width: 90px;
+      height: 90px;
+      border-radius: 100%;
+      object-fit: cover;
+    }
 
 	&__content {
 		margin-left: 20px;

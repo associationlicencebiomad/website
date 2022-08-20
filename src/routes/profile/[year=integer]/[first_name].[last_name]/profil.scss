@@ -34,8 +34,9 @@
 		justify-content: center;
 		margin-bottom: 40px;
 		flex-wrap: wrap;
+		gap: 24px;
 
-		&__avatar :global(img) {
+		&__avatar :global(.avatar) {
 			width: 250px;
 			height: 250px;
 			border-radius: 100%;

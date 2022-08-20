@@ -12,7 +12,7 @@ header {
 	z-index: 999;
 	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
 
-	:global(img) {
+	:global(img), :global(.user__profilPicture) {
 		width: 50px;
 		height: 50px;
 		user-select: none;
@@ -78,9 +78,13 @@ header {
 		}
 
 		// profile picture
-		& :global(img) {
+		& :global(.user__profilPicture) {
 			margin-right: 15px;
 			object-fit: cover;
+
+			:global(span) {
+				font-size: 24px;
+			}
 		}
 	}
 
@@ -150,7 +154,7 @@ header {
 				}
 
 				// profile picture
-				:global(img) {
+				:global(.user__profilPicture) {
 					margin-right: 0;
 				}
 			}
