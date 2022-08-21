@@ -8,7 +8,7 @@
 	import {inview} from 'svelte-inview';
 
 	let hasMore = true;
-	let searchActive = false;
+	let searchActive: boolean | string = false;
 	let searchInput = '';
 	let previousProfile: ProfileType[] = [];
 
@@ -53,7 +53,7 @@
 
 	};
 	const handleSearch = async () => {
-		if (!searchInput) {
+		if (searchInput === '') {
 			if (previousProfile.length) {
 				searchActive = false;
 				hasMore = true;
@@ -80,9 +80,12 @@
 					config: 'fr',
 				});
 
-			previousProfile = profiles;
+			if (previousProfile.length === 0) {
+				previousProfile = profiles;
+			}
+
 			profiles = freshProfiles;
-			searchActive = true;
+			searchActive = searchInput;
 		}
 	}
 </script>
@@ -95,9 +98,14 @@
 	</p>
 </section>
 <div class="container">
-	<form class="searchbox" on:submit|preventDefault={handleSearch}>
+	<form class="searchbox" on:keypress={(e) => {
+		if (e.keyCode===13) {
+			e.preventDefault();
+			handleSearch();
+		}
+	}} on:submit|preventDefault={handleSearch}>
 		<input bind:value={searchInput} placeholder="Rechercher un parcours" type="text"/>
-		{#if !searchActive}
+		{#if !searchActive || searchInput !== searchActive}
 			<button>
 				<SearchIcon/>
 			</button>
