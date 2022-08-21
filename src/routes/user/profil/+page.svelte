@@ -141,11 +141,11 @@
 					<Input type="text" bind:value={newprofile.first_name}>Prénom</Input>
 					<Input type="text" bind:value={newprofile.last_name}>Nom</Input>
 					<Input type="date" bind:value={newprofile.birthday}>Date de naissance</Input>
-					<!--					<Select bind:value={newprofile.god} name="Parrain ou marraine">-->
-					<!--						<option value={ItemType.education}>Étude</option>-->
-					<!--						<option value={ItemType.internship}>Stage</option>-->
-					<!--						<option value={ItemType.work}>Travail</option>-->
-					<!--					</Select>-->
+					<Select bind:value={newprofile.godparent} name="Parrain ou marraine">
+						<option value={ItemType.education}>Étude</option>
+						<option value={ItemType.internship}>Stage</option>
+						<option value={ItemType.work}>Travail</option>
+					</Select>
 				</div>
 				<div class="info__links">
 					<div class="website">

@@ -1,14 +1,14 @@
 <script lang="ts">
 	import TimelineItem from './timelineItem/TimelineItem.svelte';
-	import { Position } from './timeline.type';
-	import type { TimelineType } from './timeline.type';
+	import type {TimelineType} from './timeline.type';
+	import {Position} from './timeline.type';
 
 	export let timeline: TimelineType;
 </script>
 
 {#if timeline}
 	<ul class="timeline">
-		{#each [...timeline] as timelineItem, index (timelineItem.name)}
+		{#each [...timeline] as timelineItem, index}
 			<TimelineItem
 				date={timelineItem.date}
 				name={timelineItem.name}
