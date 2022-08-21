@@ -5,7 +5,7 @@
 	export let avatar: string;
 	export let first_name: string;
 	export let last_name: string;
-	export let src;
+	let src;
 
 	function hashCode(str) { // java String#hashCode
 		let hash = 0;

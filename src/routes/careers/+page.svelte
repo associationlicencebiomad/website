@@ -4,22 +4,26 @@
 
 	import {supabaseClient} from '$lib/supabase-client';
 	import UserCareerCard from '$lib/components/UserCareerCard/UserCareerCard.svelte';
-	import {SearchIcon} from '@krowten/svelte-heroicons';
+	import {SearchIcon, XCircleIcon} from '@krowten/svelte-heroicons';
 	import {inview} from 'svelte-inview';
 
 	let hasMore = true;
-	let profilesPage = 0;
+	let searchActive = false;
+	let searchInput = '';
+	let previousProfile: ProfileType[] = [];
 
+	let profilesPage = 0;
 	export let data: PageData;
+
 	// export let error;
 
 	let profiles: ProfileType[] = [];
-
 	$: profiles = data?.profiles;
-	$: hasMore = data?.hasMore;
 
+	$: hasMore = data?.hasMore;
 	const fetchData = async () => {
 		// To get more results, we'll increment the page by 1
+
 		profilesPage++;
 
 		const {data: freshProfiles} = await supabaseClient
@@ -38,16 +42,49 @@
 			.range(profilesPage * 14, (profilesPage + 1) * 14 - 1);
 
 		profiles = [...profiles, ...freshProfiles];
-
 		if (!freshProfiles || freshProfiles.length < 14) {
 			hasMore = false;
 		}
-	};
 
+	};
 	const handleChange = async (e: CustomEvent) => {
 		// And fetch more data
 		if (e.detail.inView && hasMore) await fetchData();
+
 	};
+	const handleSearch = async () => {
+		if (!searchInput) {
+			if (previousProfile.length) {
+				searchActive = false;
+				hasMore = true;
+				profiles = previousProfile;
+				previousProfile = [];
+			}
+		} else {
+			hasMore = false;
+
+			const {data: freshProfiles} = await supabaseClient
+				.from<ProfileType>('profiles')
+				.select(
+					`
+				id,
+				first_name,
+				last_name,
+				avatar,
+				timeline,
+				promos (name, year)
+			`
+				)
+				.textSearch("fts", searchInput, {
+					type: "websearch",
+					config: 'fr',
+				});
+
+			previousProfile = profiles;
+			profiles = freshProfiles;
+			searchActive = true;
+		}
+	}
 </script>
 
 <section class="title">
@@ -58,12 +95,21 @@
 	</p>
 </section>
 <div class="container">
-	<div class="searchbox">
-		<input placeholder="Rechercher un parcours" type="text"/>
-		<button>
-			<SearchIcon/>
-		</button>
-	</div>
+	<form class="searchbox" on:submit|preventDefault={handleSearch}>
+		<input bind:value={searchInput} placeholder="Rechercher un parcours" type="text"/>
+		{#if !searchActive}
+			<button>
+				<SearchIcon/>
+			</button>
+		{:else}
+			<button on:click={()=> {
+				searchInput = '';
+				handleSearch();
+			}}>
+				<XCircleIcon/>
+			</button>
+		{/if}
+	</form>
 </div>
 <div class="UsersCareer">
 	{#each profiles as profile (profile.id)}
