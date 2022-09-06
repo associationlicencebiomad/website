@@ -119,7 +119,7 @@
 		</div>
 	</div>
 	<section class="godparents">
-		<h1>Mes parrains/marraines</h1>
+		<h1>Mes parrains/marraines :</h1>
 		<div class="container">
 			{#each currentProfile.godparents as godparent, index}
 				<div class="godparent">
