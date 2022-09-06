@@ -25,6 +25,8 @@
 	let popup = false;
 	let subject = '';
 	let message = '';
+
+	$: console.log(currentProfile);
 </script>
 
 {#if popup}
@@ -116,6 +118,26 @@
 			{/if}
 		</div>
 	</div>
+	<section class="godparents">
+		<h1>Mes parrains/marraines</h1>
+		<div class="container">
+			{#each currentProfile.godparents as godparent, index}
+				<div class="godparent">
+					<Avatar
+							avatar={godparent.profile.avatar}
+							first_name={godparent.profile.first_name}
+							last_name={godparent.profile.last_name}
+					/>
+					<div class="info">
+						{godparent.profile.first_name} {godparent.profile.last_name}
+						{#if godparent.is_adopted}
+							<p>Adopté</p>
+						{/if}
+					</div>
+				</div>
+			{/each}
+		</div>
+	</section>
 	<div class="user__about">
 		<h3>A propos :</h3>
 		{#if currentProfile.about}

@@ -16,7 +16,7 @@ export type Profile = {
 	created_at: string;
 	updated_at: string;
 	promos: Promos;
-	godparent: Godparent;
+	godparents: Godparent[];
 };
 
 export type Links = {
@@ -41,4 +41,8 @@ export type Buro = {
 	profils: Profile;
 };
 
-export type Godparent = {}
+export type Godparent = {
+	id: string;
+	profile: Profile;
+	is_adopted: boolean;
+}

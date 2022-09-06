@@ -3,9 +3,9 @@
 	export let value;
 </script>
 
-<select bind:value>
+<select bind:value on:change>
 	<option value="" disabled selected>{name}</option>
-	<slot />
+	<slot/>
 </select>
 
 <style lang="scss">
