@@ -36,7 +36,8 @@
 		</h1>
 		<form method="post">
 			<input type="hidden" name="to" value={currentProfile.id}/>
-			<input type="hidden" name="from" value={`${currentProfile.first_name} ${currentProfile.last_name}`}/>
+			<input type="hidden" name="from"
+				   value={`${$page.data.session.user?.first_name} ${$page.data.session.user?.last_name}`}/>
 			<input type="hidden" name="from_email" value={$page.data.session.user?.email}/>
 			<Input name="subject" type="text" bind:value={subject} required>Sujet</Input>
 			<Textarea name="message" bind:value={message} required>Message</Textarea>
