@@ -9,7 +9,14 @@ export async function handleProfile({event, resolve}) {
 	if (user) {
 		const {data} = await supabaseServerClient(accessToken)
 			.from<Profile>('profiles')
-			.select('*, promos(*)')
+			.select(`
+				*, 
+				promos(*),
+				godparents!godparents_user_id_fkey(
+				    profile:profiles!godparents_godparent_id_fkey(id, first_name, last_name, avatar),
+					is_adopted
+				)
+			`)
 			.eq('id', user.id)
 			.single();
 

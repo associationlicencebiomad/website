@@ -10,7 +10,11 @@ export const load: PageLoad = async ({params}) => {
 		.select(
 			`
 				*,
-				promos!inner(*)
+				promos!inner(*),
+				godparents!godparents_user_id_fkey(
+				    profile:profiles!godparents_godparent_id_fkey(first_name, last_name, avatar),
+					is_adopted
+				)
 				`
 		)
 		.eq('promos.year', params.year)
