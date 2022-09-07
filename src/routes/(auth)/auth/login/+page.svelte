@@ -1,12 +1,12 @@
 <script lang="ts">
-	import type {ToastType} from '$lib/components/Toast/toast.type';
+	import type {ToastType} from '../../../../lib/components/Toast/toast.type';
 	import {ArrowNarrowLeftIcon, LoginIcon} from '@krowten/svelte-heroicons';
 	import {page} from '$app/stores';
-	import {route} from '../../../lib/route';
-	import {supabaseClient} from '$lib/supabase-client';
-	import Button from '$lib/components/Button/Button.svelte';
-	import Input from '$lib/components/Input/Input.svelte';
-	import Toast from '$lib/components/Toast/Toast.svelte';
+	import {route} from '../../../../lib/route';
+	import {supabaseClient} from '../../../../lib/supabase-client';
+	import Button from '../../../../lib/components/Button/Button.svelte';
+	import Input from '../../../../lib/components/Input/Input.svelte';
+	import Toast from '../../../../lib/components/Toast/Toast.svelte';
 
 	let toasts: Array<ToastType> = [];
 	let email = '';

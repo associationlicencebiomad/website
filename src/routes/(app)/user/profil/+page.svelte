@@ -1,21 +1,21 @@
 <script lang="ts">
-	import Avatar from '$lib/components/Avatar/Avatar.svelte';
-	import Button from '$lib/components/Button/Button.svelte';
-	import FacebookIcon from '$lib/icons/FacebookIcon.svelte';
-	import GithubIcon from '$lib/icons/GithubIcon.svelte';
-	import InstagramIcon from '$lib/icons/InstagramIcon.svelte';
-	import LinkedinIcon from '$lib/icons/LinkedinIcon.svelte';
-	import TwitterIcon from '$lib/icons/TwitterIcon.svelte';
-	import Input from '$lib/components/Input/Input.svelte';
-	import Select from '$lib/components/Select/Select.svelte';
-	import {supabaseClient} from '$lib/supabase-client';
-	import Textarea from '$lib/components/Textarea/Textarea.svelte';
-	import {ItemType} from '$lib/components/Timeline/timeline.type';
+	import Avatar from '../../../../lib/components/Avatar/Avatar.svelte';
+	import Button from '../../../../lib/components/Button/Button.svelte';
+	import FacebookIcon from '../../../../lib/icons/FacebookIcon.svelte';
+	import GithubIcon from '../../../../lib/icons/GithubIcon.svelte';
+	import InstagramIcon from '../../../../lib/icons/InstagramIcon.svelte';
+	import LinkedinIcon from '../../../../lib/icons/LinkedinIcon.svelte';
+	import TwitterIcon from '../../../../lib/icons/TwitterIcon.svelte';
+	import Input from '../../../../lib/components/Input/Input.svelte';
+	import Select from '../../../../lib/components/Select/Select.svelte';
+	import {supabaseClient} from '../../../../lib/supabase-client';
+	import Textarea from '../../../../lib/components/Textarea/Textarea.svelte';
+	import {ItemType} from '../../../../lib/components/Timeline/timeline.type';
 	import {ArrowDownIcon, ArrowUpIcon, GlobeAltIcon, PlusIcon, TrashIcon} from '@krowten/svelte-heroicons';
 	import type {Profile} from '/src/types/database/Profile.type';
 	import {page} from "$app/stores";
 	import {invalidate} from "$app/navigation";
-	import Checkbox from "$lib/components/Checkbox/Checkbox.svelte";
+	import Checkbox from "../../../../lib/components/Checkbox/Checkbox.svelte";
 	import {onMount} from "svelte";
 
 	let uploading = false;
@@ -169,7 +169,7 @@
 		</div>
 	{/if}
 	<div class="back">
-		<a href="/" on:click|preventDefault={() => window.history.back()}>← Retour</a>
+		<a href="/static" on:click|preventDefault={() => window.history.back()}>← Retour</a>
 	</div>
 	<div class="user">
 		<section class="info">
@@ -401,5 +401,5 @@
 {/if}
 
 <style lang="scss">
-  @import './profile';
+  @import 'profile';
 </style>

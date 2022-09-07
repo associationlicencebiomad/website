@@ -6,7 +6,7 @@
 </div>
 
 <style lang="scss">
-	@import 'src/scss/colors';
+	@import '../../scss/colors';
 
 	.container {
 		width: 100vw;

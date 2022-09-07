@@ -1,9 +1,9 @@
 <script lang="ts">
-	import Scroll from "../lib/assets/Scroll.svelte";
-	import Separator_1 from '$lib/assets/Separator-1.svelte';
-	import Illustration from '$lib/assets/Illustration.svelte';
-	import Separator_2 from '$lib/assets/Separator-2.svelte';
-	import OrgMemberCard from '$lib/components/OrgMemberCard/OrgMemberCard.svelte';
+	import Scroll from "../../lib/assets/Scroll.svelte";
+	import Separator_1 from '../../lib/assets/Separator-1.svelte';
+	import Illustration from '../../lib/assets/Illustration.svelte';
+	import Separator_2 from '../../lib/assets/Separator-2.svelte';
+	import OrgMemberCard from '../../lib/components/OrgMemberCard/OrgMemberCard.svelte';
 	import {page} from "$app/stores";
 
 	if ($page.data.error) console.error($page.data.error);
@@ -74,5 +74,5 @@
 </section>
 
 <style lang="scss">
-	@import './index';
+  @import 'index';
 </style>

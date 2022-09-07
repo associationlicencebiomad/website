@@ -1,6 +1,6 @@
 import type {PageLoad} from './$types';
-import type {Profile as ProfileType} from '../../types/database/Profile.type';
-import {supabaseClient} from '$lib/supabase-client';
+import type {Profile as ProfileType} from '../../../types/database/Profile.type';
+import {supabaseClient} from '../../../lib/supabase-client';
 
 export const load: PageLoad = async () => {
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment

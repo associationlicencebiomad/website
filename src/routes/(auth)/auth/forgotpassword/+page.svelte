@@ -1,11 +1,11 @@
 <script lang="ts">
 	import {ArrowNarrowLeftIcon, CheckIcon} from '@krowten/svelte-heroicons';
-	import type {ToastType} from '$lib/components/Toast/toast.type';
+	import type {ToastType} from '../../../../lib/components/Toast/toast.type';
 
-	import Button from '$lib/components/Button/Button.svelte';
-	import Input from '$lib/components/Input/Input.svelte';
-	import Toast from '$lib/components/Toast/Toast.svelte';
-	import {supabaseClient} from '$lib/supabase-client';
+	import Button from '../../../../lib/components/Button/Button.svelte';
+	import Input from '../../../../lib/components/Input/Input.svelte';
+	import Toast from '../../../../lib/components/Toast/Toast.svelte';
+	import {supabaseClient} from '../../../../lib/supabase-client';
 	import {page} from '$app/stores';
 
 	let loading = false;

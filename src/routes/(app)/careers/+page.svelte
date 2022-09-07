@@ -1,9 +1,9 @@
 <script lang="ts">
 	import type {PageData} from "./$types";
-	import type {Profile as ProfileType} from '../../types/database/Profile.type';
+	import type {Profile as ProfileType} from '../../../types/database/Profile.type';
 
-	import {supabaseClient} from '$lib/supabase-client';
-	import UserCareerCard from '$lib/components/UserCareerCard/UserCareerCard.svelte';
+	import {supabaseClient} from '../../../lib/supabase-client';
+	import UserCareerCard from '../../../lib/components/UserCareerCard/UserCareerCard.svelte';
 	import {SearchIcon, XCircleIcon} from '@krowten/svelte-heroicons';
 	import {inview} from 'svelte-inview';
 
@@ -136,5 +136,5 @@
 <div on:change={handleChange} use:inview/>
 
 <style lang="scss">
-  @import './career';
+  @import 'career';
 </style>

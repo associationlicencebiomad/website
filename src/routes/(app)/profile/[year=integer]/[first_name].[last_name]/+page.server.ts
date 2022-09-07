@@ -1,4 +1,4 @@
-import {transporter} from '$lib/mail';
+import {transporter} from '../../../../../lib/mail';
 import {createClient} from '@supabase/supabase-js';
 // import type {RequestHandler} from "./$types";
 import {error, type RequestHandler} from '@sveltejs/kit';

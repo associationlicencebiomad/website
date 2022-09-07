@@ -1,12 +1,12 @@
 <script lang="ts">
-	import AnecdoteCard from '$lib/components/AnecdoteCard/AnecdoteCard.svelte';
-	import Avatar from '$lib/components/Avatar/Avatar.svelte';
-	import Button from '$lib/components/Button/Button.svelte';
-	import Input from '$lib/components/Input/Input.svelte';
-	import Popup from '$lib/components/Popup/Popup.svelte';
-	import Textarea from '$lib/components/Textarea/Textarea.svelte';
-	import Timeline from '$lib/components/Timeline/Timeline.svelte';
-	import UserLinks from '$lib/components/UserLinks/UserLinks.svelte';
+	import AnecdoteCard from '../../../../../lib/components/AnecdoteCard/AnecdoteCard.svelte';
+	import Avatar from '../../../../../lib/components/Avatar/Avatar.svelte';
+	import Button from '../../../../../lib/components/Button/Button.svelte';
+	import Input from '../../../../../lib/components/Input/Input.svelte';
+	import Popup from '../../../../../lib/components/Popup/Popup.svelte';
+	import Textarea from '../../../../../lib/components/Textarea/Textarea.svelte';
+	import Timeline from '../../../../../lib/components/Timeline/Timeline.svelte';
+	import UserLinks from '../../../../../lib/components/UserLinks/UserLinks.svelte';
 	import {
 		ArrowNarrowLeftIcon,
 		BookOpenIcon,
@@ -56,7 +56,7 @@
 {/if}
 
 <div class="back">
-	<a href="/" on:click|preventDefault={() => window.history.back()}>← Retour</a>
+	<a href="/static" on:click|preventDefault={() => window.history.back()}>← Retour</a>
 </div>
 <div class="user">
 	<div class="user__info">
@@ -161,5 +161,5 @@
 </div>
 
 <style lang="scss">
-  @import './profil';
+  @import 'profil';
 </style>

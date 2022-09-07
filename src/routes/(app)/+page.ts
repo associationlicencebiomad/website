@@ -1,4 +1,4 @@
-import {supabaseClient} from '$lib/supabase-client';
+import {supabaseClient} from '../../lib/supabase-client';
 import type {PageLoad} from './$types'
 import type {Buro} from 'src/types/database/Profile.type';
 
