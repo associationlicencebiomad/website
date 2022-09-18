@@ -26,7 +26,6 @@
 	let subject = '';
 	let message = '';
 
-	$: console.log(currentProfile);
 </script>
 
 {#if popup}
@@ -103,6 +102,28 @@
 					<LocationMarkerIcon/>
 					<span>{currentProfile.timeline[0]?.name} — {currentProfile.timeline[0]?.place}</span>
 				</div>
+				<!--{#each currentProfile.godparents as godparent, index}-->
+				<!--	<div class="godparent">-->
+				<!--		<a-->
+				<!--				class="godparent"-->
+				<!--				href="/profile/{$page.data.currentProfile.promos.year - 1}/{godparent.profile.first_name.replaceAll(' ', '_').toLowerCase()}.{godparent.profile.last_name-->
+				<!--			.replaceAll(' ', '_')-->
+				<!--			.toLowerCase()}"-->
+				<!--		>-->
+				<!--			<Avatar-->
+				<!--					avatar={godparent.profile.avatar}-->
+				<!--					first_name={godparent.profile.first_name}-->
+				<!--					last_name={godparent.profile.last_name}-->
+				<!--			/>-->
+				<!--			<div class="info">-->
+				<!--				{godparent.profile.first_name} {godparent.profile.last_name}-->
+				<!--				{#if godparent.is_adopted}-->
+				<!--					<p class="adopted">adoption</p>-->
+				<!--				{/if}-->
+				<!--			</div>-->
+				<!--		</a>-->
+				<!--	</div>-->
+				<!--{/each}-->
 			</div>
 			{#if $page.data.session.user && currentProfile.id !== $page.data.session.user?.id}
 				<div class="user__info__contact">
@@ -119,26 +140,33 @@
 			{/if}
 		</div>
 	</div>
-	<section class="godparents">
-		<h1>Mes parrains/marraines :</h1>
-		<div class="container">
-			{#each currentProfile.godparents as godparent, index}
-				<div class="godparent">
-					<Avatar
-							avatar={godparent.profile.avatar}
-							first_name={godparent.profile.first_name}
-							last_name={godparent.profile.last_name}
-					/>
-					<div class="info">
-						{godparent.profile.first_name} {godparent.profile.last_name}
-						{#if godparent.is_adopted}
-							<p>Adopté</p>
-						{/if}
-					</div>
-				</div>
-			{/each}
-		</div>
-	</section>
+	{#if currentProfile.godparents.length > 0}
+		<section class="godparents">
+			<h1>Mes parrains/marraines :</h1>
+			<div class="container">
+				{#each currentProfile.godparents as godparent, index}
+					<a
+							class="godparent"
+							href="/profile/{$page.data.currentProfile.promos.year - 1}/{godparent.profile.first_name.replaceAll(' ', '_').toLowerCase()}.{godparent.profile.last_name
+							.replaceAll(' ', '_')
+							.toLowerCase()}"
+					>
+						<Avatar
+								avatar={godparent.profile.avatar}
+								first_name={godparent.profile.first_name}
+								last_name={godparent.profile.last_name}
+						/>
+						<div class="info">
+							{godparent.profile.first_name} {godparent.profile.last_name}
+							{#if godparent.is_adopted}
+								<p class="adopted">adoption</p>
+							{/if}
+						</div>
+					</a>
+				{/each}
+			</div>
+		</section>
+	{/if}
 	<div class="user__about">
 		<h3>A propos :</h3>
 		{#if currentProfile.about}

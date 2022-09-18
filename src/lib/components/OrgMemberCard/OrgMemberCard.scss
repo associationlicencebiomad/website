@@ -11,11 +11,11 @@
 	color: $black-0;
 
 	:global(.avatar) {
-      width: 90px;
-      height: 90px;
-      border-radius: 100%;
-      object-fit: cover;
-    }
+		width: 80px;
+		height: 80px;
+		border-radius: 100%;
+		object-fit: cover;
+	}
 
 	&__content {
 		margin-left: 20px;

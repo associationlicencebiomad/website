@@ -14,7 +14,7 @@
 	import {ArrowDownIcon, ArrowUpIcon, GlobeAltIcon, PlusIcon, TrashIcon} from '@krowten/svelte-heroicons';
 	import type {Profile} from '/src/types/database/Profile.type';
 	import {page} from "$app/stores";
-	import {invalidate} from "$app/navigation";
+	import {invalidateAll} from "$app/navigation";
 	import Checkbox from "../../../../lib/components/Checkbox/Checkbox.svelte";
 	import {onMount} from "svelte";
 
@@ -102,11 +102,11 @@
 
 
 			if (error) throw error;
-			await invalidate();
+			await invalidateAll();
 			// $page.data.session.user = data;
 			newProfile = JSON.parse(JSON.stringify($page.data.session.user.profile));
 		} catch (err) {
-			console.log(err);
+			console.error(err);
 		} finally {
 			saving = false;
 		}
@@ -114,7 +114,6 @@
 
 	async function loadPossibleGodparents() {
 		let currentGodparents = newProfile.godparents.map(godparent => godparent.profile.id);
-		console.log(currentGodparents)
 		const {data, error} = await supabaseClient
 			.from<Profile>('profiles')
 			.select('id, first_name, last_name')
@@ -139,7 +138,6 @@
 	}
 
 	function removeGodparent(godparent, index) {
-		console.log('ici')
 		newProfile.godparents = [...newProfile.godparents.slice(0, index), ...newProfile.godparents.slice(index + 1)];
 		possibleGodparents = [...possibleGodparents, godparent.profile];
 	}
