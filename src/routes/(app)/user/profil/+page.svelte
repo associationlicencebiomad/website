@@ -281,7 +281,7 @@
 			<h2>A propos</h2>
 			<Textarea bind:value={newProfile.about}>
 				<p slot="helper">
-					Dit nous ce que tu fait actuellement et ce que tu veux faire par la suite. En passant tu
+					Dit nous ce que tu fais actuellement et ce que tu veux faire par la suite. En passant tu
 					pourras nous glisser quelques mots sur ton activité quotidienne, et comment tu te sens
 					globalement :p.
 				</p>
