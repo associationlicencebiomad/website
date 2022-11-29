@@ -3,26 +3,26 @@
 	export let color = '';
 	export let hover = false;
 
-	if ($$slots.icon) {
-		className += ' btn-grid ';
-	}
+	let colorClass: string;
 
-	if (color) {
-		className += ` btn-${color}`;
+	if ($$slots.icon) {
+		className += ' btn-grid';
 	}
 
 	if (hover) {
 		className += ` btn-hover`;
 	}
+
+	$: colorClass = color ? ` btn-${color}` : '';
 </script>
 
-<button on:click class={className.trim()} {...$$restProps}>
+<button {...$$restProps} class={className.trim() + colorClass} on:click>
 	{#if $$slots.icon}
-		<span class="icon"><slot name="icon" /></span>
+		<span class="icon"><slot name="icon"/></span>
 	{/if}
-	<span><slot /></span>
+	<span><slot/></span>
 </button>
 
 <style lang="scss">
-	@import 'Button';
+  @import 'Button';
 </style>
