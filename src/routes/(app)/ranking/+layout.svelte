@@ -21,8 +21,7 @@
 	$: isGeneralRanking = $page.url.pathname == "/ranking";
 </script>
 
-<PageTitle dark={true}
-		   description="Vote pour les meilleurs professeurs et découvre le classement général des LBM"
+<PageTitle description="Vote pour les meilleurs professeurs et découvre le classement général des LBM"
 		   title="Le classement"/>
 
 <div class="controls">

@@ -2,13 +2,9 @@
 	import Footer from '../../lib/components/Footer/Footer.svelte';
 	import Header from '../../lib/components/Header/Header.svelte';
 	import {theme} from "$lib/stores.js";
-
-	let color = $theme;
-
-	$: color = $theme;
 </script>
 
-<div class={`layout ${color}`}>
+<div class={`layout ${$theme}`}>
 	<Header/>
 	<slot/>
 	<Footer/>
@@ -21,10 +17,6 @@
   @use 'src/scss/colors';
 
   .layout.dark {
-    background-color: colors.$black-2;
-  }
-
-  :global(footer > .separator) {
     background-color: colors.$black-2;
   }
 </style>
