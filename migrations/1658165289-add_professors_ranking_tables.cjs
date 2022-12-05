@@ -12,14 +12,14 @@ exports.up = async client => {
 	await client`
         create table public.professors_ranking
         (
-            id           serial primary key,
             professor_id int references public.professors (id) on delete cascade not null,
             user_id      uuid references public.profiles (id) on delete cascade  not null,
-            ranking      numeric                                                 not null
+            ranking      numeric                                                 not null,
+            PRIMARY KEY (professor_id, user_id)
         );
 	`
 
-	// await client`
+	// await client`d
 	//     create table public.courses
 	//     (
 	//         id    serial primary key,
