@@ -18,5 +18,6 @@
 
   .layout.dark {
     background-color: colors.$black-2;
+    color: colors.$white-0;
   }
 </style>
