@@ -1,9 +1,11 @@
 <script lang="ts">
+	import {theme} from "$lib/stores.js";
+
 	export let title: string;
-	export let description: string;
+	export let description = '';
 </script>
 
-<section class="title">
+<section class={`title ${$theme}`}>
 	<h1>{title}</h1>
 	<p>{description}</p>
 </section>
@@ -41,6 +43,16 @@
 
       p {
         font-size: 18px;
+      }
+    }
+
+    &.dark {
+      h1 {
+        color: $white-3;
+      }
+
+      p {
+        color: $white-2;
       }
     }
   }
