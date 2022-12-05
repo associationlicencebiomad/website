@@ -2,25 +2,30 @@
 
 header {
 	position: sticky;
-	background-color: $white-4;
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	align-items: center;
-	width: 100%;
-	top: 0;
-	z-index: 999;
-	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+  background-color: $white-4;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  top: 0;
+  z-index: 999;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
 
-	:global(img), :global(.user__profilPicture) {
-		width: 50px;
-		height: 50px;
-		user-select: none;
-		pointer-events: none;
-		border-radius: 100%;
-	}
+  &.dark {
+    background-color: $black-0;
+    color: $white-3;
+  }
 
-	nav {
+  :global(img), :global(.user__profilPicture) {
+    width: 50px;
+    height: 50px;
+    user-select: none;
+    pointer-events: none;
+    border-radius: 100%;
+  }
+
+  nav {
 		display: flex;
 		flex-direction: row;
 		flex-wrap: nowrap;
@@ -73,7 +78,7 @@ header {
 		&__username {
 			font-size: 18px;
 			font-weight: 400;
-			color: $black-0;
+          //color: $black-0;
 			margin-right: 24px;
 		}
 
