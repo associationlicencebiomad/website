@@ -17,6 +17,7 @@
 	import {invalidateAll} from "$app/navigation";
 	import Checkbox from "../../../../lib/components/Checkbox/Checkbox.svelte";
 	import {onMount} from "svelte";
+	import SavePopup from "$lib/components/SavePopup/SavePopup.svelte";
 
 	let uploading = false;
 	let files: FileList;
@@ -149,22 +150,10 @@
 
 {#if newProfile}
 	{#if edited}
-		<div class="popup">
-			<div class="content">
-				Il y a des modifications non enregistrées.
-				<div class="container">
-					<Button on:click={async () => {
-						newProfile = JSON.parse(JSON.stringify($page.data.session.user.profile))
-						await loadPossibleGodparents();
-					}}>
-						Réinitialiser
-					</Button>
-					<Button color="accent-3" on:click={updateUser} disabled={saving}
-					>{saving ? 'Enregistrement ...' : 'Enregistrer'}</Button
-					>
-				</div>
-			</div>
-		</div>
+		<SavePopup onReset={async () => {
+				newProfile = JSON.parse(JSON.stringify($page.data.session.user.profile))
+				await loadPossibleGodparents();
+			}} onSave={updateUser} {saving}/>
 	{/if}
 	<div class="back">
 		<a href="/static" on:click|preventDefault={() => window.history.back()}>← Retour</a>
