@@ -1,5 +1,16 @@
 @use "src/scss/colors";
 
+@keyframes popup {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .popup {
   z-index: 100;
 
@@ -10,6 +21,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  animation: popup 0.3s ease-in-out;
+
+  &.dark {
+    :global(button) {
+      color: colors.$white-2;
+    }
+
+    .content {
+      background-color: colors.$black-1;
+    }
+  }
 
   .content {
     border-radius: 10px;

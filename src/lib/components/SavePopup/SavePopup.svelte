@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Button from "$lib/components/Button/Button.svelte";
+	import {theme} from "$lib/stores.js";
 
 	export let onSave: () => void;
 	export let onReset: () => void;
@@ -7,7 +8,7 @@
 </script>
 
 
-<div class="popup">
+<div class={`popup ${$theme}`}>
 	<div class="content">
 		Il y a des modifications non enregistrées.
 		<div class="container">
