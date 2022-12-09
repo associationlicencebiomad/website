@@ -1,19 +1,20 @@
 <script lang="ts">
-	import type {Ranking} from "../../../types/database/Ranking.type";
-	import {theme} from "$lib/stores.js";
+	import type {Professor, Ranking} from "../../../types/database/Ranking.type";
+	import {theme} from "$lib/stores";
 
-	export let ranking: Ranking;
-	export let index: number;
+	export let professor: Ranking | Professor;
+	export let index: number | null = null;
+	export let isActive = false;
 </script>
 
-<div class={`ranking_card ${$theme}`}>
+<div {...$$restProps} class={`ranking_card ${$theme}`} class:isActive on:dragenter on:dragover on:dragstart on:drop>
 	{#if index}
 		<div class="ranking_card__index">{index}</div>
 	{/if}
-	<img alt={ranking.full_name} src={ranking.image_url}/>
-	<h2>{ranking.full_name}</h2>
+	<img alt={professor.full_name} src={professor.image_url}/>
+	<h2>{professor.full_name}</h2>
 	<div class="courses">
-		{#each ranking.courses as course}
+		{#each professor.courses as course}
 			<div class="course">{course}</div>
 		{/each}
 	</div>
