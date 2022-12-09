@@ -156,6 +156,7 @@
     padding: 12px;
     border-radius: 10px;
     background-color: colors.$black-1;
+    overflow: scroll;
 
     .list {
       display: flex;
