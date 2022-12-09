@@ -1,12 +1,13 @@
 @use "src/scss/colors";
 
-@keyframes popup {
+@keyframes popupSlideIn {
   0% {
-    opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(100%);
+  }
+  70% {
+    transform: translateY(-5px);
   }
   100% {
-    opacity: 1;
     transform: translateY(0);
   }
 }
@@ -17,11 +18,11 @@
   width: 100%;
   position: fixed;
   left: 0;
-  bottom: 10px;
+  bottom: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: popup 0.3s ease-in-out;
+  animation: popupSlideIn 0.3s backwards;
 
   &.dark {
     :global(button) {
@@ -43,6 +44,7 @@
     align-items: center;
     justify-content: center;
     column-gap: 20px;
+    box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
 
     .container {
       display: flex;
