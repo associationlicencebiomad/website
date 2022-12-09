@@ -18,6 +18,6 @@ export const load: PageLoad = async () => {
 
 
 	return {
-		ranking: [...data, ...data, ...data, ...data, ...data, ...data, ...data, ...data, ...data, ...data, ...data, ...data, ...data, ...data, ...data]
+		ranking: data
 	};
 };

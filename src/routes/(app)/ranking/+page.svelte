@@ -12,7 +12,7 @@
 
 <div class="ranking">
 	{#each ranking as place, index}
-		<RankingCard ranking={place} index={index+1}/>
+		<RankingCard professor={place} index={index+1}/>
 	{/each}
 </div>
 
