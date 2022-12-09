@@ -145,7 +145,7 @@
     align-items: center;
 
     gap: 15px;
-    overflow: scroll;
+    overflow-y: auto;
     max-height: 100%;
 
     padding-top: 10px;
@@ -158,7 +158,7 @@
     padding: 12px;
     border-radius: 10px;
     background-color: colors.$black-1;
-    overflow: scroll;
+    overflow-y: auto;
 
     .list {
       display: flex;

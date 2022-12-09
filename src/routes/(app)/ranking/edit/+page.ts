@@ -16,6 +16,7 @@ export const load: PageLoad = async ({parent}) => {
 		.from<Professor>('professors')
 		.select('*')
 		.not('id', 'in', `(${user_ranking?.map((professor: Professor) => professor.id).join(',')})`)
+		.order('full_name', {ascending: true})
 
 
 	return {
