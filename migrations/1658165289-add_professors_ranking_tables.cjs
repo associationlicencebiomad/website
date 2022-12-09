@@ -19,25 +19,6 @@ exports.up = async client => {
         );
 	`
 
-	// await client`d
-	//     create table public.courses
-	//     (
-	//         id    serial primary key,
-	//         name  text not null,
-	//         uri   text not null,
-	//         color text not null
-	//     );
-	// `
-
-	// await client`
-	//     create table public.courses_professors
-	//     (
-	//         id           serial primary key,
-	//         course_id    int references public.courses (id) on delete cascade    not null,
-	//         professor_id int references public.professors (id) on delete cascade not null
-	//     );
-	// `
-
 	await client`
 		create or replace function get_professors_ranking (
 			param_user_id uuid default null
@@ -83,14 +64,6 @@ exports.up = async client => {
 };
 
 exports.down = async client => {
-	// await client`
-	//     drop table public.courses_professors;
-	// `
-	//
-	// await client`
-	//     drop table public.courses;
-	// `
-
 	await client`
         drop table public.professors_ranking;
 	`
