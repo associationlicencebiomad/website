@@ -105,7 +105,7 @@
 
 		{#each user_ranking as ranking, index}
 
-			<RankingCard professor={ranking} index={index + 1}
+			<RankingCard overflow={true} professor={ranking} index={index + 1}
 						 data-index={index}
 						 data-id={ranking.id}
 						 draggable="true"
@@ -147,6 +147,8 @@
     gap: 15px;
     overflow: scroll;
     max-height: 100%;
+
+    padding-top: 10px;
   }
 
   .available_professor {
