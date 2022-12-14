@@ -6,6 +6,7 @@
 	import UserCareerCard from '../../../lib/components/UserCareerCard/UserCareerCard.svelte';
 	import {SearchIcon, XCircleIcon} from '@krowten/svelte-heroicons';
 	import {inview} from 'svelte-inview';
+	import PageTitle from "$lib/components/PageTitle/PageTitle.svelte";
 
 	let hasMore = true;
 	let searchActive: boolean | string = false;
@@ -90,13 +91,9 @@
 	}
 </script>
 
-<section class="title">
-	<h1>Les parcours</h1>
-	<p>
-		Retrouve ici les parcours de chacun, que ce soit la L3 au fin fond du Texas ou bien le master au
-		Bahamas.
-	</p>
-</section>
+<PageTitle
+		description="Retrouve ici les parcours de chacun, que ce soit la L3 au fin fond du Texas ou bien le master au Bahamas."
+		title="Les parcours"/>
 <div class="container">
 	<form class="searchbox" on:keypress={(e) => {
 		if (e.keyCode===13) {

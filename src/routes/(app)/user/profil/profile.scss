@@ -2,34 +2,7 @@
 @import '../../../../scss/mixins';
 @import '../../../../scss/animations';
 
-.popup {
-	z-index: 100;
 
-	width: 100%;
-	position: fixed;
-	left: 0;
-	bottom: 10px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-
-	.content {
-		border-radius: 10px;
-		background-color: $white-1;
-		padding: 20px 30px;
-		display: flex;
-		flex-wrap: wrap;
-		flex-direction: row;
-		align-items: center;
-		justify-content: center;
-		column-gap: 20px;
-
-		.container {
-			display: flex;
-			flex-direction: row;
-		}
-	}
-}
 
 .back {
 	display: block;

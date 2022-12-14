@@ -1,22 +1,23 @@
 <script lang="ts">
-	import Avatar from '../../../../lib/components/Avatar/Avatar.svelte';
-	import Button from '../../../../lib/components/Button/Button.svelte';
-	import FacebookIcon from '../../../../lib/icons/FacebookIcon.svelte';
-	import GithubIcon from '../../../../lib/icons/GithubIcon.svelte';
-	import InstagramIcon from '../../../../lib/icons/InstagramIcon.svelte';
-	import LinkedinIcon from '../../../../lib/icons/LinkedinIcon.svelte';
-	import TwitterIcon from '../../../../lib/icons/TwitterIcon.svelte';
-	import Input from '../../../../lib/components/Input/Input.svelte';
-	import Select from '../../../../lib/components/Select/Select.svelte';
-	import {supabaseClient} from '../../../../lib/supabase-client';
-	import Textarea from '../../../../lib/components/Textarea/Textarea.svelte';
-	import {ItemType} from '../../../../lib/components/Timeline/timeline.type';
+	import Avatar from '$lib/components/Avatar/Avatar.svelte';
+	import Button from '$lib/components/Button/Button.svelte';
+	import FacebookIcon from '$lib/icons/FacebookIcon.svelte';
+	import GithubIcon from '$lib/icons/GithubIcon.svelte';
+	import InstagramIcon from '$lib/icons/InstagramIcon.svelte';
+	import LinkedinIcon from '$lib/icons/LinkedinIcon.svelte';
+	import TwitterIcon from '$lib/icons/TwitterIcon.svelte';
+	import Input from '$lib/components/Input/Input.svelte';
+	import Select from '$lib/components/Select/Select.svelte';
+	import {supabaseClient} from '$lib/supabase-client';
+	import Textarea from '$lib/components/Textarea/Textarea.svelte';
+	import {ItemType} from '$lib/components/Timeline/timeline.type';
 	import {ArrowDownIcon, ArrowUpIcon, GlobeAltIcon, PlusIcon, TrashIcon} from '@krowten/svelte-heroicons';
-	import type {Profile} from '/src/types/database/Profile.type';
+	import type {Profile} from 'src/types/database/Profile.type';
 	import {page} from "$app/stores";
 	import {invalidateAll} from "$app/navigation";
-	import Checkbox from "../../../../lib/components/Checkbox/Checkbox.svelte";
+	import Checkbox from "$lib/components/Checkbox/Checkbox.svelte";
 	import {onMount} from "svelte";
+	import SavePopup from "$lib/components/SavePopup/SavePopup.svelte";
 
 	let uploading = false;
 	let files: FileList;
@@ -149,22 +150,10 @@
 
 {#if newProfile}
 	{#if edited}
-		<div class="popup">
-			<div class="content">
-				Il y a des modifications non enregistrées.
-				<div class="container">
-					<Button on:click={async () => {
-						newProfile = JSON.parse(JSON.stringify($page.data.session.user.profile))
-						await loadPossibleGodparents();
-					}}>
-						Réinitialiser
-					</Button>
-					<Button color="accent-3" on:click={updateUser} disabled={saving}
-					>{saving ? 'Enregistrement ...' : 'Enregistrer'}</Button
-					>
-				</div>
-			</div>
-		</div>
+		<SavePopup onReset={async () => {
+				newProfile = JSON.parse(JSON.stringify($page.data.session.user.profile))
+				await loadPossibleGodparents();
+			}} onSave={updateUser} {saving}/>
 	{/if}
 	<div class="back">
 		<a href="/static" on:click|preventDefault={() => window.history.back()}>← Retour</a>
@@ -390,9 +379,7 @@
 		<section>
 			<h2>Tu n'es pas connecté !</h2>
 			<p>
-				Afin de pouvoir éditer ton profil, il faut tout d'abord te <a href="/auth/login"
-			>connecter</a
-			>
+				Afin de pouvoir éditer ton profil, il faut tout d'abord te <a href="/auth/login">connecter</a>
 			</p>
 		</section>
 	</div>

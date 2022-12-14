@@ -4,6 +4,7 @@
 	import {MenuIcon} from '@krowten/svelte-heroicons';
 	import HeaderDropdown from './HeaderDropdown.svelte';
 	import type {UserSession} from "/src/types/User.type";
+	import {theme} from "$lib/stores.js";
 
 	let dropdownOpened = false;
 	let headerOpened = false;
@@ -22,7 +23,7 @@
 	$: user = $page.data.session.user
 </script>
 
-<header class:headerOpened>
+<header class={$theme} class:headerOpened>
 	<nav>
 		<a href="/" class="logo {url === '/' ? 'active' : ''}" on:click={() => toggleHeader(false)}>
 			<img alt="Logo" src="/images/logo.jpg"/>
