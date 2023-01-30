@@ -2,8 +2,8 @@ name: Update database types
 
 on:
   push:
-#    paths:
-#      - '*.sql'
+    paths:
+      - '*.sql'
   workflow_dispatch:
 
 jobs:
