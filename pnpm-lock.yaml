@@ -9,6 +9,7 @@ specifiers:
   eslint-plugin-svelte3: ^4.0.0
   sass: ^1.57.1
   svelte: ^3.54.0
+  svelte-autosize: ^1.0.1
   svelte-check: ^3.0.1
   tslib: ^2.4.1
   typescript: ^4.9.3
@@ -567,6 +568,10 @@ packages:
   /array-union/2.1.0:
     resolution: {integrity: sha512-HGyxoOTYUyCM6stUe6EJgnd4EoewAI7zMdfqO+kGjnlZmBDz/cR5pf8r/cR4Wq60sL/p0IkcjUEEPwS3GFrIyw==}
     engines: {node: '>=8'}
+    dev: true
+
+  /autosize/5.0.2:
+    resolution: {integrity: sha512-FPVt5ynkqUAA9gcMZnJHka1XfQgr1WNd/yRfIjmj5WGmjua+u5Hl9hn8M2nU5CNy2bEIcj1ZUwXq7IOHsfZG9w==}
     dev: true
 
   /balanced-match/1.0.2:
@@ -1504,6 +1509,12 @@ packages:
   /supports-preserve-symlinks-flag/1.0.0:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
+    dev: true
+
+  /svelte-autosize/1.0.1:
+    resolution: {integrity: sha512-HBk7Xrt5bS0rpp5zSUZvuXNKc0UhAxvJGLNy1eTHMDK/KkHb0UsgWpbyn60jW3tE2ZfuXfLttnHvvb1H4zZZ0Q==}
+    dependencies:
+      autosize: 5.0.2
     dev: true
 
   /svelte-check/3.0.3_sass@1.57.1+svelte@3.55.1:
