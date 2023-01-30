@@ -2,8 +2,8 @@ name: Push changes to database
 
 on:
   push:
-#    paths:
-#      - '*.sql'
+    paths:
+      - '*.sql'
   workflow_dispatch:
 
 jobs:
