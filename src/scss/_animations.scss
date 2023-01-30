@@ -1,0 +1,27 @@
+@keyframes click-feedback {
+	0% {
+		transform: scale(1);
+	}
+
+	50% {
+		transform: scale(0.8);
+	}
+
+	100% {
+		transform: scale(1);
+	}
+}
+
+@keyframes hover-feedback {
+	0% {
+		transform: scale(1);
+	}
+
+	50% {
+		transform: scale(0.97);
+	}
+
+	100% {
+		transform: scale(1);
+	}
+}
