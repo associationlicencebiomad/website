@@ -36,6 +36,7 @@
     line-height: 1.5;
     color: colors.$black-0;
     background-color: colors.$white-3;
+    transition: .3s ease-in-out;
 
     &.dark {
       color: colors.$white-3;
