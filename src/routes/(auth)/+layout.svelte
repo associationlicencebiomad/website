@@ -1,43 +1,54 @@
-<div class="container">
+<script>
+	import {theme} from "$lib/stores";
+</script>
+
+<div class={`container ${$theme}`}>
 	<div class="form">
-		<img src="/images/logo_albm.png" class="logo" alt="Logo" />
-		<slot />
+		<img alt="Logo" class="logo" src="/images/logo_albm.png"/>
+		<slot/>
 	</div>
 </div>
 
 <style lang="scss">
-	@use 'src/scss/colors';
+  @use 'src/scss/colors';
 
-	.container {
-		width: 100vw;
-		min-height: 100vh;
+  .container {
+    width: 100vw;
+    min-height: 100vh;
 
-		display: flex;
-		align-items: center;
-		justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-		& .logo {
-			width: 64px;
-			margin-bottom: 8px;
-		}
+    & .logo {
+      width: 64px;
+      margin-bottom: 8px;
+    }
 
-		& :global(.title) {
-			margin-bottom: 8px;
-			font-size: 24px;
-			color: colors.$black-0;
-		}
+    & :global(.title) {
+      margin-bottom: 8px;
+      font-size: 24px;
+      padding-bottom: 12px;
+    }
 
-		.form {
-			padding: 20px;
-			margin: 20px;
-			width: 70%;
-			max-width: 400px;
-			min-width: 200px;
-			text-align: center;
+    .form {
+      padding: 20px;
+      margin: 20px;
+      width: 70%;
+      max-width: 400px;
+      min-width: 200px;
+      text-align: center;
 
-			border-radius: 10px;
+      border-radius: 10px;
 
-			background-color: colors.$white-4;
-		}
-	}
+      background-color: colors.$white-4;
+    }
+
+    &.dark {
+      .form {
+        background-color: colors.$black-1;
+
+      }
+    }
+  }
 </style>

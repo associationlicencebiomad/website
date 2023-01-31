@@ -4,6 +4,7 @@
 	import {onMount} from 'svelte';
 
 	import '../app.scss';
+	import {theme} from "$lib/stores";
 
 	onMount(() => {
 		const {
@@ -22,8 +23,23 @@
 	<title>ALBM</title>
 </svelte:head>
 
-<slot/>
+<div class={$theme}>
+	<slot/>
+</div>
 
-<!--<style global lang="scss">-->
-<!--  @use '../app.scss';-->
-<!--</style>-->
+<style lang="scss">
+  @use "src/scss/colors";
+
+  div {
+    font-family: Rubik, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: colors.$black-0;
+    background-color: colors.$white-3;
+
+    &.dark {
+      color: colors.$white-3;
+      background-color: colors.$black-0;
+    }
+  }
+</style>
