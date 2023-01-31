@@ -1349,3 +1349,78 @@ ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "public" GRANT ALL ON TAB
 --
 
 RESET ALL;
+
+-- Add the trigger (rn: it's only for dev since this trigger exist allready in production).
+create trigger on_auth_user_created
+    after insert on auth.users
+    for each row execute procedure public.handle_new_user();
+
+
+CREATE INDEX refresh_token_session_id ON auth.refresh_tokens USING btree (session_id);
+
+set check_function_bodies = off;
+
+CREATE OR REPLACE FUNCTION auth.email()
+    RETURNS text
+    LANGUAGE sql
+    STABLE
+AS $function$
+select
+    coalesce(
+            nullif(current_setting('request.jwt.claim.email', true), ''),
+            (nullif(current_setting('request.jwt.claims', true), '')::jsonb ->> 'email')
+        )::text
+$function$
+;
+
+CREATE OR REPLACE FUNCTION auth.role()
+    RETURNS text
+    LANGUAGE sql
+    STABLE
+AS $function$
+select
+    coalesce(
+            nullif(current_setting('request.jwt.claim.role', true), ''),
+            (nullif(current_setting('request.jwt.claims', true), '')::jsonb ->> 'role')
+        )::text
+$function$
+;
+
+CREATE OR REPLACE FUNCTION auth.uid()
+    RETURNS uuid
+    LANGUAGE sql
+    STABLE
+AS $function$
+select
+    coalesce(
+            nullif(current_setting('request.jwt.claim.sub', true), ''),
+            (nullif(current_setting('request.jwt.claims', true), '')::jsonb ->> 'sub')
+        )::uuid
+$function$
+;
+
+create policy "Authenticaded user can update an avatar."
+    on "storage"."objects"
+    as permissive
+    for update
+    to public
+    with check (((bucket_id = 'avatars'::text) AND (auth.role() = 'authenticated'::text)));
+
+
+create policy "Authenticaded user can upload an avatar."
+    on "storage"."objects"
+    as permissive
+    for insert
+    to public
+    with check (((bucket_id = 'avatars'::text) AND (auth.role() = 'authenticated'::text)));
+
+
+create policy "Avatar images are publicly accessible."
+    on "storage"."objects"
+    as permissive
+    for select
+    to public
+    using ((bucket_id = 'avatars'::text));
+
+
+
