@@ -39,7 +39,7 @@
 
     &.dark {
       color: colors.$white-3;
-      background-color: colors.$black-0;
+      background-color: colors.$black-2;
     }
   }
 </style>
