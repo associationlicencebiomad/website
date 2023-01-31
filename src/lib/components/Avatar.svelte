@@ -76,7 +76,6 @@
       padding: 5px;
       font-size: 42px;
       font-weight: 600;
-      //font-style: italic;
     }
   }
 </style>
