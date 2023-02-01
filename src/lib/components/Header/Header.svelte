@@ -6,6 +6,8 @@
 	import type {LoggedInUser} from "/src/types/user.types";
 	import {Icon} from "@steeze-ui/svelte-icon";
 	import {Bars3} from "@steeze-ui/heroicons";
+	import Button from "$lib/primitives/Button/Button.svelte";
+	import {ThemeType} from "../../../types/theme.types";
 
 	let dropdownOpened = false;
 	let headerOpened = false;
@@ -19,6 +21,10 @@
 	}
 
 	let user: LoggedInUser | null | undefined
+
+	function switchtheme() {
+		$theme = $theme === ThemeType.light ? ThemeType.dark : ThemeType.light
+	}
 
 	$: url = $page.url.pathname;
 	$: user = $page.data.user
@@ -40,6 +46,10 @@
 		>
 			Parcours
 		</a>
+		<Button color="accent-1" on:click={switchtheme}>
+			switch theme
+		</Button>
+
 	</nav>
 	{#if $page.data.session}
 		<div class="user" on:click={() => toggleDropdown()}>

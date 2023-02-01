@@ -9,3 +9,7 @@ export interface LoggedInUser extends ProfileRow {
 	promo: PromoRow,
 	godparents: GodparentProfile[]
 }
+
+export interface Profile extends Pick<ProfileRow, 'id' | 'first_name' | 'last_name' | 'avatar' | 'timeline'> {
+	promo: Pick<PromoRow, 'name' | 'year'>
+}
