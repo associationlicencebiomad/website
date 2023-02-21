@@ -1,4 +1,4 @@
-import {writable} from "svelte/store";
+import {persisted} from 'svelte-local-storage-store'
 import {ThemeType} from "../types/theme.types";
 
-export const theme = writable<ThemeType>(ThemeType.light)
+export const theme = persisted<ThemeType>('theme', ThemeType.light);
