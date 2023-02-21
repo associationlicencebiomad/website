@@ -6,7 +6,7 @@
 
   textarea {
     font-family: Rubik, sans-serif;
-    color: colors.$black-0;
+    color: inherit;
     background-color: transparent;
     border: none;
     border-bottom: 1px solid colors.$black-3;
@@ -38,7 +38,7 @@
   }
 
   & > textarea + label {
-    color: colors.$black-3;
+    color: inherit;
     position: absolute;
     top: 0;
     left: 0;
@@ -67,14 +67,14 @@
     :global(a) {
       &:visited,
       &:link {
-        color: colors.$black-3;
+        color: inherit;
         text-decoration: none;
         outline: none;
         font-style: italic;
       }
 
       &:hover {
-        color: colors.$black-0;
+        color: colors.$accent-2;
         transition: all ease-in-out 0.3s;
       }
     }

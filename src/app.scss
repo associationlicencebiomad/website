@@ -3,9 +3,7 @@
 @import 'src/scss/reset';
 @import 'src/scss/scrollbar';
 
-:global(*),
-:global(*::before),
-:global(*::after) {
+*, ::after, ::before {
   box-sizing: border-box;
 }
 

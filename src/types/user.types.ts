@@ -13,3 +13,12 @@ export interface LoggedInUser extends ProfileRow {
 export interface Profile extends Pick<ProfileRow, 'id' | 'first_name' | 'last_name' | 'avatar' | 'timeline'> {
 	promo: Pick<PromoRow, 'name' | 'year'>
 }
+
+export interface Links {
+	instagram: string,
+	facebook: string,
+	twitter: string,
+	linkedin: string,
+	website: string,
+	github: string,
+}
