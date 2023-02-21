@@ -46,7 +46,7 @@
 					<Icon src={PaperAirplane} slot="icon"/>
 					Envoyer
 				</Button>
-				<Button color="accent-3">
+				<Button color="accent-3" on:click={(e) => {e.preventDefault(); popup = !popup}}>
 					<Icon src={ArrowSmallLeft} slot="icon"/>
 					Retour
 				</Button>
