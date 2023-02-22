@@ -1,7 +1,7 @@
 @import 'src/scss/colors';
 
 header {
-	position: sticky;
+  position: sticky;
   background-color: $white-4;
   display: flex;
   flex-direction: row;
@@ -26,177 +26,222 @@ header {
   }
 
   nav {
-		display: flex;
-		flex-direction: row;
-		flex-wrap: nowrap;
-		justify-content: space-between;
-		align-items: center;
-		margin: 0 22px;
-		user-select: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 22px;
+    user-select: none;
 
-		&:first-child {
-			margin-left: 0;
-		}
+    &:first-child {
+      margin-left: 0;
+    }
 
-		a {
-			display: flex;
-			text-decoration: none;
-			font-size: 24px;
-			font-weight: 400;
-			margin: 10px 14px;
-			color: inherit;
-			outline: none;
+    a {
+      display: flex;
+      text-decoration: none;
+      font-size: 24px;
+      font-weight: 400;
+      margin: 10px 14px;
+      color: inherit;
+      outline: none;
 
-			&.logo {
-				flex-direction: row;
-				justify-content: center;
-				align-items: center;
+      &.logo {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
 
-				img {
-					margin-right: 15px;
-				}
-			}
+        img {
+          margin-right: 15px;
+        }
+      }
 
-			&.active {
-				text-decoration: underline;
-			}
+      &.active {
+        text-decoration: underline;
+      }
 
-			&:hover {
-				color: $accent-3;
-				transition: color ease-in-out 0.2s;
-			}
-		}
-	}
+      &:hover {
+        color: $accent-3;
+        transition: color ease-in-out 0.2s;
+      }
+    }
+  }
 
-	.user {
-		cursor: pointer;
-		display: flex;
-		flex-direction: row;
-		justify-content: flex-end;
-		align-items: center;
+  .user {
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
 
-		&__username {
-			font-size: 18px;
-			font-weight: 400;
-          //color: $black-0;
-			margin-right: 24px;
-		}
+    &__username {
+      font-size: 18px;
+      font-weight: 400;
+      //color: $black-0;
+      margin-right: 24px;
+    }
 
-		// profile picture
-		& :global(.user__profilPicture) {
-			margin-right: 15px;
-			object-fit: cover;
+    // profile picture
+    & :global(.user__profilPicture) {
+      margin-right: 15px;
+      object-fit: cover;
 
-			:global(span) {
-				font-size: 24px;
-			}
-		}
-	}
+      :global(span) {
+        font-size: 24px;
+      }
+    }
+  }
 
-	.auth {
-		display: flex;
-		flex-direction: row;
-		justify-content: flex-end;
-		align-items: center;
-		margin-right: 15px;
-		grid-gap: 5px;
+  .auth {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 15px;
+    grid-gap: 5px;
 
-		a {
-			text-decoration: none;
-			font-size: 18px;
-			font-weight: 400;
+    a {
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: 400;
 
-			color: inherit;
-			outline: none;
+      color: inherit;
+      outline: none;
 
-			&:hover {
-				color: $accent-3;
-				transition: color ease-in-out 0.2s;
-			}
-		}
-	}
+      &:hover {
+        color: $accent-3;
+        transition: color ease-in-out 0.2s;
+      }
+    }
+  }
 
-	.hamburger {
-		display: none;
-		margin-right: 15px;
-	}
+  .container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 6px;
 
-	@media (max-width: 600px) {
-		display: flex;
+    :global(button) {
+      position: relative;
+      translate: 0 2px;
+      padding: 7px 7px;
+      :global(.icon) {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
 
-		&.headerOpened {
-			flex-direction: column;
-			justify-content: flex-start;
-			align-items: flex-start;
-			position: fixed;
-			width: 100%;
-			z-index: 100;
-			height: 100%;
+  .hamburger {
+    display: none;
+    margin-right: 15px;
+  }
 
-			nav {
-				flex-direction: column;
-				justify-content: flex-start;
-				align-items: flex-start;
-				margin: 0;
-				width: 100%;
+  @media (max-width: 600px) {
+    display: flex;
 
-				a:not(.logo) {
-					align-self: center;
-					display: inherit;
-				}
-			}
 
-			.user {
-				display: inherit;
 
-				border-top: 1px lighten($black-3, 50%) solid;
-				padding-top: 20px;
-				width: 100%;
-				justify-content: center;
+    &.headerOpened {
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      position: fixed;
+      width: 100%;
+      z-index: 100;
+      height: 100%;
 
-				&__username {
-					margin-left: 0;
-				}
+      nav {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        margin: 0;
+        width: 100%;
 
-				// profile picture
-				:global(.user__profilPicture) {
-					margin-right: 0;
-				}
-			}
+        a:not(.logo) {
+          align-self: center;
+          display: inherit;
+        }
+      }
 
-			.auth {
-				display: inherit;
+      .container {
+        display: inherit;
+      }
 
-				border-top: 1px lighten($black-3, 50%) solid;
-				padding-top: 20px;
-				width: 100%;
-				justify-content: center;
-				margin-right: 0;
-			}
-		}
+      .user {
+        display: inherit;
 
-		nav {
-			a:not(.logo) {
-				display: none;
-			}
-		}
+        border-top: 1px lighten($black-3, 50%) solid;
+        padding-top: 20px;
+        width: 100%;
+        justify-content: center;
 
-		.user {
-			display: none;
-		}
+        &__username {
+          margin-left: 0;
+        }
 
-		.auth {
-			display: none;
-		}
+        // profile picture
+        :global(.user__profilPicture) {
+          margin-right: 0;
+        }
+      }
 
-		.hamburger {
-			display: block;
-			position: fixed;
-			top: 25px;
-			right: 10px;
-			margin-right: 0;
-			margin-left: 22px;
-			cursor: pointer;
-		}
-	}
+      .auth {
+        display: inherit;
+
+        border-top: 1px lighten($black-3, 50%) solid;
+        padding-top: 20px;
+        width: 100%;
+        justify-content: center;
+        margin-right: 0;
+      }
+    }
+
+    nav {
+      a:not(.logo) {
+        display: none;
+      }
+    }
+
+    .user {
+      display: none;
+    }
+
+    .container {
+      display: none;
+
+      flex-direction: column;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .auth {
+      display: none;
+    }
+
+    .hamburger {
+      display: block;
+      position: fixed;
+      top: 25px;
+      right: 10px;
+      margin-right: 0;
+      margin-left: 22px;
+      cursor: pointer;
+      transition: .4s;
+      transform: rotate(0deg);
+
+      :global(svg) {
+        width: 30px;
+        height: 30px;
+      }
+
+      &.headerOpened {
+        transform: rotate(90deg);
+      }
+    }
+  }
+
+
 }

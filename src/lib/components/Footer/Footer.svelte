@@ -3,41 +3,45 @@
 	import Separator_3 from '../../assets/Separator-3.svelte';
 	import FacebookIcon from '../../icons/FacebookIcon.svelte';
 	import InstagramIcon from '../../icons/InstagramIcon.svelte';
+	import LinkedinIcon from "$lib/icons/LinkedinIcon.svelte";
 
 	$: url = $page.url.pathname;
 </script>
 
 <footer>
 	<div class="separator">
-		<Separator_3 />
+		<Separator_3/>
 	</div>
 	<div class="content">
 		<div class="container">
-			<img src="/images/logo_albm.png" alt="Logo ALBM" />
+			<img alt="Logo ALBM" src="/images/logo_albm.png"/>
 			<div class="title">
 				<h1>ALBM</h1>
 				<div class="socials">
 					<a href="https://www.facebook.com/groups/360613077352359/" target="_blank">
-						<FacebookIcon />
+						<FacebookIcon/>
+					</a>
+					<a href="https://www.linkedin.com/groups/8809708/" target="_blank">
+						<LinkedinIcon/>
 					</a>
 					<a href="https://www.instagram.com/albm_roscoff/" target="_blank">
-						<InstagramIcon />
+						<InstagramIcon/>
 					</a>
 				</div>
 			</div>
 		</div>
-		<span> ©2022 — Association des licences BIOMAD </span>
+		<span>©2022 - {new Date().getFullYear()} — Association des licences BIOMAD</span>
 		<div class="links">
-			<a href="/static" class={url === '/' ? 'active' : ''}>Home</a>
-			<a href="/blog" class={url === '/blog' ? 'active' : ''}>Blog</a>
+			<a class={url === '/' ? 'active' : ''} href="/">Home</a>
+			<a class={url === '/blog' ? 'active' : ''} href="/blog">Blog</a>
 			<a class={url === '/careers' ? 'active' : ''} href="/careers">Parcours</a>
-			<a href="/about" class={url === '/about' ? 'active' : ''}>A propos</a>
-			<a href="/contact" class={url === '/contact' ? 'active' : ''}>Contact</a>
-			<a href="/credits" class={url === '/cretis' ? 'active' : ''}>Crédits</a>
+			<a class={url === '/about' ? 'active' : ''} href="/about">À propos</a>
+			<a class={url === '/contact' ? 'active' : ''} href="/contact">Contact</a>
+			<a class={url === '/credits' ? 'active' : ''} href="/credits">Crédits</a>
 		</div>
 	</div>
 </footer>
 
 <style lang="scss">
-	@use 'Footer';
+  @use 'Footer';
 </style>

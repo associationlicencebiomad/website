@@ -1,9 +1,4 @@
-import {writable} from 'svelte/store';
-import {ThemeType} from "../types/Theme.type";
+import {persisted} from 'svelte-local-storage-store'
+import {ThemeType} from "../types/theme.types";
 
-export const session = writable({
-	user: null,
-	accessToken: null,
-})
-
-export const theme = writable<ThemeType>(ThemeType.light)
+export const theme = persisted<ThemeType>('theme', ThemeType.light);

@@ -1,13 +1,9 @@
 <script lang="ts">
-	import type {PageData} from './$types';
-	import type {Ranking} from "../../../types/database/Ranking.type";
 	import RankingCard from "$lib/components/RankingCard/RankingCard.svelte";
+	import type {Ranking} from "src/types/ranking.types";
+	import {page} from "$app/stores";
 
-	export let data: PageData;
-
-	let ranking: Ranking[] = data.ranking;
-
-
+	let ranking: Ranking[] = $page.data.ranking;
 </script>
 
 <div class="ranking">
@@ -24,10 +20,6 @@
     flex-direction: column;
     align-items: center;
     gap: 15px;
-    //@include grid_auto_columns(4, 20px, 500px);
     margin: 0 24px;
-    //align-items: center;
-    //justify-content: center;
-
   }
 </style>

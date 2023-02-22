@@ -1,24 +1,26 @@
-/// <reference types="@sveltejs/kit" />
-
 // See https://kit.svelte.dev/docs/types#app
 // for information about these interfaces
-declare namespace App {
-	interface UserSession {
-		user: import('@supabase/supabase-js').User & {
-			profil: import('src/types/database/Profile.type').Profile;
-		};
-		accessToken?: string;
-	}
+import type {LoggedInUser} from "./types/user.types";
 
-	interface Locals extends UserSession {
-		error: import('@supabase/supabase-js').ApiError;
-	}
+declare global {
+	namespace App {
+		interface Supabase {
+			Database: import('types/database.types').Database
+			SchemaName: 'public'
+		}
 
-	// interface Platform {}
-	// interface Stuff {}
+		// interface Error {}
+		interface Locals {
+			loggedInUser: LoggedInUser | null;
+		}
+
+		interface PageData {
+			session: import('@supabase/supabase-js').Session | null;
+			user?: LoggedInUser | null;
+		}
+
+		// interface Platform {}
+	}
 }
 
-declare module 'svelte-autosize' {
-	const autosize: never;
-	export default autosize;
-}
+export {};

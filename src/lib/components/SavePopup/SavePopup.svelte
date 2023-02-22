@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Button from "$lib/components/Button/Button.svelte";
 	import {theme} from "$lib/stores.js";
+	import Button from "$lib/primitives/Button/Button.svelte";
 
 	export let onSave: () => void;
 	export let onReset: () => void;
@@ -15,9 +15,9 @@
 			<Button on:click={onReset}>
 				Réinitialiser
 			</Button>
-			<Button color="accent-3" disabled={saving} on:click={onSave}
-			>{saving ? 'Enregistrement ...' : 'Enregistrer'}</Button
-			>
+			<Button color="accent-3" disabled={saving} on:click={onSave}>
+				{saving ? 'Enregistrement ...' : 'Enregistrer'}
+			</Button>
 		</div>
 	</div>
 </div>

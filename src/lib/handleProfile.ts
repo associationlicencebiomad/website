@@ -1,27 +1,28 @@
-import {supabaseServerClient} from '@supabase/auth-helpers-sveltekit';
-import type {Profile} from '../types/database/Profile.type';
+import {getSupabase} from '@supabase/auth-helpers-sveltekit'
+import type {Handle} from '@sveltejs/kit'
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-export async function handleProfile({event, resolve}) {
-	const {user, accessToken} = event.locals;
+export const handleProfile: Handle = async ({event, resolve}) => {
+	const {session, supabaseClient} = await getSupabase(event)
 
-	if (user) {
-		const {data} = await supabaseServerClient(accessToken)
-			.from<Profile>('profiles')
-			.select(`
-				*, 
-				promos(*),
-				godparents!godparents_user_id_fkey(
-				    profile:profiles!godparents_godparent_id_fkey(id, first_name, last_name, avatar),
-					is_adopted
-				)
-			`)
-			.eq('id', user.id)
-			.single();
+	if (session) {
+		const {user} = session
+		if (user) {
+			const {data: profile} = await supabaseClient
+				.from('profiles')
+				.select(`
+					*,
+					promos(*),
+					godparents!godparents_user_id_fkey(
+						profile:profiles!godparents_godparent_id_fkey(id, first_name, last_name, avatar),
+						is_adopted
+					)
+				`)
+				.eq('id', user?.id)
+				.single()
 
-		event.locals.user.profile = data;
+			event.locals.loggedInUser = profile
+		}
 	}
 
-	return await resolve(event);
+	return resolve(event);
 }

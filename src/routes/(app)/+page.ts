@@ -1,20 +1,14 @@
-import {supabaseClient} from '../../lib/supabase-client';
-import type {PageLoad} from './$types'
-import type {Buro} from 'src/types/database/Profile.type';
+import type {PageLoad} from './$types';
+import {getSupabase} from "@supabase/auth-helpers-sveltekit";
 
-export const load: PageLoad = async () => {
-	const {data, error: supabaseErr} = await supabaseClient.from<Buro>('buro')
-		.select(`
-				*,
-				profiles (first_name, last_name, avatar)
-			`)
+export const load = (async (event) => {
+	const {supabaseClient} = await getSupabase(event)
+
+	const {data: buro} = await supabaseClient
+		.from('buro')
+		.select('*, profiles(first_name, last_name, avatar)')
 		.eq('display', true);
 
-	if (supabaseErr || !data) {
-		return {error: supabaseErr};
-	}
+	return {buro}
 
-	return {
-		buro: data
-	};
-};
+}) satisfies PageLoad;

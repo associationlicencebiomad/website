@@ -1,9 +1,10 @@
 import type {LayoutServerLoad} from './$types'
+import {getSupabase} from "@supabase/auth-helpers-sveltekit";
 import {error} from "@sveltejs/kit";
 
-export const load: LayoutServerLoad = async ({parent}) => {
-	const data = await parent()
-	if (!data.session.user) { // guard route against unauthenticated users
-		throw error(404, 'Not found');
+export const load: LayoutServerLoad = async (event) => {
+	const {session} = await getSupabase(event)
+	if (!session) {
+		throw error(404, 'Not found')
 	}
 }

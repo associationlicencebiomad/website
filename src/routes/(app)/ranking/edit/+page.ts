@@ -1,26 +1,19 @@
-import {supabaseClient} from '$lib/supabase-client';
+import type {Professor} from "src/types/ranking.types";
 import type {PageLoad} from './$types';
-import type {Professor, Ranking} from "src/types/database/Ranking.type";
+import {getSupabase} from "@supabase/auth-helpers-sveltekit";
 
-export const load: PageLoad = async ({parent}) => {
-	const {session} = await parent()
-	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-	// @ts-ignore
-	const {data: user_ranking, error: supabaseErr} = await supabaseClient.rpc<Ranking>('get_professors_ranking', {
+export const load = (async (event) => {
+	const {supabaseClient, session} = await getSupabase(event)
+
+	const {data: user_ranking} = await supabaseClient.rpc('get_professors_ranking', {
 		param_user_id: session?.user?.id
 	})
 
-	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-	// @ts-ignore
-	const {data: available_professor, error: supabaseErr2} = await supabaseClient
-		.from<Professor>('professors')
+	const {data: available_professor} = await supabaseClient
+		.from('professors')
 		.select('*')
 		.not('id', 'in', `(${user_ranking?.map((professor: Professor) => professor.id).join(',')})`)
 		.order('full_name', {ascending: true})
 
-
-	return {
-		user_ranking,
-		available_professor
-	};
-};
+	return {user_ranking, available_professor}
+}) satisfies PageLoad;

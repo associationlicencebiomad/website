@@ -1,10 +1,11 @@
 <script lang="ts">
 	import type {PageData} from './$types';
-	import type {Professor, Ranking} from "src/types/database/Ranking.type";
-	import RankingCard from "$lib/components/RankingCard/RankingCard.svelte";
+	import type {Professor, Ranking} from "src/types/ranking.types";
+	import {supabaseClient} from "$lib/db";
 	import SavePopup from "$lib/components/SavePopup/SavePopup.svelte";
-	import {supabaseClient} from "$lib/supabase-client";
-	import DragDropBox from "$lib/components/DragDropBox/DragDropBox.svelte";
+	import RankingCard from "$lib/components/RankingCard/RankingCard.svelte";
+	import DragDropBox from "$lib/components/DragDropBox.svelte";
+	import {theme} from "$lib/stores";
 
 	export let data: PageData;
 
@@ -14,7 +15,7 @@
 	let edited;
 	let saving = false;
 
-	$: edited = JSON.stringify(user_ranking) !== JSON.stringify(data.user_ranking), user_ranking;
+	$: edited = JSON.stringify(user_ranking) !== JSON.stringify(data.user_ranking);
 
 	let hovering = null;
 
@@ -57,31 +58,30 @@
 
 	async function save() {
 		saving = true;
-		try {
-			const {error} = await supabaseClient
-				.from<Ranking>('professors_ranking')
-				.upsert([
-					...user_ranking.map((item, index) => ({
-						professor_id: item.id,
-						user_id: data.session.user.id,
-						ranking: index + 1
-					}))
-				], {
-					onConflict: 'professor_id,user_id',
-				});
 
-			await supabaseClient.from<Ranking>('professors_ranking').delete().eq('user_id', data.session.user.id).not('professor_id', 'in', `(${user_ranking.map((item) => item.id).join(',')})`)
+		await supabaseClient
+			.from('professors_ranking')
+			.upsert([
+				...user_ranking.map((item, index) => ({
+					professor_id: item.id,
+					user_id: data.session.user.id,
+					ranking: index + 1
+				}))
+			], {
+				onConflict: 'professor_id,user_id',
+			});
 
-			data.user_ranking = [...user_ranking];
-			data.available_professor = [...available_professor];
+		await supabaseClient
+			.from('professors_ranking')
+			.delete()
+			.eq('user_id', data.session.user.id)
+			.not('professor_id', 'in', `(${user_ranking.map((item) => item.id).join(',')})`)
+
+		data.user_ranking = [...user_ranking];
+		data.available_professor = [...available_professor];
 
 
-			if (error) throw error;
-		} catch (err) {
-			console.error(err);
-		} finally {
-			saving = false;
-		}
+		saving = false;
 	}
 </script>
 
@@ -119,7 +119,7 @@
 
 	</div>
 
-	<div class="available_professor" on:drop={event => {event.preventDefault(); removeFromRanking(event)}}
+	<div class="available_professor {$theme}" on:drop={event => {event.preventDefault(); removeFromRanking(event)}}
 		 ondragover="return false">
 		<h2>{available_professor.length} professeurs non classé</h2>
 		<div class="list">
@@ -157,8 +157,12 @@
     margin: 24px auto;
     padding: 12px;
     border-radius: 10px;
-    background-color: colors.$black-1;
+    background-color: colors.$white-4;
     overflow-y: auto;
+
+    &.dark {
+      background-color: colors.$black-1;
+    }
 
     .list {
       display: flex;

@@ -1,0 +1,63 @@
+@use 'src/scss/colors';
+@import 'src/scss/animations';
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .searchbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: colors.$white-4;
+    padding: 5px 10px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 350px;
+    margin: 0 20px;
+
+    input {
+      padding: 0;
+      background-color: inherit;
+      border: none;
+      max-width: 350px;
+      flex: 1 1 auto;
+    }
+
+    button {
+      background-color: transparent;
+      border: none;
+      font-size: 24px;
+      padding: 0;
+      margin: 5px;
+
+      width: 1em;
+      height: 1em;
+
+      &:hover {
+        color: colors.$accent-3;
+        transition: all ease-in-out 0.3s;
+      }
+
+      &:focus {
+        outline: none;
+        animation: click-feedback 0.3s ease-in-out;
+      }
+    }
+  }
+}
+
+.UsersCareer {
+  margin: 5% 10%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  justify-items: center;
+}
+
+:global(.infinite-status-prompt) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

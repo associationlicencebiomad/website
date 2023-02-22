@@ -1,208 +1,237 @@
-@import 'src/scss/colors';
+@use 'src/scss/colors';
 
 .item {
-	padding-left: 30px;
-	position: relative;
-	background: inherit;
-	width: 50%;
+  padding-left: 30px;
+  position: relative;
+  background: inherit;
+  width: 50%;
 
-	@media screen and (min-width: 1000px) {
-		padding-right: 30px;
-	}
+  @media screen and (min-width: 1000px) {
+    padding-right: 30px;
+  }
 
-	&.work {
-		:global(svg) {
-			background-color: $accent-1;
-		}
-	}
+  &.dark {
+    .content {
+      p {
+        color: colors.$white-4;
+      }
 
-	&.internship {
-		:global(svg) {
-			background-color: $yellow;
-		}
-	}
+      h3 {
+        color: colors.$white-0;
+      }
 
-	&.left {
-		left: 0;
+      h2 {
+        color: colors.$accent-2;
 
-		&::after {
-			@media screen and (max-width: 1000px) {
-				left: 2px;
-			}
-		}
+      }
 
-		&::before {
-			@media screen and (max-width: 1000px) {
-				left: 10px;
-				border-color: transparent darken($accent-3, 10%) transparent transparent;
-			}
-		}
+    }
 
-		.date {
-			@media screen and (min-width: 1000px) {
-				right: -115%;
-				width: 100%;
-				text-align: left;
-			}
-		}
+    .date {
+        color: colors.$accent-2;
+    }
 
-		:global(svg) {
-			right: 56px;
+    &::before {
+      background: colors.$accent-2;
+    }
 
-			@media screen and (max-width: 1000px) {
-				right: auto;
-				left: 56px;
-			}
-		}
+    &::after {
+      border: 2px solid colors.$accent-2;
+    }
+  }
 
-		.content {
-			@media screen and (min-width: 1000px) {
-				text-align: right;
-			}
+  &.work {
+    :global(svg) {
+      background-color: colors.$accent-1;
+    }
+  }
 
-			@media screen and (max-width: 1000px) {
-				padding: 30px 0 30px 90px;
-			}
-		}
-	}
+  &.internship {
+    :global(svg) {
+      background-color: colors.$yellow;
+    }
+  }
 
-	&.right {
-		left: 50%;
+  &.left {
+    left: 0;
 
-		@media screen and (max-width: 1000px) {
-			left: 0;
-		}
+    &::after {
+      @media screen and (max-width: 1000px) {
+        left: 2px;
+      }
+    }
 
-		&::after {
-			left: -8px;
+    &::before {
+      @media screen and (max-width: 1000px) {
+        left: 10px;
+        border-color: transparent darken(colors.$accent-3, 10%) transparent transparent;
+      }
+    }
 
-			@media screen and (max-width: 1000px) {
-				left: 2px;
-			}
-		}
+    .date {
+      @media screen and (min-width: 1000px) {
+        right: -115%;
+        width: 100%;
+        text-align: left;
+      }
+    }
 
-		&::before {
-			left: 8px;
+    :global(svg) {
+      right: 56px;
 
-			@media screen and (max-width: 1000px) {
-				left: 10px;
-				border-color: transparent darken($accent-3, 10%) transparent transparent;
-			}
-		}
+      @media screen and (max-width: 1000px) {
+        right: auto;
+        left: 56px;
+      }
+    }
 
-		.date {
-			@media screen and (min-width: 1000px) {
-				left: -115%;
-				width: 100%;
-				text-align: right;
-			}
-		}
+    .content {
+      @media screen and (min-width: 1000px) {
+        text-align: right;
+      }
 
-		:global(svg) {
-			left: 56px;
+      @media screen and (max-width: 1000px) {
+        padding: 30px 0 30px 90px;
+      }
+    }
+  }
 
-			@media screen and (max-width: 1000px) {
-				right: auto;
-				left: 56px;
-			}
-		}
+  &.right {
+    left: 50%;
 
-		.content {
-			padding: 30px 0px 30px 90px;
-		}
-	}
+    @media screen and (max-width: 1000px) {
+      left: 0;
+    }
 
-	&::after {
-		content: '';
-		position: absolute;
-		width: 16px;
-		height: 16px;
-		top: calc(50% - 8px);
-		right: -8px;
-		background: $white-4;
-		border: 2px solid darken($accent-3, 10%);
-		border-radius: 16px;
-		z-index: 1;
-	}
+    &::after {
+      left: -8px;
 
-	&::before {
-		content: '';
-		position: absolute;
-		width: 50px;
-		height: 2px;
-		top: calc(50% - 1px);
-		right: 8px;
-		background: darken($accent-3, 10%);
-		z-index: 1;
-	}
+      @media screen and (max-width: 1000px) {
+        left: 2px;
+      }
+    }
 
-	.date {
-		position: absolute;
-		text-decoration: underline;
-		display: inline-block;
-		top: calc(50% - 7px);
-		text-align: center;
-		font-size: 14px;
-		font-weight: bold;
-		color: darken($accent-3, 10%);
-		text-transform: uppercase;
-		letter-spacing: 1px;
-		line-height: 1;
-		z-index: 1;
+    &::before {
+      left: 8px;
 
-		@media screen and (max-width: 1000px) {
-			position: static;
-			text-align: left;
-		}
-	}
+      @media screen and (max-width: 1000px) {
+        left: 10px;
+        border-color: transparent darken(colors.$accent-3, 10%) transparent transparent;
+      }
+    }
 
-	:global(svg) {
-		position: absolute;
-		display: inline-block;
-		width: 40px;
-		height: 40px;
-		padding: 9px 0;
-		top: calc(50% - 20px);
-		background: $green;
-		border: 2px solid darken($accent-3, 10%);
-		border-radius: 40px;
-		text-align: center;
-		font-size: 18px;
-		color: darken($accent-3, 10%);
-		z-index: 1;
-	}
+    .date {
+      @media screen and (min-width: 1000px) {
+        left: -115%;
+        width: 100%;
+        text-align: right;
+      }
+    }
 
-	.content {
-		padding: 30px 90px 30px 30px;
-		position: relative;
+    :global(svg) {
+      left: 56px;
 
-		h2 {
-			// margin: 0 0 10px 0;
-			font-size: 20px;
-			font-weight: 400;
-			line-height: 1.5;
-			color: darken($accent-3, 10%);
-		}
+      @media screen and (max-width: 1000px) {
+        right: auto;
+        left: 56px;
+      }
+    }
 
-		h3 {
-			line-height: 1;
-			font-size: 14px;
-			font-weight: 300;
-			font-style: italic;
-			margin-bottom: 10px;
-			color: $black-3;
-		}
+    .content {
+      padding: 30px 0 30px 90px;
+    }
+  }
 
-		p {
-			margin: 0;
-			font-size: 16px;
-			font-weight: 300;
-			color: $black-0;
-		}
-	}
+  &::after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: calc(50% - 8px);
+    right: -8px;
+    background: colors.$white-4;
+    border: 2px solid darken(colors.$accent-3, 10%);
+    border-radius: 16px;
+    z-index: 1;
+  }
 
-	@media screen and (max-width: 1000px) {
-		width: 100%;
-		padding-left: 25px;
-	}
+  &::before {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 2px;
+    top: calc(50% - 1px);
+    right: 8px;
+    background: darken(colors.$accent-3, 10%);
+    z-index: 1;
+  }
+
+  .date {
+    position: absolute;
+    text-decoration: underline;
+    display: inline-block;
+    top: calc(50% - 7px);
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    color: darken(colors.$accent-3, 10%);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    line-height: 1;
+    z-index: 1;
+
+    @media screen and (max-width: 1000px) {
+      position: static;
+      text-align: left;
+    }
+  }
+
+  :global(svg) {
+    position: absolute;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    padding: 9px 0;
+    top: calc(50% - 20px);
+    background: colors.$green;
+    border: 2px solid darken(colors.$accent-3, 10%);
+    border-radius: 40px;
+    text-align: center;
+    font-size: 18px;
+    color: darken(colors.$accent-3, 10%);
+    z-index: 1;
+  }
+
+  .content {
+    padding: 30px 90px 30px 30px;
+    position: relative;
+
+    h2 {
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1.5;
+      color: darken(colors.$accent-3, 10%);
+    }
+
+    h3 {
+      line-height: 1;
+      font-size: 14px;
+      font-weight: 300;
+      font-style: italic;
+      margin-bottom: 10px;
+      color: colors.$black-3;
+    }
+
+    p {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 300;
+      color: colors.$black-0;
+    }
+  }
+
+  @media screen and (max-width: 1000px) {
+    width: 100%;
+    padding-left: 25px;
+  }
 }

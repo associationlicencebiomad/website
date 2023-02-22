@@ -1,58 +1,50 @@
 <script lang="ts">
+	import {Icon} from "@steeze-ui/svelte-icon";
+	import {ChevronDoubleUp, MagnifyingGlass, XCircle} from "@steeze-ui/heroicons";
+	import InfiniteLoading from 'svelte-infinite-loading';
+	import {supabaseClient} from '$lib/db';
+	import UserCareerCard from '$lib/components/UserCareerCard/UserCareerCard.svelte';
+	import PageTitle from "$lib/components/PageTitle.svelte";
+	import type {Profile} from "src/types/user.types";
 	import type {PageData} from "./$types";
-	import type {Profile as ProfileType} from '../../../types/database/Profile.type';
+	import Button from "$lib/primitives/Button/Button.svelte";
 
-	import {supabaseClient} from '../../../lib/supabase-client';
-	import UserCareerCard from '../../../lib/components/UserCareerCard/UserCareerCard.svelte';
-	import {SearchIcon, XCircleIcon} from '@krowten/svelte-heroicons';
-	import {inview} from 'svelte-inview';
-	import PageTitle from "$lib/components/PageTitle/PageTitle.svelte";
-
-	let hasMore = true;
-	let searchActive: boolean | string = false;
-	let searchInput = '';
-	let previousProfile: ProfileType[] = [];
-
-	let profilesPage = 0;
 	export let data: PageData;
 
-	// export let error;
+	let searchActive: boolean | string = false;
+	let searchInput = '';
+	let previousProfile: Profile[] = [];
 
-	let profiles: ProfileType[] = [];
-	$: profiles = data?.profiles;
+	let profilesPage = 0;
+	let profiles: Profile[] = data?.profiles;
+	let hasMore = data?.hasMore;
 
-	$: hasMore = data?.hasMore;
-	const fetchData = async () => {
+	const fetchData = async ({detail: {loaded, complete}}) => {
+		if (!hasMore) {
+			complete();
+			return
+
+		}
 		// To get more results, we'll increment the page by 1
-
 		profilesPage++;
 
 		const {data: freshProfiles} = await supabaseClient
-			.from<ProfileType>('profiles')
-			.select(
-				`
-				id,
-				first_name,
-				last_name,
-				avatar,
-				timeline,
-				promos (name, year)
-			`
-			)
+			.from('profiles')
+			.select(`id, first_name, last_name, avatar, timeline, promos(name, year)`)
 			.order('promo_id', {ascending: true})
 			.range(profilesPage * 14, (profilesPage + 1) * 14 - 1);
 
 		profiles = [...profiles, ...freshProfiles];
+
 		if (!freshProfiles || freshProfiles.length < 14) {
+
 			hasMore = false;
+			complete();
+			return
 		}
-
+		loaded();
 	};
-	const handleChange = async (e: CustomEvent) => {
-		// And fetch more data
-		if (e.detail.inView && hasMore) await fetchData();
 
-	};
 	const handleSearch = async () => {
 		if (searchInput === '') {
 			if (previousProfile.length) {
@@ -65,21 +57,9 @@
 			hasMore = false;
 
 			const {data: freshProfiles} = await supabaseClient
-				.from<ProfileType>('profiles')
-				.select(
-					`
-				id,
-				first_name,
-				last_name,
-				avatar,
-				timeline,
-				promos (name, year)
-			`
-				)
-				.textSearch("fts", searchInput, {
-					type: "websearch",
-					config: 'fr',
-				});
+				.from('profiles')
+				.select(`id, first_name, last_name, avatar, timeline, promos(name, year)`)
+				.textSearch("fts", searchInput, {type: "websearch", config: 'fr'});
 
 			if (previousProfile.length === 0) {
 				previousProfile = profiles;
@@ -89,11 +69,20 @@
 			searchActive = searchInput;
 		}
 	}
+
+	function scrollToTop() {
+		window.scrollTo({
+			top: 0,
+			behavior: 'smooth'
+		});
+	}
 </script>
 
 <PageTitle
 		description="Retrouve ici les parcours de chacun, que ce soit la L3 au fin fond du Texas ou bien le master au Bahamas."
-		title="Les parcours"/>
+		title="Les parcours"
+/>
+
 <div class="container">
 	<form class="searchbox" on:keypress={(e) => {
 		if (e.keyCode===13) {
@@ -104,18 +93,16 @@
 		<input bind:value={searchInput} placeholder="Rechercher un parcours" type="text"/>
 		{#if !searchActive || searchInput !== searchActive}
 			<button>
-				<SearchIcon/>
+				<Icon src={MagnifyingGlass}/>
 			</button>
 		{:else}
-			<button on:click={()=> {
-				searchInput = '';
-				handleSearch();
-			}}>
-				<XCircleIcon/>
+			<button on:click={()=> {searchInput = '';handleSearch();}}>
+				<Icon src={XCircle}/>
 			</button>
 		{/if}
 	</form>
 </div>
+
 <div class="UsersCareer">
 	{#each profiles as profile (profile.id)}
 		<UserCareerCard
@@ -129,9 +116,13 @@
 	{/each}
 </div>
 
-<!-- Trigger infinite scroll https://levelup.gitconnected.com/loading-more-results-on-scroll-with-svelte-js-restful-apis-svelte-infinite-scrolling-ad80a09b5e33 -->
-<div on:change={handleChange} use:inview/>
+<InfiniteLoading distance={80} on:infinite={fetchData}>
+	<Button color="accent-2" on:click={scrollToTop} slot="noMore">
+		<Icon src={ChevronDoubleUp} class="icon"/>
+		Revenir en haut
+	</Button>
+</InfiniteLoading>
 
 <style lang="scss">
-  @import 'career';
+  @import 'careers';
 </style>

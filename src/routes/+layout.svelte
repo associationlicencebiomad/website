@@ -1,21 +1,46 @@
-<script lang="ts">
-	// import { session } from '$app/stores';
-	import {supabaseClient} from '$lib/supabase-client';
-	import {SupaAuthHelper} from '@supabase/auth-helpers-svelte';
-	import {page} from "$app/stores";
-	import {session} from "../lib/stores"
+<script>
+	import {supabaseClient} from '$lib/db';
+	import {invalidate} from '$app/navigation';
+	import {onMount} from 'svelte';
 
-	$: $session = $page.data.session;
+	import '../app.scss';
+	import {theme} from "$lib/stores";
+
+	onMount(() => {
+		const {
+			data: {subscription}
+		} = supabaseClient.auth.onAuthStateChange(() => {
+			invalidate('supabase:auth');
+		});
+
+		return () => {
+			subscription.unsubscribe();
+		};
+	});
 </script>
 
+<svelte:head>
+	<title>ALBM</title>
+</svelte:head>
 
-<SupaAuthHelper {session} {supabaseClient}>
-	<head>
-		<title>ALBM</title>
-	</head>
+<div class={$theme}>
 	<slot/>
-</SupaAuthHelper>
+</div>
 
-<style global lang="scss">
-  @use '../app.scss';
+<style lang="scss">
+  @use "src/scss/colors";
+
+  div {
+    font-family: Rubik, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: colors.$black-0;
+    background-color: colors.$white-3;
+    transition: .3s ease-in-out;
+
+    &.dark {
+      color: colors.$white-3;
+      background-color: colors.$black-2;
+    }
+  }
 </style>

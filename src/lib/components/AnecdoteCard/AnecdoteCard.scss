@@ -1,29 +1,29 @@
-@import 'src/scss/colors';
+@use 'src/scss/colors';
 
 .anecdote {
-	background-color: $accent-3;
-	border-radius: 15px;
-	padding: 30px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
+  background-color: colors.$accent-3;
+  border-radius: 15px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
-	max-width: 300px;
-	box-sizing: content-box;
+  max-width: 300px;
+  box-sizing: content-box;
 
-	h1 {
-		color: $white-3;
-		font-size: 24px;
-		font-weight: 600;
-		text-align: center;
-		margin-bottom: 20px;
-	}
+  h1 {
+    color: colors.$white-3;
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 20px;
+  }
 
-	p {
-		color: $white-4;
-		font-size: 20px;
-		font-weight: 300;
-		text-align: center;
-	}
+  p {
+    color: colors.$white-4;
+    font-size: 20px;
+    font-weight: 300;
+    text-align: center;
+  }
 }

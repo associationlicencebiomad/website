@@ -1,9 +1,9 @@
 <script lang="ts">
-	import Scroll from "../../lib/assets/Scroll.svelte";
-	import Separator_1 from '../../lib/assets/Separator-1.svelte';
-	import Illustration from '../../lib/assets/Illustration.svelte';
-	import Separator_2 from '../../lib/assets/Separator-2.svelte';
-	import OrgMemberCard from '../../lib/components/OrgMemberCard/OrgMemberCard.svelte';
+	import Scroll from "$lib/assets/Scroll.svelte";
+	import Separator_1 from '$lib/assets/Separator-1.svelte';
+	import Illustration from '$lib/assets/Illustration.svelte';
+	import Separator_2 from '$lib/assets/Separator-2.svelte';
+	import OrgMemberCard from '$lib/components/OrgMemberCard/OrgMemberCard.svelte';
 	import {page} from "$app/stores";
 
 	if ($page.data.error) console.error($page.data.error);
@@ -14,10 +14,10 @@
 		<h1>Bienvenue sur le site de l'association des licences Bio-MAD.</h1>
 	</div>
 	<div class="scrollDown">
-		<Scroll />
+		<Scroll/>
 	</div>
 	<div class="separator">
-		<Separator_1 />
+		<Separator_1/>
 	</div>
 </section>
 <section class="about">
@@ -36,17 +36,17 @@
 			contrées plus lointaines.
 		</p>
 		<div class="about__content__illustration">
-			<Illustration />
+			<Illustration/>
 		</div>
 	</div>
 </section>
 <div class="separator">
-	<Separator_2 />
+	<Separator_2/>
 </div>
 <section class="albm">
 	<h2 class="albm__title">L'association :</h2>
 	<div class="albm__content">
-		<img src="/images/logo_albm.png" alt="Logo ALBM" />
+		<img alt="Logo ALBM" src="/images/logo_albm.png"/>
 		<div class="albm__content__container">
 			<div class="albm__content__container__item">
 				<p class="albm__content__text">
@@ -74,5 +74,5 @@
 </section>
 
 <style lang="scss">
-  @import 'index';
+  @import './index';
 </style>

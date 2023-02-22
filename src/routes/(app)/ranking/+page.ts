@@ -1,23 +1,10 @@
-import {supabaseClient} from '$lib/supabase-client';
 import type {PageLoad} from './$types';
-import type {Ranking} from "src/types/database/Ranking.type";
+import {getSupabase} from "@supabase/auth-helpers-sveltekit";
 
-export const load: PageLoad = async () => {
-	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-	// @ts-ignore
-	const {data, error: supabaseErr} = await supabaseClient.rpc<Ranking>('get_professors_ranking')
+export const load = (async (event) => {
+	const {supabaseClient} = await getSupabase(event)
 
-	if (supabaseErr) {
-		console.error(supabaseErr);
-		return {errors: [supabaseErr.message]};
-	}
+	const {data: ranking} = await supabaseClient.rpc('get_professors_ranking')
 
-	if (supabaseErr || !data) {
-		return {error: supabaseErr};
-	}
-
-
-	return {
-		ranking: data
-	};
-};
+	return {ranking}
+}) satisfies PageLoad;

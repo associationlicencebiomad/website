@@ -1,7 +1,8 @@
 <script lang="ts">
-	import { AcademicCapIcon, BriefcaseIcon, IdentificationIcon } from '@krowten/svelte-heroicons';
-
+	import {AcademicCap, Briefcase, Identification} from "@steeze-ui/heroicons";
+	import {Icon} from "@steeze-ui/svelte-icon";
 	import { Position, ItemType } from '../timeline.type';
+	import {theme} from "$lib/stores.js";
 
 	export let name: string;
 	export let date: string;
@@ -13,13 +14,13 @@
 	// export let
 </script>
 
-<li class="item {position} {type}">
+<li class="item {position} {type} {$theme}">
 	{#if type === ItemType.education}
-		<AcademicCapIcon />
+		<Icon src={AcademicCap} class="icon"/>
 	{:else if type === ItemType.work}
-		<BriefcaseIcon />
+		<Icon src={Briefcase} class="icon" size="24px"/>
 	{:else}
-		<IdentificationIcon />
+		<Icon src={Identification} class="icon"/>
 	{/if}
 
 	<div class="content">

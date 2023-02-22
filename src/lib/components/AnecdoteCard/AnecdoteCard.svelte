@@ -1,17 +1,13 @@
 <script lang="ts">
 	export let name: string;
 	export let content: string;
-
-	if (!content) {
-		content = "Cette personne n'a pas bien rempli son profile...";
-	}
 </script>
 
 <div class="anecdote">
 	<h1>{name}</h1>
-	<p>{content}</p>
+	<p>{content ?? "Cette personne n'a pas bien rempli son profile..."}</p>
 </div>
 
 <style lang="scss">
-	@import 'AnecdoteCard';
+  @import 'AnecdoteCard';
 </style>

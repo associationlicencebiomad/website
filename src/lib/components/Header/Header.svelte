@@ -1,10 +1,13 @@
 <script lang="ts">
 	import {page} from '$app/stores';
-	import Avatar from '../Avatar/Avatar.svelte';
-	import {MenuIcon} from '@krowten/svelte-heroicons';
+	import Avatar from '$lib/components/Avatar.svelte';
 	import HeaderDropdown from './HeaderDropdown.svelte';
-	import type {UserSession} from "/src/types/User.type";
 	import {theme} from "$lib/stores.js";
+	import type {LoggedInUser} from "src/types/user.types";
+	import {Icon} from "@steeze-ui/svelte-icon";
+	import {Bars3, Moon, Sun} from "@steeze-ui/heroicons";
+	import Button from "$lib/primitives/Button/Button.svelte";
+	import {ThemeType} from "src/types/theme.types";
 
 	let dropdownOpened = false;
 	let headerOpened = false;
@@ -17,15 +20,19 @@
 		dropdownOpened = typeof value !== 'undefined' ? value : !dropdownOpened;
 	}
 
-	let user: UserSession;
+	let user: LoggedInUser | null | undefined
+
+	function switchtheme() {
+		$theme = $theme === ThemeType.light ? ThemeType.dark : ThemeType.light
+	}
 
 	$: url = $page.url.pathname;
-	$: user = $page.data.session.user
+	$: user = $page.data.user
 </script>
 
 <header class={$theme} class:headerOpened>
 	<nav>
-		<a href="/" class="logo {url === '/' ? 'active' : ''}" on:click={() => toggleHeader(false)}>
+		<a class="logo {url === '/' ? 'active' : ''}" href="/" on:click={() => toggleHeader(false)}>
 			<img alt="Logo" src="/images/logo.jpg"/>
 			<div class="Name">LBM</div>
 		</a>
@@ -40,28 +47,39 @@
 			Parcours
 		</a>
 	</nav>
-	{#if user}
-		<div class="user" on:click={() => toggleDropdown()}>
-			<span class="user__username"
-			>{user.profile.first_name} {user.profile.last_name}</span
-			>
-			<Avatar
-					first_name={user.profile.first_name}
-					last_name={user.profile.last_name}
-					avatar={user.profile.avatar}
-					class="user__profilPicture"
-			/>
-		</div>
-		<HeaderDropdown bind:dropdownOpened bind:headerOpened/>
-	{:else}
-		<div class="auth">
-			<a href="/auth/login">Connexion</a>
-			—
-			<a href="/auth/register">Inscription</a>
-		</div>
-	{/if}
-	<div on:click={() => toggleHeader()} class="hamburger">
-		<MenuIcon class="icon"/>
+	<div class="container">
+		<Button color="accent-2" hover on:click={switchtheme}>
+			{#if $theme === ThemeType.dark}
+				<Icon src={Moon} slot="icon" class="icon"/>
+			{:else}
+				<Icon src={Sun} slot="icon" class="icon"/>
+			{/if}
+		</Button>
+		{#if $page.data.session}
+			<div class="user" on:click={() => toggleDropdown()}>
+			<span class="user__username">
+				{user.first_name} {user.last_name}
+			</span>
+				<Avatar
+						first_name={user.first_name}
+						last_name={user.last_name}
+						avatar={user.avatar}
+						class="user__profilPicture"
+				/>
+			</div>
+			<HeaderDropdown bind:dropdownOpened bind:headerOpened/>
+		{:else}
+			<div class="auth">
+				<a href="/login">Connexion</a>
+				—
+				<a href="/register">Inscription</a>
+			</div>
+		{/if}
+	</div>
+
+
+	<div class="hamburger" class:headerOpened on:click={() => toggleHeader()}>
+		<Icon src={Bars3}/>
 	</div>
 </header>
 

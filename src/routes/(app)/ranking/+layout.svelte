@@ -1,23 +1,9 @@
 <script lang="ts">
 	import {page} from "$app/stores";
-
-	import PageTitle from "$lib/components/PageTitle/PageTitle.svelte";
-	import Button from "$lib/components/Button/Button.svelte";
-	import {onMount} from "svelte";
-	import {theme} from "../../../lib/stores";
-	import {ThemeType} from "../../../types/Theme.type";
+	import Button from "$lib/primitives/Button/Button.svelte";
+	import PageTitle from "$lib/components/PageTitle.svelte";
 
 	let isGeneralRanking: boolean;
-
-	onMount(() => {
-		if ($theme !== ThemeType.dark) {
-			theme.set(ThemeType.dark);
-
-			return () => theme.set(ThemeType.light);
-		}
-	});
-
-
 	$: isGeneralRanking = $page.url.pathname == "/ranking";
 </script>
 

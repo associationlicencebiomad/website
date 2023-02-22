@@ -1,7 +1,9 @@
 <script lang="ts">
-	import Avatar from '../Avatar/Avatar.svelte';
-	import type {TimelineType} from '../Timeline/timeline.type';
-	import {LocationMarkerIcon} from '@krowten/svelte-heroicons';
+	import {Icon} from "@steeze-ui/svelte-icon";
+	import {MapPin} from "@steeze-ui/heroicons";
+	import Avatar from '$lib/components/Avatar.svelte';
+	import {theme} from "$lib/stores";
+	import type {TimelineType} from '$lib/Timeline/timeline.type';
 
 	export let timeline: TimelineType;
 	export let first_name: string;
@@ -12,16 +14,16 @@
 </script>
 
 <a
-		class="UserCareerCard"
+		class={`UserCareerCard ${$theme}`}
 		href="/profile/{promoYear}/{first_name.replaceAll(' ', '_').toLowerCase()}.{last_name
 		.replaceAll(' ', '_')
 		.toLowerCase()}"
 >
-	<Avatar {first_name} {last_name} {avatar}/>
+	<Avatar {avatar} {first_name} {last_name}/>
 	<h1>{first_name} {last_name}</h1>
 	<div class="current">
 		{#if timeline}
-			<LocationMarkerIcon/>
+			<Icon src={MapPin} class="icon"/>
 			<p>{timeline[0]?.name} — {timeline[0]?.place}</p>
 		{/if}
 	</div>
@@ -29,5 +31,5 @@
 </a>
 
 <style lang="scss">
-	@import 'UserCareerCard';
+  @import 'UserCareerCard';
 </style>

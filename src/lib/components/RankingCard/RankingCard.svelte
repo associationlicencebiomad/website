@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type {Professor, Ranking} from "../../../types/database/Ranking.type";
 	import {theme} from "$lib/stores";
+	import type {Professor, Ranking} from "src/types/ranking.types";
 
 	export let professor: Ranking | Professor;
 	export let index: number | null = null;
