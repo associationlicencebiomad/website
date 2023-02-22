@@ -3,11 +3,11 @@
 	import Avatar from '$lib/components/Avatar.svelte';
 	import HeaderDropdown from './HeaderDropdown.svelte';
 	import {theme} from "$lib/stores.js";
-	import type {LoggedInUser} from "/src/types/user.types";
+	import type {LoggedInUser} from "src/types/user.types";
 	import {Icon} from "@steeze-ui/svelte-icon";
-	import {Bars3} from "@steeze-ui/heroicons";
+	import {Bars3, Moon, Sun} from "@steeze-ui/heroicons";
 	import Button from "$lib/primitives/Button/Button.svelte";
-	import {ThemeType} from "../../../types/theme.types";
+	import {ThemeType} from "src/types/theme.types";
 
 	let dropdownOpened = false;
 	let headerOpened = false;
@@ -46,31 +46,37 @@
 		>
 			Parcours
 		</a>
-		<Button color="accent-1" on:click={switchtheme}>
-			switch theme
-		</Button>
-
 	</nav>
-	{#if $page.data.session}
-		<div class="user" on:click={() => toggleDropdown()}>
+	<div class="container">
+		<Button color="accent-2" hover on:click={switchtheme}>
+			{#if $theme === ThemeType.dark}
+				<Icon src={Moon} slot="icon" class="icon"/>
+			{:else}
+				<Icon src={Sun} slot="icon" class="icon"/>
+			{/if}
+		</Button>
+		{#if $page.data.session}
+			<div class="user" on:click={() => toggleDropdown()}>
 			<span class="user__username">
 				{user.first_name} {user.last_name}
 			</span>
-			<Avatar
-					first_name={user.first_name}
-					last_name={user.last_name}
-					avatar={user.avatar}
-					class="user__profilPicture"
-			/>
-		</div>
-		<HeaderDropdown bind:dropdownOpened bind:headerOpened/>
-	{:else}
-		<div class="auth">
-			<a href="/login">Connexion</a>
-			—
-			<a href="/register">Inscription</a>
-		</div>
-	{/if}
+				<Avatar
+						first_name={user.first_name}
+						last_name={user.last_name}
+						avatar={user.avatar}
+						class="user__profilPicture"
+				/>
+			</div>
+			<HeaderDropdown bind:dropdownOpened bind:headerOpened/>
+		{:else}
+			<div class="auth">
+				<a href="/login">Connexion</a>
+				—
+				<a href="/register">Inscription</a>
+			</div>
+		{/if}
+	</div>
+
 
 	<div class="hamburger" class:headerOpened on:click={() => toggleHeader()}>
 		<Icon src={Bars3}/>

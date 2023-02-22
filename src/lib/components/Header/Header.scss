@@ -116,6 +116,24 @@ header {
     }
   }
 
+  .container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 6px;
+
+    :global(button) {
+      position: relative;
+      translate: 0 2px;
+      padding: 7px 7px;
+      :global(.icon) {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+
   .hamburger {
     display: none;
     margin-right: 15px;
@@ -123,6 +141,8 @@ header {
 
   @media (max-width: 600px) {
     display: flex;
+
+
 
     &.headerOpened {
       flex-direction: column;
@@ -144,6 +164,10 @@ header {
           align-self: center;
           display: inherit;
         }
+      }
+
+      .container {
+        display: inherit;
       }
 
       .user {
@@ -185,6 +209,14 @@ header {
       display: none;
     }
 
+    .container {
+      display: none;
+
+      flex-direction: column;
+      justify-content: center;
+      width: 100%;
+    }
+
     .auth {
       display: none;
     }
@@ -210,4 +242,6 @@ header {
       }
     }
   }
+
+
 }
