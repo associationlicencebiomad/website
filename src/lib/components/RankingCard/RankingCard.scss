@@ -1,0 +1,106 @@
+@use "src/scss/colors";
+
+.ranking_card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 500px;
+  border-radius: 10px;
+  padding: 5px 16px;
+  gap: 15px;
+  width: 100%;
+  box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
+
+  @media screen and (max-width: 350px) {
+    flex-wrap: wrap;
+  }
+
+  &.light {
+    background-color: colors.$black-2;
+    color: colors.$white-3;
+  }
+
+  &.dark {
+    background-color: colors.$white-3;
+    color: colors.$black-3;
+  }
+
+  img {
+    width: 80px;
+    height: 80px;
+    border-radius: 100%;
+    object-fit: cover;
+    box-shadow: inset 0 0 0 1px hsla(0, 0%, 0%, 0.1);
+    user-select: none;
+  }
+
+  .courses {
+    flex: 2;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    font-size: 14px;
+
+    .course {
+      background-color: colors.$accent-3;
+      color: colors.$white-4;
+      padding: 2px 5px;
+      border-radius: 5px;
+    }
+  }
+
+  h2 {
+    text-wrap: avoid;
+    font-size: 24px;
+    font-weight: 500;
+    margin: 0;
+    text-align: center;
+  }
+
+  &__index {
+    align-self: flex-start;
+    justify-self: flex-start;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    color: colors.$white-4;
+    background-color: colors.$green;
+    width: 30px;
+    height: 30px;
+    transform: translate(-100%, -50%);
+    //transform: translateX(-200%);
+    box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
+
+    &.overflow {
+      position: relative;
+    }
+  }
+
+  @keyframes dragHoverFeedback {
+    0% {
+      transform: rotate(0deg);
+    }
+    15% {
+      transform: rotate(1deg);
+    }
+    30% {
+      transform: rotate(-1deg);
+    }
+    50%, 100% {
+      transform: rotate(0deg);
+    }
+  }
+
+  &.isActive {
+    transition: all 0.2s ease-in-out;
+    background-color: colors.$accent-3;
+    color: colors.$white-4;
+    animation: infinite 0.5s dragHoverFeedback;
+
+  }
+}
