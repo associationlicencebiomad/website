@@ -21,7 +21,7 @@
 			</a>
 		</li> -->
 		<li class="dropdown__content__item">
-			<a class="dropdown__link" href="/user/profil" on:click={() => dropdownUsed()}>
+			<a class="dropdown__link" href="/me/profile" on:click={() => dropdownUsed()}>
 				<Icon src={User}/>
 				Mon profil
 			</a>
