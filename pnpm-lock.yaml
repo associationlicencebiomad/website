@@ -1,5 +1,10 @@
 lockfileVersion: '6.0'
 
+dependencies:
+  '@stripe/stripe-js':
+    specifier: ^1.52.0
+    version: 1.52.0
+
 devDependencies:
   '@steeze-ui/heroicons':
     specifier: ^2.2.2
@@ -379,7 +384,6 @@ packages:
 
   /@stripe/stripe-js@1.52.0:
     resolution: {integrity: sha512-Ja2VlaTf3kM5tN4Y0sC8T3ibZAnfGUU/QzMAlk/G+Adz2fF1ycTabtSkdSuVP4/adXox8NkPPV4Xndx/EP4fMg==}
-    dev: true
 
   /@supabase/auth-helpers-shared@0.2.4(@supabase/supabase-js@2.14.0):
     resolution: {integrity: sha512-c+hi3N6DhjPTzjXGOokre4gmMZOqt0f1ORrwZwi2s07pk3cbkmn77DwwVtlYMNi3oZNYRQqAfxJu83UzpJrrmg==}

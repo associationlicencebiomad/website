@@ -2,7 +2,7 @@ import type { Actions } from './$types';
 import {createClient} from "@supabase/supabase-js";
 import {PUBLIC_SUPABASE_URL} from '$env/static/public';
 import {SUPABASE_SERVICE_KEY} from '$env/static/private';
-import {transporter} from "$lib/mail";
+import {transporter} from "$lib/mail.server";
 
 
 export const actions = {
