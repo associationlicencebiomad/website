@@ -1,6 +1,6 @@
 <script lang="ts">
 	import {Icon} from "@steeze-ui/svelte-icon";
-	import {ArrowLeftOnRectangle, User} from "@steeze-ui/heroicons";
+	import {ArrowLeftOnRectangle, User, CreditCard} from "@steeze-ui/heroicons";
 	import {supabaseClient} from "$lib/db";
 	import {theme} from "$lib/stores";
 
@@ -27,6 +27,12 @@
 			</a>
 		</li>
 		<li class="dropdown__content__item">
+			<a class="dropdown__link" href="/me/membership" on:click={() => dropdownUsed()}>
+				<Icon src={CreditCard}/>
+				Mon adhésion
+			</a>
+		</li>
+		<li class="dropdown__content__item">
 			<a class="dropdown__link" on:click={() => {
 				dropdownUsed();
 				supabaseClient.auth.signOut();
@@ -47,7 +53,7 @@
     right: 10px;
     z-index: 100;
 
-    background-color: inherit;
+    background-color: colors.$white-4;
     padding: 10px 20px;
     border-radius: 10px;
 
@@ -63,6 +69,10 @@
       justify-content: space-between;
       align-items: flex-start;
     }
+
+	&.dark {
+	  background-color: colors.$black-0;
+	}
 
     &.dark::before {
       border-bottom-color: colors.$black-0;
