@@ -49,6 +49,26 @@ export interface Database {
           user_id?: string
         }
       }
+      memberships: {
+        Row: {
+          amount: number
+          date: string
+          id: string
+          user_id: string
+        }
+        Insert: {
+          amount: number
+          date: string
+          id: string
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          date?: string
+          id?: string
+          user_id?: string
+        }
+      }
       migrations: {
         Row: {
           created_at: string
@@ -206,5 +226,9 @@ export interface Database {
     Enums: {
       [_ in never]: never
     }
+    CompositeTypes: {
+      [_ in never]: never
+    }
   }
 }
+

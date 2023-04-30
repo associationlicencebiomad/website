@@ -18,7 +18,9 @@
 
 <button {...$$restProps} class={className.trim() + colorClass} on:click>
 	{#if $$slots.icon}
-		<span class="icon"><slot name="icon"/></span>
+		<span class="icon">
+			<slot name="icon"/>
+		</span>
 	{/if}
 	<span><slot/></span>
 </button>
