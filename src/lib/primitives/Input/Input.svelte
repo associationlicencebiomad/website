@@ -9,13 +9,15 @@
 </script>
 
 <div class="input-field {type}">
-	<input id={id} bind:value {...$$restProps} use:setType />
-	<label for={id} class:active={value}><slot /></label>
-	{#if $$slots.helper}
+    <input {...$$restProps} bind:value id={id} on:change use:setType/>
+    <label class:active={value} for={id}>
+        <slot/>
+    </label>
+    {#if $$slots.helper}
 		<span class="helper-text" data-error="wrong" data-success="right">
-			<slot name="helper" />
+			<slot name="helper"/>
 		</span>
-	{/if}
+    {/if}
 </div>
 
 <style lang="scss">

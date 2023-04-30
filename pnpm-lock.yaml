@@ -24,6 +24,9 @@ devDependencies:
   '@sveltejs/kit':
     specifier: ^1.15.9
     version: 1.15.9(svelte@3.58.0)(vite@4.3.3)
+  '@types/luxon':
+    specifier: ^3.3.0
+    version: 3.3.0
   '@types/nodemailer':
     specifier: ^6.4.7
     version: 6.4.7
@@ -39,6 +42,9 @@ devDependencies:
   eslint-plugin-svelte3:
     specifier: ^4.0.0
     version: 4.0.0(eslint@8.39.0)(svelte@3.58.0)
+  luxon:
+    specifier: ^3.3.0
+    version: 3.3.0
   nodemailer:
     specifier: ^6.9.1
     version: 6.9.1
@@ -527,6 +533,10 @@ packages:
 
   /@types/json-schema@7.0.11:
     resolution: {integrity: sha512-wOuvG1SN4Us4rez+tylwwwCV1psiNVOkJeM3AUWUNWg/jDQY2+HE/444y5gc+jBmRqASOm2Oeh5c1axHobwRKQ==}
+    dev: true
+
+  /@types/luxon@3.3.0:
+    resolution: {integrity: sha512-uKRI5QORDnrGFYgcdAVnHvEIvEZ8noTpP/Bg+HeUzZghwinDlIS87DEenV5r1YoOF9G4x600YsUXLWZ19rmTmg==}
     dev: true
 
   /@types/node@18.16.1:
@@ -1397,6 +1407,11 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       yallist: 4.0.0
+    dev: true
+
+  /luxon@3.3.0:
+    resolution: {integrity: sha512-An0UCfG/rSiqtAIiBPO0Y9/zAnHUZxAMiCpTd5h2smgsj7GGmcenvrvww2cqNA8/4A5ZrD1gJpHN2mIHZQF+Mg==}
+    engines: {node: '>=12'}
     dev: true
 
   /magic-string@0.27.0:
