@@ -5,9 +5,9 @@
 	export let avatar: string;
 	export let first_name: string;
 	export let last_name: string;
-	let src;
+	let src: string;
 
-	function hashCode(str) { // java String#hashCode
+	function hashCode(str: string) { // java String#hashCode
 		let hash = 0;
 		for (let i = 0; i < str.length; i++) {
 			hash = str.charCodeAt(i) + ((hash << 5) - hash);
@@ -15,7 +15,7 @@
 		return hash;
 	}
 
-	function intToRGB(i) {
+	function intToRGB(i: number) {
 		let c = (i & 0x00FFFFFF)
 			.toString(16)
 			.toUpperCase();
@@ -28,7 +28,7 @@
 	 * @param bgColor
 	 * @returns {string}
 	 */
-	function getColorByBgColor(bgColor) {
+	function getColorByBgColor(bgColor: string) {
 		if (!bgColor) {
 			return '';
 		}
@@ -56,7 +56,7 @@
 </script>
 
 {#if avatar && src}
-	<img class="avatar" {src} alt="{first_name} {last_name}" {...$$restProps}/>
+	<img class="avatar" {src} alt="{first_name} {last_name}" loading="lazy" {...$$restProps}/>
 {:else}
 	<div style="background-color: #{intToRGB(hashCode(first_name + last_name))}" class="avatar" {...$$restProps}>
 		<span style="color: {getColorByBgColor(intToRGB(hashCode(first_name + last_name)))}">
