@@ -30,7 +30,7 @@ CREATE EXTENSION IF NOT EXISTS "pgsodium" WITH SCHEMA "pgsodium";
 -- *not* creating schema, since initdb creates it
 
 
-ALTER SCHEMA "public" OWNER TO "postgres";
+-- ALTER SCHEMA "public" OWNER TO "postgres";
 
 --
 -- Name: pg_graphql; Type: EXTENSION; Schema: -; Owner: -
@@ -118,7 +118,7 @@ CREATE FUNCTION "public"."get_professors_ranking"("param_user_id" "uuid" DEFAULT
 		  end;$$;
 
 
-ALTER FUNCTION "public"."get_professors_ranking"("param_user_id" "uuid") OWNER TO "postgres";
+-- ALTER FUNCTION "public"."get_professors_ranking"("param_user_id" "uuid") OWNER TO "postgres";
 
 --
 -- Name: handle_new_user(); Type: FUNCTION; Schema: public; Owner: postgres
@@ -158,8 +158,6 @@ BEGIN
 END;
 $$;
 
-
-ALTER FUNCTION "public"."trigger_set_timestamp"() OWNER TO "supabase_admin";
 
 --
 -- Name: fr; Type: TEXT SEARCH CONFIGURATION; Schema: public; Owner: postgres
