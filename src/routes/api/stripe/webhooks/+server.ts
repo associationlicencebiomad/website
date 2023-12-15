@@ -20,7 +20,7 @@ export const POST = (async ({request}) => {
 		event = await webhookHandler.verifySignature(request);
 	} catch (err) {
 		console.log(err);
-		throw error(503);
+		error(503);
 	}
 
 	await webhookHandler.handleEvent(event);
