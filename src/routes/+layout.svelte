@@ -2,9 +2,12 @@
 	import {supabaseClient} from '$lib/db';
 	import {invalidate} from '$app/navigation';
 	import {onMount} from 'svelte';
+	import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit';
 
 	import '../app.scss';
 	import {theme} from "$lib/stores";
+
+	injectSpeedInsights();
 
 	onMount(() => {
 		const {
