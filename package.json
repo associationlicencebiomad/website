@@ -16,9 +16,9 @@
 		"@steeze-ui/svelte-icon": "^1.5.0",
 		"@stripe/stripe-js": "^1.54.2",
 		"@supabase/auth-helpers-sveltekit": "^0.8.7",
-		"@supabase/supabase-js": "^2.39.0",
-		"@sveltejs/adapter-auto": "^3.0.0",
-		"@sveltejs/kit": "^2.0.0",
+		"@supabase/supabase-js": "^2.39.1",
+		"@sveltejs/adapter-auto": "^3.0.1",
+		"@sveltejs/kit": "^2.0.6",
 		"@sveltejs/vite-plugin-svelte": "^3.0.1",
 		"@types/luxon": "^3.3.7",
 		"@types/nodemailer": "^6.4.14",
@@ -27,11 +27,11 @@
 		"@vercel/analytics": "^1.1.1",
 		"@vercel/speed-insights": "^1.0.2",
 		"compressorjs": "^1.2.1",
-		"eslint": "^8.55.0",
+		"eslint": "^8.56.0",
 		"eslint-plugin-svelte": "^2.35.1",
 		"luxon": "^3.4.4",
-		"nodemailer": "^6.9.7",
-		"sass": "^1.69.5",
+		"nodemailer": "^6.9.8",
+		"sass": "^1.69.6",
 		"stripe": "^11.18.0",
 		"svelte": "^4.2.8",
 		"svelte-autosize": "^1.1.0",
@@ -42,7 +42,7 @@
 		"svelte-stripe": "^0.0.22",
 		"tslib": "^2.6.2",
 		"typescript": "^5.3.3",
-		"vite": "^5.0.9"
+		"vite": "^5.0.10"
 	},
 	"type": "module"
 }
