@@ -11,116 +11,121 @@
 
 	export let data: PageData;
 
-	let searchActive: boolean | string = false;
-	let searchInput = '';
-	let previousProfile: Profile[] = [];
+    let searchActive: boolean | string = false;
+    let searchInput = '';
+    let previousProfile: Profile[] = [];
 
-	let profilesPage = 0;
-	let profiles: Profile[] = data?.profiles;
-	let hasMore = data?.hasMore;
+    let profilesPage = 0;
+    let profiles: Profile[] = data?.profiles;
+    let hasMore = data?.hasMore;
 
-	const fetchData = async ({detail: {loaded, complete}}) => {
-		if (!hasMore) {
-			complete();
-			return
+    const fetchData = async ({detail: {loaded, complete}}) => {
+        if (!hasMore) {
+            complete();
+            return
 
-		}
-		// To get more results, we'll increment the page by 1
-		profilesPage++;
+        }
+        // To get more results, we'll increment the page by 1
+        profilesPage++;
 
-		const {data: freshProfiles} = await supabaseClient
-			.from('profiles')
-			.select(`id, first_name, last_name, avatar, timeline, promos(name, year)`)
-			.order('promo_id', {ascending: true})
-			.range(profilesPage * 14, (profilesPage + 1) * 14 - 1);
+        const {data: freshProfiles} = await supabaseClient
+            .from('profiles')
+            .select(`id, first_name, last_name, avatar, timeline, promos(name, year)`)
+            .order('promo_id', {ascending: true})
+						.order('last_name', {ascending: true})
+            .order('first_name', {ascending: true})
+            .range(profilesPage * 14, (profilesPage + 1) * 14 - 1);
 
-		profiles = [...profiles, ...freshProfiles];
+        console.log(profiles);
+        console.log(freshProfiles);
 
-		if (!freshProfiles || freshProfiles.length < 14) {
+        profiles = [...profiles, ...freshProfiles];
 
-			hasMore = false;
-			complete();
-			return
-		}
-		loaded();
-	};
+        if (!freshProfiles || freshProfiles.length < 14) {
 
-	const handleSearch = async () => {
-		if (searchInput === '') {
-			if (previousProfile.length) {
-				searchActive = false;
-				hasMore = true;
-				profiles = previousProfile;
-				previousProfile = [];
-			}
-		} else {
-			hasMore = false;
+            hasMore = false;
+            complete();
+            return
+        }
+        loaded();
+    };
 
-			const {data: freshProfiles} = await supabaseClient
-				.from('profiles')
-				.select(`id, first_name, last_name, avatar, timeline, promos(name, year)`)
-				.textSearch("fts", searchInput, {type: "websearch", config: 'fr'});
+    const handleSearch = async () => {
+        if (searchInput === '') {
+            if (previousProfile.length) {
+                searchActive = false;
+                hasMore = true;
+                profiles = previousProfile;
+                previousProfile = [];
+            }
+        } else {
+            hasMore = false;
 
-			if (previousProfile.length === 0) {
-				previousProfile = profiles;
-			}
+            const {data: freshProfiles} = await supabaseClient
+                .from('profiles')
+                .select(`id, first_name, last_name, avatar, timeline, promos(name, year)`)
+                .textSearch("fts", searchInput, {type: "websearch", config: 'fr'});
 
-			profiles = freshProfiles;
-			searchActive = searchInput;
-		}
-	}
+            if (previousProfile.length === 0) {
+                previousProfile = profiles;
+            }
 
-	function scrollToTop() {
-		window.scrollTo({
-			top: 0,
-			behavior: 'smooth'
-		});
-	}
+            profiles = freshProfiles;
+            searchActive = searchInput;
+        }
+    }
+
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
 </script>
 
 <PageTitle
-		description="Retrouve ici les parcours de chacun, que ce soit la L3 au fin fond du Texas ou bien le master au Bahamas."
-		title="Les parcours"
+    description="Retrouve ici les parcours de chacun, que ce soit la L3 au fin fond du Texas ou bien le master au Bahamas."
+    title="Les parcours"
 />
 
 <div class="container">
-	<form class="searchbox" on:keypress={(e) => {
-		if (e.keyCode===13) {
+  <form class="searchbox" on:keypress={(e) => {
+		if (e.key === 'Enter') {
 			e.preventDefault();
 			handleSearch();
 		}
 	}} on:submit|preventDefault={handleSearch}>
-		<input bind:value={searchInput} placeholder="Rechercher un parcours" type="text"/>
-		{#if !searchActive || searchInput !== searchActive}
-			<button>
-				<Icon src={MagnifyingGlass}/>
-			</button>
-		{:else}
-			<button on:click={()=> {searchInput = '';handleSearch();}}>
-				<Icon src={XCircle}/>
-			</button>
-		{/if}
-	</form>
+    <input bind:value={searchInput} placeholder="Rechercher un parcours" type="text"/>
+    {#if !searchActive || searchInput !== searchActive}
+      <button>
+        <Icon src={MagnifyingGlass}/>
+      </button>
+    {:else}
+      <button on:click={()=> {searchInput = '';handleSearch();}}>
+        <Icon src={XCircle}/>
+      </button>
+    {/if}
+  </form>
 </div>
 
 <div class="UsersCareer">
-	{#each profiles as profile (profile.id)}
-		<UserCareerCard
-				first_name={profile.first_name}
-				last_name={profile.last_name}
-				avatar={profile.avatar}
-				promoName={profile.promos.name}
-				promoYear={profile.promos.year}
-				timeline={profile.timeline}
-		/>
-	{/each}
+  {#each profiles as profile (profile.id)}
+    <UserCareerCard
+        first_name={profile.first_name}
+        last_name={profile.last_name}
+        avatar={profile.avatar}
+        promoName={profile.promos.name}
+        promoYear={profile.promos.year}
+        timeline={profile.timeline}
+    />
+  {/each}
 </div>
 
 <InfiniteLoading distance={80} on:infinite={fetchData}>
-	<Button color="accent-2" on:click={scrollToTop} slot="noMore">
-		<Icon src={ChevronDoubleUp} class="icon"/>
-		Revenir en haut
-	</Button>
+  <Button color="accent-2" on:click={scrollToTop} slot="noMore">
+    <Icon class="icon" src={ChevronDoubleUp}/>
+    Revenir en haut
+  </Button>
 </InfiniteLoading>
 
 <style lang="scss">

@@ -8,6 +8,8 @@ export const load = (async (event) => {
 		.from('profiles')
 		.select(`id, first_name, last_name, avatar, timeline, promos(name, year)`)
 		.order('promo_id', {ascending: true})
+		.order('last_name', {ascending: true})
+		.order('first_name', {ascending: true})
 		.range(0, 13)
 
 	return {
