@@ -16,8 +16,13 @@ export interface LoggedInUser extends ProfileRow {
 	godparents: GodparentProfile[]
 }
 
-export interface Profile extends Pick<ProfileRow, 'id' | 'first_name' | 'last_name' | 'avatar' | 'timeline'> {
-	promo: Pick<PromoRow, 'name' | 'year'>
+export interface ProfileResumed extends Pick<ProfileRow, 'id' | 'first_name' | 'last_name' | 'avatar' | 'timeline'> {
+	promos: Pick<PromoRow, 'name' | 'year'>
+}
+
+export interface Profile extends ProfileRow {
+	promos: Pick<PromoRow, 'name' | 'year'>
+	godparents: GodparentProfile[]
 }
 
 export interface Links {

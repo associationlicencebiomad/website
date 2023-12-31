@@ -21,21 +21,24 @@
 	import Input from "$lib/primitives/Input/Input.svelte";
 	import Popup from "$lib/components/Popup.svelte";
 
-	let currentProfile: Profile = $page.data.currentProfile;
+	export let data;
+	let currentProfile = data.currentProfile;
+
 
 	let popup = false;
 	let subject = '';
 	let message = '';
 
+	// page.data.currentProfile = currentProfile;
 </script>
 
 {#if $page.data.session && popup}
 	<Popup>
 		<h1 class="title">
-			Envoyer un message à {currentProfile.first_name}
+			Envoyer un message à {data.currentProfile.first_name}
 		</h1>
 		<form method="POST" action="?/sendMessage">
-			<input type="hidden" name="to" value={currentProfile.id}/>
+			<input type="hidden" name="to" value={data.currentProfile.id}/>
 			<input type="hidden" name="from"
 				   value={`${$page.data.user?.first_name} ${$page.data.user?.last_name}`}/>
 			<input type="hidden" name="from_email" value={$page.data.session.user?.email}/>
@@ -62,32 +65,32 @@
 	<div class="user__info">
 		<div class="user__info__avatar">
 			<Avatar
-					avatar={currentProfile.avatar}
-					first_name={currentProfile.first_name}
-					last_name={currentProfile.last_name}
+					avatar={data.currentProfile.avatar}
+					first_name={data.currentProfile.first_name}
+					last_name={data.currentProfile.last_name}
 			/>
 		</div>
 		<div class="user__info__container">
 			<div class="user__info__primary">
 				<div class="user__info__primary__name">
-					{currentProfile.first_name}
-					{currentProfile.last_name}
+					{data.currentProfile.first_name}
+					{data.currentProfile.last_name}
 				</div>
-				{#if Object.values(currentProfile.links).some((el) => el)}
-					<UserLinks links={currentProfile.links}/>
+				{#if Object.values(data.currentProfile.links).some((el) => el)}
+					<UserLinks links={data.currentProfile.links}/>
 				{/if}
 			</div>
 			<div class="user__info__history">
 				<div class="birthday">
 					<Icon class="icon" src={Cake}/>
-					<span>{new Date(currentProfile.birthday).toLocaleDateString()}</span>
+					<span>{new Date(data.currentProfile.birthday).toLocaleDateString()}</span>
 				</div>
 				<div class="promoType">
 					<Icon class="icon" src={BookOpen}/>
 					<span>
-						{#if currentProfile.promos.year >= 2019}
+						{#if data.currentProfile.promos.year >= 2019}
 							Bio-MAD
-						{:else if currentProfile.promos.year >= 2014}
+						{:else if data.currentProfile.promos.year >= 2014}
 							Bio-Maths, doubles diplômes
 						{:else}
 							Bio-Maths
@@ -96,14 +99,14 @@
 				</div>
 				<div class="promo">
 					<Icon class="icon" src={Calendar}/>
-					<span>LBM {currentProfile.promos.year} — {currentProfile.promos.name}</span>
+					<span>LBM {data.currentProfile.promos.year} — {data.currentProfile.promos.name}</span>
 				</div>
 				<div class="current">
 					<Icon class="icon" src={MapPin}/>
-					<span>{currentProfile.timeline[0]?.name} — {currentProfile.timeline[0]?.place}</span>
+					<span>{data.currentProfile.timeline[0]?.name} — {data.currentProfile.timeline[0]?.place}</span>
 				</div>
 			</div>
-			{#if $page.data.session && currentProfile.id !== $page.data.session.user?.id}
+			{#if $page.data.session && data.currentProfile.id !== $page.data.session.user?.id}
 				<div class="user__info__contact">
 					<p>Une question sur mon parcours, mes études actuelle ou le pays de ma L3 ?</p>
 					<Button
@@ -117,14 +120,14 @@
 			{/if}
 		</div>
 	</div>
-	{#if currentProfile.godparents.length > 0}
+	{#if data.currentProfile.godparents.length > 0}
 		<section class="godparents">
 			<h1>Mes parrains/marraines :</h1>
 			<div class="container">
-				{#each currentProfile.godparents as godparent, index}
+				{#each data.currentProfile.godparents as godparent, index}
 					<a
 							class="godparent"
-							href="/profile/{$page.data.currentProfile.promos.year - 1}/{godparent.profile.first_name.replaceAll(' ', '_').toLowerCase()}.{godparent.profile.last_name
+							href="/profile/{data.currentProfile.promos.year - 1}/{godparent.profile.first_name.replaceAll(' ', '_').toLowerCase()}.{godparent.profile.last_name
 							.replaceAll(' ', '_')
 							.toLowerCase()}"
 					>
@@ -146,22 +149,22 @@
 	{/if}
 	<div class="user__about">
 		<h3>A propos :</h3>
-		{#if currentProfile.about}
-			<p>{currentProfile.about}</p>
+		{#if data.currentProfile.about}
+			<p>{data.currentProfile.about}</p>
 		{:else}
 			<p class="null">Cette personne n'a pas bien rempli son profil...</p>
 		{/if}
 	</div>
 	<div class="user__anecdote">
-		<AnecdoteCard content={currentProfile.best_memory} name="Meilleur souvenir de la LBM"/>
-		<AnecdoteCard content={currentProfile.strong_points} name="Points forts de la LBM"/>
+		<AnecdoteCard content={data.currentProfile.best_memory} name="Meilleur souvenir de la LBM"/>
+		<AnecdoteCard content={data.currentProfile.strong_points} name="Points forts de la LBM"/>
 		<AnecdoteCard
-				content={currentProfile.better_promo}
+				content={data.currentProfile.better_promo}
 				name="C'était mieux du temps de ta promo ? Prouve le !"
 		/>
 	</div>
 	<div class="user__timeline">
-		<Timeline timeline={currentProfile.timeline}/>
+		<Timeline timeline={data.currentProfile.timeline}/>
 	</div>
 </div>
 

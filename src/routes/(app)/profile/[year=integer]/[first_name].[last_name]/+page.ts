@@ -1,6 +1,7 @@
 import {getSupabase} from "@supabase/auth-helpers-sveltekit";
 import type {PageLoad} from './$types';
 import type {Profile} from "src/types/user.types";
+import {error} from "@sveltejs/kit";
 
 export const load = (async (event) => {
 	const {supabaseClient} = await getSupabase(event)
@@ -21,16 +22,15 @@ export const load = (async (event) => {
 		.single();
 
 	if (supabaseErr) {
-		console.error(supabaseErr);
-		return {errors: [supabaseErr.message]};
+		error(503, {message: supabaseErr.message});
 	}
 
-	if (supabaseErr || !data) {
-		return {error: supabaseErr};
+	if (!data) {
+		error(404, {message: 'Profile not found'});
 	}
 
 	return {
-		currentProfile: data as Profile
+		currentProfile: data as NonNullable<Profile>
 	};
 }) satisfies PageLoad;
 
