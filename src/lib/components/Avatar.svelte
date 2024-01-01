@@ -2,7 +2,7 @@
 	import {supabaseClient} from '$lib/db';
 	import {onMount} from 'svelte';
 
-	export let avatar: string;
+	export let avatar: string | null;
 	export let first_name: string;
 	export let last_name: string;
 	let src: string;

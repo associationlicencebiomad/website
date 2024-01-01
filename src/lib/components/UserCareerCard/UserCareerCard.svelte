@@ -3,12 +3,12 @@
 	import {MapPin} from "@steeze-ui/heroicons";
 	import Avatar from '$lib/components/Avatar.svelte';
 	import {theme} from "$lib/stores";
-	import type {TimelineType} from '$lib/Timeline/timeline.type';
+	import type {TimelineType} from "src/types/timeline.type";
 
 	export let timeline: TimelineType;
 	export let first_name: string;
 	export let last_name: string;
-	export let avatar: string;
+	export let avatar: string | null;
 	export let promoName: string;
 	export let promoYear: number;
 </script>

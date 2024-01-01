@@ -1,7 +1,7 @@
 <script lang="ts">
 	import {AcademicCap, Briefcase, Identification} from "@steeze-ui/heroicons";
 	import {Icon} from "@steeze-ui/svelte-icon";
-	import { Position, ItemType } from '../timeline.type';
+	import { Position, ItemType } from 'src/types/timeline.type';
 	import {theme} from "$lib/stores.js";
 
 	export let name: string;

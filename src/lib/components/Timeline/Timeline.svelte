@@ -1,7 +1,7 @@
 <script lang="ts">
 	import TimelineItem from './timelineItem/TimelineItem.svelte';
-	import type {TimelineType} from './timeline.type';
-	import {Position} from './timeline.type';
+	import type {TimelineType} from 'src/types/timeline.type';
+	import {Position} from 'src/types/timeline.type';
 
 	export let timeline: TimelineType;
 </script>

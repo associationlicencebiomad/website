@@ -16,7 +16,7 @@
     import Select from "$lib/primitives/Select/Select.svelte";
     import Checkbox from "$lib/primitives/Checkbox/Checkbox.svelte";
     import Textarea from "$lib/primitives/Textarea/Textarea.svelte";
-    import {ItemType} from "$lib/components/Timeline/timeline.type.js";
+    import {ItemType} from "src/types/timeline.type.js";
     import SavePopup from "$lib/components/SavePopup/SavePopup.svelte";
     import {invalidate} from "$app/navigation";
     import {theme} from "$lib/stores.js";
