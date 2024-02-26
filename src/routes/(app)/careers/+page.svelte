@@ -7,7 +7,6 @@
     import type {Profile} from "src/types/user.types";
     import type {PageData} from "./$types";
     import Button from "$lib/primitives/Button/Button.svelte";
-    import {ProfilesStore} from "$lib/stores";
 
     export let data: PageData;
     let profiles: Profile[] = data.profiles ;
