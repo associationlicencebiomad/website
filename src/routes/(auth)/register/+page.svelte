@@ -1,5 +1,5 @@
 <script lang="ts">
-	import {supabaseClient} from '$lib/db';
+	import {page} from '$app/stores';
 	import {goto} from '$app/navigation';
 	import {Icon} from "@steeze-ui/svelte-icon";
 	import {ArrowSmallLeft, Check} from "@steeze-ui/heroicons";
@@ -31,7 +31,7 @@
 		}
 
 		loading = true;
-		let {error} = await supabaseClient.auth.signUp({
+		let {error} = await $page.data.supabase.auth.signUp({
 			email, password, options: {
 				data:
 					{

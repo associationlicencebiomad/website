@@ -1,7 +1,6 @@
 <script lang="ts">
     import {Icon} from "@steeze-ui/svelte-icon";
     import {ArrowDown, ArrowUp, GlobeAlt, Plus, Trash} from "@steeze-ui/heroicons";
-    import {supabaseClient} from "$lib/db";
     import type {GodparentProfile, LoggedInUser} from "src/types/user.types";
     import {page} from "$app/stores";
     import {onMount} from "svelte";
@@ -51,7 +50,7 @@
                 mimeType: 'image/webp',
                 async success(result) {
                     file = result;
-                    let {error: uploadError} = await supabaseClient.storage
+                    let {error: uploadError} = await $page.data.supabase.storage
                         .from('avatars')
                         .upload(filePath, file, {upsert: true});
                     if (uploadError) throw uploadError;
@@ -72,7 +71,7 @@
 
     const updateUser = async () => {
         saving = true;
-        const {error} = await supabaseClient
+        const {error} = await $page.data.supabase
             .from('profiles')
             .update({
                 first_name: newProfile.first_name,
@@ -95,7 +94,7 @@
             let godparentsToRemove = $page.data.user.godparents
                 .filter(godparent => !newProfile.godparents.some(g => g.profile.id === godparent.profile.id));
 
-            await supabaseClient
+            await $page.data.supabase
                 .from('godparents')
                 .upsert(newProfile.godparents.map((godparent) => {
                     return {
@@ -105,14 +104,14 @@
                     }
                 }));
 
-            await supabaseClient
+            await $page.data.supabase
                 .from('godparents')
                 .delete()
                 .eq('user_id', newProfile.id)
                 .in('godparent_id', godparentsToRemove.map(godparent => godparent.profile.id));
 
             if ($page.data.user.avatar && newProfile.avatar !== $page.data.user.avatar) {
-                await supabaseClient.storage.from('avatars').remove([$page.data.user.avatar]);
+                await $page.data.supabase.storage.from('avatars').remove([$page.data.user.avatar]);
             }
         }
 
@@ -125,7 +124,7 @@
 
     async function loadPossibleGodparents() {
         let currentGodparents = newProfile.godparents.map(godparent => godparent.profile.id);
-        const {data, error} = await supabaseClient
+        const {data, error} = await $page.data.supabase
             .from('profiles')
             .select('id, first_name, last_name')
             .eq('promo_id', newProfile.promo_id - 1)

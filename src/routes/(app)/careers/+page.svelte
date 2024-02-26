@@ -1,12 +1,12 @@
 <script lang="ts">
     import {Icon} from "@steeze-ui/svelte-icon";
     import {ChevronDoubleUp, MagnifyingGlass, XCircle} from "@steeze-ui/heroicons";
-    import {supabaseClient} from '$lib/db';
     import UserCareerCard from '$lib/components/UserCareerCard/UserCareerCard.svelte';
     import PageTitle from "$lib/components/PageTitle.svelte";
     import type {Profile} from "src/types/user.types";
     import type {PageData} from "./$types";
     import Button from "$lib/primitives/Button/Button.svelte";
+	import {page} from "$app/stores";
 
     export let data: PageData;
     let profiles: Profile[] = data.profiles ;
@@ -24,7 +24,7 @@
             }
         } else {
 
-            const {data: freshProfiles} = await supabaseClient
+            const {data: freshProfiles} = await $page.data.supabase
                 .from('profiles')
                 .select(`id, first_name, last_name, avatar, timeline, promos(name, year)`)
                 .textSearch("fts", searchInput, {type: "websearch", config: 'fr'});

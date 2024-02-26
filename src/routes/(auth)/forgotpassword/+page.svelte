@@ -1,7 +1,6 @@
 <script lang="ts">
 	import {page} from '$app/stores';
 	import type {ToastTypes} from "$lib/primitives/Toast/Toast.types";
-	import {supabaseClient} from "$lib/db";
 	import Toast from "$lib/primitives/Toast/Toast.svelte";
 	import Input from "$lib/primitives/Input/Input.svelte";
 	import Button from "$lib/primitives/Button/Button.svelte";
@@ -14,7 +13,7 @@
 
 	const requestReset = async () => {
 		loading = true;
-		const {error} = await supabaseClient.auth.resetPasswordForEmail(email, {
+		const {error} = await $page.data.supabase.auth.resetPasswordForEmail(email, {
 			redirectTo: `${$page.url.origin}/resetpassword`
 		});
 		loading = false;

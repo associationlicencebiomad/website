@@ -1,10 +1,11 @@
 <script lang="ts">
-	import {supabaseClient} from '$lib/db';
 	import {onMount} from 'svelte';
+	import {page} from '$app/stores';
 
 	export let avatar: string | null;
 	export let first_name: string;
 	export let last_name: string;
+
 	let src: string;
 
 	function hashCode(str: string) { // java String#hashCode
@@ -37,7 +38,7 @@
 
 	async function getSrc() {
 		if (avatar) {
-			const {data, error} = await supabaseClient.storage.from('avatars').download(avatar);
+			const {data, error} = await $page.data.supabase.storage.from('avatars').download(avatar);
 
 			if (error) console.error(error);
 

@@ -1,10 +1,10 @@
-import type {LayoutServerLoad} from './$types'
+import type {LayoutServerLoad} from './$types';
 import {redirect} from "@sveltejs/kit";
-import {getSupabase} from "@supabase/auth-helpers-sveltekit";
 
-export const load: LayoutServerLoad = async (event) => {
-	const {session} = await getSupabase(event)
+export const load: LayoutServerLoad = async ({url, locals}) => {
+	const session = await locals.getSession();
+
 	if (session) {
-		redirect(303, '/');
+		redirect(303, url.origin);
 	}
 }

@@ -1,5 +1,7 @@
-import '$lib/db';
+import type {Handle} from '@sveltejs/kit';
 import {sequence} from "@sveltejs/kit/hooks";
-import {handleProfile} from "$lib/handleProfile";
+import {handleSupabase} from "$lib/supabase";
 
-export const handle = sequence(handleProfile)
+export const handle: Handle = sequence(
+	handleSupabase,
+)
