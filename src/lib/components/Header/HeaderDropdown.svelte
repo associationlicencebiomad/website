@@ -1,7 +1,7 @@
 <script lang="ts">
 	import {Icon} from "@steeze-ui/svelte-icon";
 	import {ArrowLeftOnRectangle, User, CreditCard} from "@steeze-ui/heroicons";
-	import {supabaseClient} from "$lib/db";
+	import {page} from '$app/stores';
 	import {theme} from "$lib/stores";
 
 	export let dropdownOpened: boolean;
@@ -35,7 +35,7 @@
 		<li class="dropdown__content__item">
 			<a class="dropdown__link" on:click={() => {
 				dropdownUsed();
-				supabaseClient.auth.signOut();
+				$page.data.supabase.auth.signOut();
 			}}>
 				<Icon src="{ArrowLeftOnRectangle}"/>
 				Logout

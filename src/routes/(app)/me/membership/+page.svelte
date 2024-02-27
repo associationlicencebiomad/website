@@ -19,15 +19,15 @@
 	let payments = $page.data.payments;
 	let hasActiveMembership = $page.data.hasActiveMembership;
 
-	let elements
-	let stripe = null
+	let elements: any
+	let stripe: any = null
 
-	let clientSecret = null
-	let paymentIntent = null
-	let paymentIntentManager = null
+	let clientSecret: any = null
+	let paymentIntent: any = null
+	let paymentIntentManager: any = null
 
 	let activeOption: number | null = null;
-	let customAmount;
+	let customAmount: number;
 
 	let processing = false
 	let processed = false
@@ -54,7 +54,7 @@
 		}
 	})
 
-	async function handlePaymentIntentChange(amount, newOption: number, force_update = false) {
+	async function handlePaymentIntentChange(amount: number, newOption: number, force_update = false) {
 		if (!amount || activeOption === newOption && !force_update) return;
 
 		// update payment intent
@@ -108,46 +108,46 @@
 <PageTitle description="Pour organiser des super JEEP, on à besoin de votre contribution !" title="Adhésion"/>
 
 {#if hasActiveMembership}
-    <h2>Hourra 🎉 ! Vous êtes déjà adhérent pour l'année {DateTime.now().year} !</h2>
+  <h2>Hourra 🎉 ! Vous êtes déjà adhérent pour l'année {DateTime.now().year} !</h2>
 {:else}
-    <h2>Adhérer à l'association pour l'année {DateTime.now().year}</h2>
-    <div class="payment">
-        <div class="options">
-            <div class="options__card" class:active={activeOption === 0}
-                 on:click={() => handlePaymentIntentChange(500, 0)}>
-                <h3>Adhérent</h3>
-                <div class="price">
-                    5<span>€</span>
-                </div>
-            </div>
-            <div class="options__card" class:active={activeOption === 1}
-                 on:click={() => handlePaymentIntentChange(1000, 1)}>
-                <h3>Bienfaiteur</h3>
-                <div class="price">
-                    10<span>€</span>
-                </div>
-            </div>
-            <div class="options__card" class:active={activeOption === 2}
-                 on:click={() => handlePaymentIntentChange(customAmount * 100, 2)}>
-                <h3>Je choisis</h3>
-                <div class="price__control">
-                    <Input bind:value={customAmount} min="5"
-                           on:change={() => handlePaymentIntentChange(customAmount * 100, 2, true)}
-                           type="number"/><span>€</span>
-                </div>
-
-            </div>
+  <h2>Adhérer à l'association pour l'année {DateTime.now().year}</h2>
+  <div class="payment">
+    <div class="options">
+      <div class="options__card" class:active={activeOption === 0}
+           on:click={() => handlePaymentIntentChange(500, 0)}>
+        <h3>Adhérent</h3>
+        <div class="price">
+          5<span>€</span>
+        </div>
+      </div>
+      <div class="options__card" class:active={activeOption === 1}
+           on:click={() => handlePaymentIntentChange(1000, 1)}>
+        <h3>Bienfaiteur</h3>
+        <div class="price">
+          10<span>€</span>
+        </div>
+      </div>
+      <div class="options__card" class:active={activeOption === 2}
+           on:click={() => handlePaymentIntentChange(customAmount * 100, 2)}>
+        <h3>Je choisis</h3>
+        <div class="price__control">
+          <Input bind:value={customAmount} min="5"
+                 on:change={() => handlePaymentIntentChange(customAmount * 100, 2, true)}
+                 type="number"/><span>€</span>
         </div>
 
-        <div class="payment__info">
-            {#if stripe && clientSecret}
-                <Elements
-                        {stripe}
-                        {clientSecret}
-                        theme="night"
-                        labels="floating"
-                        bind:elements
-                        variables={{
+      </div>
+    </div>
+
+    <div class="payment__info">
+      {#if stripe && clientSecret}
+        <Elements
+            {stripe}
+            {clientSecret}
+            theme="night"
+            labels="floating"
+            bind:elements
+            variables={{
                             fontFamily: 'Rubik, sans-serif',
                             borderRadius: '10px',
                             colorPrimary: '#5e81ac',
@@ -155,69 +155,69 @@
                             colorDanger: '#bf616a',
                             colorText: '#f2f4f8',
                         }}
-                >
-                    <form on:submit|preventDefault={submit}>
-                        <PaymentElement/>
-                        <Button color="accent-3" disabled={processing}>
-                            <Icon slot="icon" src={Check} class="icon"/>
+        >
+          <form on:submit|preventDefault={submit}>
+            <PaymentElement/>
+            <Button color="accent-3" disabled={processing}>
+              <Icon slot="icon" src={Check} class="icon"/>
 
-                            {#if processing}
-                                Processing...
-                            {:else}
-                                Procéder au paiement
-                            {/if}
-                        </Button>
-                    </form>
-                </Elements>
-            {:else}
-                Loading...
-            {/if}
-        </div>
-
-
+              {#if processing}
+                Processing...
+              {:else}
+                Procéder au paiement
+              {/if}
+            </Button>
+          </form>
+        </Elements>
+      {:else}
+        Loading...
+      {/if}
     </div>
+
+
+  </div>
 {/if}
 
 
 {#if payments.length > 0}
-    <h2>Historique des paiements</h2>
-    <table>
-        <thead>
-        <tr>
-            <th>N° de paiement</th>
-            <th>Date</th>
-            <th>Description</th>
-            <th>Montant</th>
-            <th>Facture</th>
-        </tr>
-        </thead>
+  <h2>Historique des paiements</h2>
+  <table>
+    <thead>
+    <tr>
+      <th>N° de paiement</th>
+      <th>Date</th>
+      <th>Description</th>
+      <th>Montant</th>
+      <th>Facture</th>
+    </tr>
+    </thead>
 
-        <tbody>
-        {#each payments as payment}
-            <tr>
-                <td>{payment.id}</td>
-                <td>{DateTime.fromISO(payment.date).toLocaleString({
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric"
-                })}</td>
-                <td>Adhésion pour l'année {DateTime.fromISO(payment.date).year}</td>
-                <td>{payment.amount / 100}€</td>
-                <td>
-                    {#if payment.receipt_url}
-                        <Button color="green" on:click={() => window.open(payment.receipt_url, '_blank')}>
-                            <Icon src={ArrowDownTray} class="icon"/>
-                        </Button>
-                    {:else}
-                        <Button color="red" disabled>
-                            <Icon src={ArrowDownTray} class="icon"/>
-                        </Button>
-                    {/if}
-                </td>
-            </tr>
-        {/each}
-        </tbody>
-    </table>
+    <tbody>
+    {#each payments as payment}
+      <tr>
+        <td>{payment.id}</td>
+        <td>{DateTime.fromISO(payment.date).toLocaleString({
+            year: "numeric",
+            month: "long",
+            day: "numeric"
+        })}</td>
+        <td>Adhésion pour l'année {DateTime.fromISO(payment.date).year}</td>
+        <td>{payment.amount / 100}€</td>
+        <td>
+          {#if payment.receipt_url}
+            <Button color="green" on:click={() => window.open(payment.receipt_url, '_blank')}>
+              <Icon src={ArrowDownTray} class="icon"/>
+            </Button>
+          {:else}
+            <Button color="red" disabled>
+              <Icon src={ArrowDownTray} class="icon"/>
+            </Button>
+          {/if}
+        </td>
+      </tr>
+    {/each}
+    </tbody>
+  </table>
 
 {/if}
 

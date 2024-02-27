@@ -1,12 +1,12 @@
 <script lang="ts">
 	import {goto} from '$app/navigation';
 	import type {ToastTypes} from "$lib/primitives/Toast/Toast.types";
-	import {supabaseClient} from "$lib/db";
 	import Toast from "$lib/primitives/Toast/Toast.svelte";
 	import Input from "$lib/primitives/Input/Input.svelte";
 	import Button from "$lib/primitives/Button/Button.svelte";
 	import {ArrowSmallLeft, Check} from "@steeze-ui/heroicons";
 	import {Icon} from "@steeze-ui/svelte-icon";
+	import {page} from "$app/stores";
 
 	let loading = false;
 	let toasts: Array<ToastTypes> = [];
@@ -26,7 +26,7 @@
 			return;
 		}
 
-		let {error} = await supabaseClient.auth.updateUser({
+		let {error} = await $page.data.supabase.auth.updateUser({
 			password
 		});
 
@@ -41,7 +41,7 @@
 				}
 			];
 		} else {
-			await supabaseClient.auth.signOut();
+			await $page.data.supabase.auth.signOut();
 			await goto('/login?reset');
 		}
 	};

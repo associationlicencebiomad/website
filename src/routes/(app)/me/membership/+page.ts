@@ -1,11 +1,10 @@
-import {getSupabase} from "@supabase/auth-helpers-sveltekit";
 import type {PageLoad} from './$types';
 import type {Membership} from "src/types/user.types";
 
-export const load = (async (event) => {
-	const {supabaseClient, session} = await getSupabase(event)
+export const load = (async ({parent}) => {
+	const {supabase, session} = await parent()
 
-	const {data, error: supabaseErr} = await supabaseClient
+	const {data, error: supabaseErr} = await supabase
 		.from('memberships')
 		.select('*')
 		.eq('user_id', session?.user.id);

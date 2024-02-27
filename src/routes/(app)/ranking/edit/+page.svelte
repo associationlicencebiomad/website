@@ -1,7 +1,6 @@
 <script lang="ts">
 	import type {PageData} from './$types';
 	import type {Professor, Ranking} from "src/types/ranking.types";
-	import {supabaseClient} from "$lib/db";
 	import SavePopup from "$lib/components/SavePopup/SavePopup.svelte";
 	import RankingCard from "$lib/components/RankingCard/RankingCard.svelte";
 	import DragDropBox from "$lib/components/DragDropBox.svelte";
@@ -59,7 +58,7 @@
 	async function save() {
 		saving = true;
 
-		await supabaseClient
+		await data.supabase
 			.from('professors_ranking')
 			.upsert([
 				...user_ranking.map((item, index) => ({
@@ -71,7 +70,7 @@
 				onConflict: 'professor_id,user_id',
 			});
 
-		await supabaseClient
+		await data.supabase
 			.from('professors_ranking')
 			.delete()
 			.eq('user_id', data.session.user.id)

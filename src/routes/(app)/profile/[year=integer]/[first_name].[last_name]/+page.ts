@@ -1,12 +1,11 @@
-import {getSupabase} from "@supabase/auth-helpers-sveltekit";
 import type {PageLoad} from './$types';
 import type {Profile} from "src/types/user.types";
 import {error} from "@sveltejs/kit";
 
-export const load = (async (event) => {
-	const {supabaseClient} = await getSupabase(event)
+export const load = (async ({parent, params}) => {
+	const {supabase} = await parent();
 
-	const {data, error: supabaseErr} = await supabaseClient
+	const {data, error: supabaseErr} = await supabase
 		.from('profiles')
 		.select(`
 				*,
@@ -16,9 +15,9 @@ export const load = (async (event) => {
 					is_adopted
 				)
 		`)
-		.eq('promos.year', event.params.year)
-		.ilike('first_name', event.params.first_name)
-		.ilike('last_name', event.params.last_name)
+		.eq('promos.year', params.year)
+		.ilike('first_name', params.first_name)
+		.ilike('last_name', params.last_name)
 		.single();
 
 	if (supabaseErr) {
@@ -30,7 +29,7 @@ export const load = (async (event) => {
 	}
 
 	return {
-		currentProfile: data as NonNullable<Profile>
+		currentProfile: data as unknown as NonNullable<Profile>
 	};
 }) satisfies PageLoad;
 

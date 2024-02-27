@@ -1,15 +1,19 @@
 import type {Professor} from "src/types/ranking.types";
 import type {PageLoad} from './$types';
-import {getSupabase} from "@supabase/auth-helpers-sveltekit";
+import {error} from "@sveltejs/kit";
 
-export const load = (async (event) => {
-	const {supabaseClient, session} = await getSupabase(event)
+export const load = (async ({parent}) => {
+	const {supabase, session} = await parent()
 
-	const {data: user_ranking} = await supabaseClient.rpc('get_professors_ranking', {
+	if (!session) {
+		error(503, 'Something went wrong. Please try again later.');
+	}
+
+	const {data: user_ranking} = await supabase.rpc('get_professors_ranking', {
 		param_user_id: session?.user?.id
 	})
 
-	const {data: available_professor} = await supabaseClient
+	const {data: available_professor} = await supabase
 		.from('professors')
 		.select('*')
 		.not('id', 'in', `(${user_ranking?.map((professor: Professor) => professor.id).join(',')})`)

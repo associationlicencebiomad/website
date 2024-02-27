@@ -1,13 +1,13 @@
 <script lang="ts">
 	// import {ArrowNarrowLeftIcon, LoginIcon} from '@krowten/svelte-heroicons';
 	import {page} from '$app/stores';
-	import {supabaseClient} from '$lib/db'
 	import Input from "$lib/primitives/Input/Input.svelte";
 	import Toast from "$lib/primitives/Toast/Toast.svelte";
 	import Button from "$lib/primitives/Button/Button.svelte";
 	import type {ToastTypes} from "$lib/primitives/Toast/Toast.types";
 	import {Icon} from "@steeze-ui/svelte-icon";
 	import {ArrowRightOnRectangle, ArrowSmallLeft} from "@steeze-ui/heroicons";
+	import {goto, invalidate} from "$app/navigation";
 
 	let toasts: Array<ToastTypes> = [];
 	let email = '';
@@ -51,7 +51,7 @@
 
 	const login = async () => {
 		loading = true;
-		let {error} = await supabaseClient.auth.signInWithPassword({
+		let {error} = await $page.data.supabase.auth.signInWithPassword({
 			email,
 			password
 		});
@@ -64,7 +64,12 @@
 					message: error.message
 				}
 			];
+		} else {
+			//trigger a revalidation of the auth store
+			await invalidate('supabase:auth');
+			await goto('/');
 		}
+		// invalidate('supabase:auth');
 		loading = false;
 	};
 </script>

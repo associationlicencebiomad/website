@@ -1,33 +1,37 @@
-<script>
-	import {supabaseClient} from '$lib/db';
-	import {invalidate} from '$app/navigation';
-	import {onMount} from 'svelte';
-	import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit';
+<script lang="ts">
+    import {injectSpeedInsights} from '@vercel/speed-insights/sveltekit';
+    import {invalidate} from '$app/navigation';
+    import {onMount} from 'svelte';
+    import type {LayoutData} from './$types';
 
-	import '../app.scss';
-	import {theme} from "$lib/stores";
+    import '../app.scss';
+    import {theme} from "$lib/stores";
 
-	injectSpeedInsights();
+    injectSpeedInsights();
 
-	onMount(() => {
-		const {
-			data: {subscription}
-		} = supabaseClient.auth.onAuthStateChange(() => {
-			invalidate('supabase:auth');
-		});
+    export let data: LayoutData;
 
-		return () => {
-			subscription.unsubscribe();
-		};
-	});
+    $: ({supabase, session} = data);
+
+    onMount(() => {
+        const {
+            data: {subscription},
+        } = supabase.auth.onAuthStateChange((event, _session) => {
+            if (_session?.expires_at !== session?.expires_at) {
+                invalidate('supabase:auth');
+            }
+        });
+
+        return () => subscription.unsubscribe();
+    });
 </script>
 
 <svelte:head>
-	<title>ALBM</title>
+  <title>ALBM</title>
 </svelte:head>
 
 <div class={$theme}>
-	<slot/>
+  <slot/>
 </div>
 
 <style lang="scss">
