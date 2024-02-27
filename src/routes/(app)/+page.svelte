@@ -1,7 +1,6 @@
 <script lang="ts">
 	import Scroll from "$lib/assets/Scroll.svelte";
 	import Separator_1 from '$lib/assets/Separator-1.svelte';
-	import Illustration from '$lib/assets/Illustration.svelte';
 	import Separator_2 from '$lib/assets/Separator-2.svelte';
 	import OrgMemberCard from '$lib/components/OrgMemberCard/OrgMemberCard.svelte';
 	import {page} from "$app/stores";
@@ -35,8 +34,8 @@
 			l'Océanie. C'est l'occasion de quitter notre douce Bretagne et de découvrir de nouvelles
 			contrées plus lointaines.
 		</p>
-		<div class="about__content__illustration">
-			<Illustration/>
+		<div class="about__content__video">
+			<video src="https://github.com/associationlicencebiomad/website/raw/master/data/presentation.webm" loop autoplay muted controls poster="/images/presentation.png" />
 		</div>
 	</div>
 </section>
