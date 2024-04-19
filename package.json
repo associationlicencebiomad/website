@@ -44,5 +44,8 @@
 		"typescript": "^5.4.5",
 		"vite": "^5.2.9"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"svelte-boring-avatars": "^1.2.6"
+	}
 }

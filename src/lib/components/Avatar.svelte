@@ -1,40 +1,13 @@
 <script lang="ts">
 	import {onMount} from 'svelte';
 	import {page} from '$app/stores';
+	import Avatar from 'svelte-boring-avatars';
 
 	export let avatar: string | null;
 	export let first_name: string;
 	export let last_name: string;
 
 	let src: string;
-
-	function hashCode(str: string) { // java String#hashCode
-		let hash = 0;
-		for (let i = 0; i < str.length; i++) {
-			hash = str.charCodeAt(i) + ((hash << 5) - hash);
-		}
-		return hash;
-	}
-
-	function intToRGB(i: number) {
-		let c = (i & 0x00FFFFFF)
-			.toString(16)
-			.toUpperCase();
-
-		return "00000".substring(0, 6 - c.length) + c;
-	}
-
-	/**
-	 * Get color (black/white) depending on bgColor, so it would be clearly seen.
-	 * @param bgColor
-	 * @returns {string}
-	 */
-	function getColorByBgColor(bgColor: string) {
-		if (!bgColor) {
-			return '';
-		}
-		return (parseInt(bgColor.replace('#', ''), 16) > 0xffffff / 2) ? '#000' : '#fff';
-	}
 
 	async function getSrc() {
 		if (avatar) {
@@ -59,10 +32,13 @@
 {#if avatar && src}
 	<img class="avatar" {src} alt="{first_name} {last_name}" loading="lazy" {...$$restProps}/>
 {:else}
-	<div style="background-color: #{intToRGB(hashCode(first_name + last_name))}" class="avatar" {...$$restProps}>
-		<span style="color: {getColorByBgColor(intToRGB(hashCode(first_name + last_name)))}">
-			{first_name.charAt(0)}{last_name.charAt(0)}
-		</span>
+	<div class="avatar" {...$$restProps}>
+		<Avatar
+				size={100}
+				name={`${first_name} ${last_name}`}
+				variant="beam"
+				colors={['#5e81ac', '#88c0d0', '#b48ead', '#d08770', '#ebcb8b']}
+		/>
 	</div>
 {/if}
 

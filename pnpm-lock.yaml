@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+dependencies:
+  svelte-boring-avatars:
+    specifier: ^1.2.6
+    version: 1.2.6
+
 devDependencies:
   '@steeze-ui/heroicons':
     specifier: ^2.3.0
@@ -2198,6 +2203,10 @@ packages:
     dependencies:
       autosize: 6.0.1
     dev: true
+
+  /svelte-boring-avatars@1.2.6:
+    resolution: {integrity: sha512-8+Z1DhsMUVI/V/5ik00Arw0PgbJcMdhTXq3YGqccBc5bYFeceCtMEMB0aWGhi8xFV+0aqZbWvS89Hcj16LlfHA==}
+    dev: false
 
   /svelte-check@3.6.9(postcss@8.4.38)(sass@1.75.0)(svelte@4.2.15):
     resolution: {integrity: sha512-hDQrk3L0osX07djQyMiXocKysTLfusqi8AriNcCiQxhQR49/LonYolcUGMtZ0fbUR8HTR198Prrgf52WWU9wEg==}
